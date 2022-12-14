@@ -4,14 +4,14 @@
     <link rel='stylesheet' href='css/styleAboutYou.css' />
     <div class="container-login">
         <div class="form-container sign-in-container">
-            <form method="POST" class="login" action ="{{url('/aboutyou/save')}}" enctype="multipart/form-data">
+            <form method="POST" class="login" action="{{ url('/aboutyou/save') }}" enctype="multipart/form-data">
                 @csrf
-                <h1>Conta-nos mais sobre ti {{ Auth::user()->firstname}}!</h1>
+                <h1>Conta-nos mais sobre ti {{ Auth::user()->firstname }}!</h1>
                 <div class="submit">
-                    <textarea name="description" class="text" placeholder="Eu sou @ melhor!"></textarea>
+                    <textarea maxlength="150" name="description" class="text" placeholder="Eu sou @ melhor!"></textarea>
                     <button name="done" type="submit">Concluído</button>
                 </div>
-            <!--</form>-->
+                <!--</form>-->
         </div>
         <div class="overlay-container">
             <div class="overlay">
@@ -21,13 +21,16 @@
                         <br>
                         <img src="images/default-profilepicture.png" alt="default-profilepicture" id="profilepicture">
                         <input type="file" id="profilepictureInput" style="display: none" name="inputImage">
-                        <!--<button class="ghost">-->
-                            <label for="profilepictureInput" id="upload">Escolhe uma foto!</label>
-                        <!--</button>-->
+                        <!--<button class="ghost" id="upload">-->
+                        <label for="profilepictureInput" class="upload">
+                            <button class="ghost" id="upload">
+                                Escolhe uma foto!
+                            </button>
+                        </label>
                     </div>
                 </div>
             </div>
-        </form>
+            </form>
         </div>
     </div>
     <script>
@@ -45,7 +48,11 @@
                     img_profilepicture.setAttribute('src', reader.result);
                 });
                 reader.readAsDataURL(chosenPhoto);
-                h1_photo.style.display="contents";
+                const i = Math.floor(Math.random() * 2);
+                if (i == 1) {
+                    document.getElementById("photo").innerHTML = "Wow, é carapau!"
+                }
+                h1_photo.style.display = "contents";
             }
         });
     </script>
