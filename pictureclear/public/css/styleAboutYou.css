@@ -271,3 +271,19 @@ label > button {
     cursor: pointer;
     pointer-events: none;
 }
+
+.close {
+    color: #fff ;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px;
+    height: auto;
+    width: min-content !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 30px;
+}
+.close:hover {
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 33px;
+}

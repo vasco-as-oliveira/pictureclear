@@ -2,6 +2,7 @@
 
 @section('content')
     <link rel='stylesheet' href='css/styleAboutYou.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="container-login">
         <div class="form-container sign-in-container">
             <form method="POST" class="login" action="{{ url('/aboutyou/save') }}" enctype="multipart/form-data">
@@ -16,6 +17,8 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
+                    <button class="close"><i class="fa fa-close"></i></button>
+                    
                     <div class="profilepicture">
                         <h1 id="photo">Wow, que lind@!</h1>
                         <br>

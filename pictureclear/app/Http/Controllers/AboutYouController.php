@@ -33,6 +33,11 @@ class AboutYouController extends Controller
         $allSessions = session()->all();
         dd($allSessions);
         */
+        $user =  User::select('finished_setup')->where('id','=',Auth::user()->id)->get();
+        if($user->value('finished_setup')){
+            return redirect('home');
+        }
+
         return view('aboutyou');
     }
 
@@ -44,9 +49,8 @@ class AboutYouController extends Controller
         ]);
         
         $request->file('inputImage')->store('public/images');
-        DB::update('update users set description=?, picture =? where id=?', [$request->description,$request->file('inputImage')->hashName() ,Auth::user()->id]);
-        $user =  User::select('*')->where('id','=',Auth::user()->id)->get();
-       
-        return view('home', ['user'=>$user]);
+        DB::update("update users set description=?, picture =?, finished_setup='t' where id=?", [$request->description,$request->file('inputImage')->hashName() ,Auth::user()->id]);
+        
+        return redirect('home');
     }
 }
