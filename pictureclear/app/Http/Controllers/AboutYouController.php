@@ -47,10 +47,24 @@ class AboutYouController extends Controller
             'description' => ['string', 'max:150'],
             'inputImage' => ['image','mimes:png,jpg,jpeg'],
         ]);
-        
-        $request->file('inputImage')->store('public/images');
-        DB::update("update users set description=?, picture =?, finished_setup='t' where id=?", [$request->description,$request->file('inputImage')->hashName() ,Auth::user()->id]);
-        
+        if(!empty($request->input('description'))){
+            //return redirect('https://youtu.be/EvlAO8dUTgs');
+            DB::update("update users set description=? where id=?", [$request->description, Auth::user()->id]);
+        }
+
+        if($request->file('inputImage') != null){
+            return redirect('https://youtu.be/EvlAO8dUTgs');
+            $request->file('inputImage')->store('public/images');
+            DB::update("update users set picture =? where id=?", [$request->file('inputImage')->hashName(), Auth::user()->id]);
+        }
+
+        DB::update("update users set finished_setup='t' where id=?", [Auth::user()->id]);
+        return redirect('home');
+    }
+
+    public function skip()
+    {
+        DB::update("update users set finished_setup='t' where id=?", [Auth::user()->id]);
         return redirect('home');
     }
 }

@@ -18,7 +18,6 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
                     <button class="close"><i class="fa fa-close"></i></button>
-                    
                     <div class="profilepicture">
                         <h1 id="photo">Wow, que lind@!</h1>
                         <br>
@@ -53,7 +52,7 @@
                 reader.readAsDataURL(chosenPhoto);
                 const i = Math.floor(Math.random() * 2);
                 if (i == 1) {
-                    document.getElementById("photo").innerHTML = "Wow, é carapau!"
+                    document.getElementById("photo").innerHTML = "Wow, estás compremetid@?"
                 }
                 h1_photo.style.display = "contents";
             }
