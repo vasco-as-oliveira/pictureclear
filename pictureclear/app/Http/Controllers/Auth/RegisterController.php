@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ABOUTYOU;
 
     /**
      * Create a new controller instance.
@@ -77,4 +77,5 @@ class RegisterController extends Controller
             'remember_token' => Str::random(10),
         ]);
     }
+
 }

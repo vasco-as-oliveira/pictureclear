@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->float('balance')->default(0);
-            $table->string('urlPhoto')->nullable();
+            $table->string('picture')->nullable();
             $table->string('description')->nullable();
             $table->float('rating')->nullable();
             $table->rememberToken();

@@ -18,7 +18,7 @@
 
 <body>
     
-    @if (Auth::check())
+    @if (Auth::check() && !(Route::currentRouteName()=='about you'))
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
