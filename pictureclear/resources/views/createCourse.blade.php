@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="css/styleRegister.css">
-    <div class="container-register" id="container-register">
+    <link rel="stylesheet" href="css/styleCreateCourse.css">
+    <div class="container-fluid container-register" id="container-register">
         <div class="form-container sign-up-container">
             <form method="POST" action="{{ url('/course/create') }}" class="register">
                 @csrf
@@ -35,25 +35,15 @@
                     </span>
                 @enderror
 
+                <label for="has_certificate">O/A Aluno/a irá obter certificado?</label>
                 <input id="has_certificate" class="@error('has_certificate') is-invalid @enderror" type="checkbox" 
                     name="has_certificate" value="true" autocomplete="has_certificate" autofocus>
 
                 <button type="submit" class="registerbtn">
-                    {{ __('createcourse') }}
+                    {{ __('Criar Curso') }}
                 </button>
             </form>
         </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <img src="images/lights.png" alt="logoImage"></img>
-                    <h1>Bem-vindo de volta!</h1>
-                    <p>Para te manteres conectado connosco, por favor faz login com as tuas informações pessoais</p>
-                    <form action="{{ route('login') }}">
-                        <button class="ghost" id="login">{{ __('Log In') }}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+       
     </div>
 @endsection

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CourseCreation;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Http\Requests;
+use App\Http\Controllers\Controller;
 
 
 class CreateCourseFormController extends Controller
@@ -43,6 +44,6 @@ class CreateCourseFormController extends Controller
         ));
         
         // 
-        return back()->with('success', 'Acabaste de iniciar o teu curso!');
+        return view()->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }
