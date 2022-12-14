@@ -22,7 +22,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        /*
+        $allSessions = session()->all();
+        dd($allSessions);
+        */
         return view('home');
     }
 }
