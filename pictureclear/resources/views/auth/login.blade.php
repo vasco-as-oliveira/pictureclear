@@ -36,8 +36,8 @@
                     {{ __('Log In') }}
                 </button>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                <div class="check">
+                    <input class="checkbox" type="checkbox" name="remember" id="remember"
                         {{ old('remember') ? 'checked' : '' }}>
 
                     <label class="form-check-label" for="remember">
