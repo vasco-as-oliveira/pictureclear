@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="icon/logoBigger.ico">
-    <title>{{ config('app.name', 'Picture Clear') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
 
@@ -80,6 +80,7 @@
         @yield('content')
     </main>
     </div>
+    @yield('profile')
     
 </body>
 
