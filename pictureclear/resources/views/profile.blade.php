@@ -12,11 +12,18 @@
 </head>
 <body>
     @section('profile')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <img src="storage/images/{{$user->value('picture')}}" alt="Avatar" style="border-radius: 50%;width: 30%;
     height: auto;">
     <h2>{{$user->value("firstname")." ".$user->value("lastname")}}</h2>
     <h3>{{$user->value("username")}}</h3>
     <h4>{{$user->value("description")}}</h4>
+
+    Avaliações: @if ($user->value("rating")==0) Este utilizador não tem quaisquer avaliações @endif
+    @for($i=0; $i<$user->value("rating"); $i++)
+        <span class="fa fa-star"></span>
+    @endfor
     @endsection
 
 </body>

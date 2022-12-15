@@ -1,3 +1,4 @@
+@extends('layouts/app')
 <!DOCTYPE html>
 <html lang="en">
 <head>
