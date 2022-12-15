@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Registo' }}
+@endsection
+
 @section('content')
     <link rel="stylesheet" href="css/styleRegister.css">
     <div class="container-register" id="container-register">

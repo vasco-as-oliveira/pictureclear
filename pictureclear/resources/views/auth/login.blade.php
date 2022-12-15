@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Login' }}
+@endsection
+
 @section('content')
     <link rel='stylesheet' href='css/styleLogin.css' />
     <div class="container-login">
