@@ -12,28 +12,45 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function editProfile(){
-        $user =  User::select('*')->where('id','=',Auth::user()->id)->get();
-       return view('editProfile', ['user'=>$user]);
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
     }
-    public function editProfileSave(Request $request){
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $user =  User::select('*')->where('id', '=', Auth::user()->id)->get();
+        return view('editProfile', ['user' => $user]);
+    }
+    public function editProfileSave(Request $request)
+    {
         if (!$request->file('image')) {
-            DB::update('update users set firstname=?, lastname=?, description=? where id=?', [$request->firstname,$request->lastname, $request->about, Auth::user()->id]);
+            DB::update('update users set firstname=?, lastname=?, description=? where id=?', [$request->firstname, $request->lastname, $request->about, Auth::user()->id]);
             return redirect()->back()->with('status', 'info updated');
         }
         $request->validate([
-        'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
-        ]); 
-        
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
+        ]);
 
-        if (Storage::exists('public/images/'. Auth::user()->picture)) {
-          
-            Storage::delete('public/images/'. Auth::user()->picture);
+
+        if (Storage::exists('public/images/' . Auth::user()->picture)) {
+
+            Storage::delete('public/images/' . Auth::user()->picture);
         }
-        
+
         $request->file('image')->store('public/images');
-        DB::update('update users set firstname=?, lastname=?, description=?, picture=? where id=?', [$request->firstname,$request->lastname, $request->about,$request->file('image')->hashName(), Auth::user()->id]);
-        return redirect()->back()->with('status', 'info updated');
-       
+        DB::update('update users set firstname=?, lastname=?, description=?, picture=? where id=?', [$request->firstname, $request->lastname, $request->about, $request->file('image')->hashName(), Auth::user()->id]);
+        return redirect()->back()->with('status', 'info updated'); // redirect to profile
     }
 }

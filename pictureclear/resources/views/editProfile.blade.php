@@ -1,30 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar perfil</title>
-</head>
-<body>
-    <form method="post" action ="{{url('/editarPerfil/save')}}" enctype="multipart/form-data">
-       @csrf
-        <input type="file" id="image" name='image' value="{{$user->value('picture')}}">
-        <img src="" id="img1">
-        Primeiro nome:<input type="text" name="firstname" value="{{$user->value('firstname')}}">
-        Último nome:<input type="text" name="lastname" value="{{$user->value('lastname')}}">
-        Email: <input disabled type="text" name="lastname" value="{{$user->value('email')}}">
-        Sobre mim: <input type="text" name="about" value="{{$user->value('description')}}">
-        <input type="submit" value="Guardar alterações">
-        Foto atual: <img src="storage/images/{{$user->value('picture')}}" alt="public/images/{{$user->value('picture')}}">
-    </form>
+@extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Editar Perfil' }}
+@endsection
+
+@section('content')
+    <link rel='stylesheet' href='css/styleEditProfile.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container-login">
+        <div class="form-container sign-in-container">
+            <form method="POST" class="login" action="{{ url('/editarperfil/save') }}" enctype="multipart/form-data">
+                @csrf
+                <h1>Continuas a mesma pessoa {{ Auth::user()->firstname }}!</h1>
+                <div class="submit">
+                    <input placeholder="Primeiro Nome" type="text" name="firstname"
+                        value="{{ $user->value('firstname') }}">
+                    <input placeholder="Último nome" type="text" name="lastname" value="{{ $user->value('lastname') }}">
+                    <input placeholder="E-mail" disabled type="text" name="lastname" value="{{ $user->value('email') }}">
+                    <textarea maxlength="150" name="about" class="text" placeholder="Descrição"
+                        value="{{ $user->value('description') }}">{{ $user->value('description') }}</textarea>
+                    <button type="submit">Concluir alterações</button>
+                </div>
+                <!--</form>-->
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <div class="profilepicture">
+                        <h1 id="photo">Wow, ainda melhor!</h1>
+                        <br>
+                        <img id="profilepicture" src="{{ $user->value('picture') != null ? 'storage/images/'.$user->value('picture') : 'images/default-profilepicture.png' }}"
+                            alt="{{ $user->value('picture') != null ? $user->value('picture') : "default-profilepicture.png" }}">
+                        <input type="file" id="profilepictureInput" name='image' style="display: none"
+                            value="{{ $user->value('picture') }}">
+                        <!--<button class="ghost" id="upload">-->
+                        <label for="profilepictureInput" class="upload">
+                            <button class="ghost" id="upload">
+                                Escolhe uma foto!
+                            </button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
     <script>
-      //  const div_pfp = document.querySelector('.image');
-        const img_profilepicture = document.querySelector('#img1');
-        const input_profilepictureInput = document.querySelector('#image');
-      //  const button_upload = document.querySelector('#upload');
-     //   const h1_photo = document.querySelector('#photo');
+        const img_profilepicture = document.querySelector('#profilepicture');
+        const input_profilepictureInput = document.querySelector('#profilepictureInput');
+
+        if (!($user->value('picture'))) {
+          return redirect('https://youtu.be/Imc-i-VYi8g');
+            img_profilepicture.setAttribute('src', 'images/default-profilepicture.png');
+        }
 
         input_profilepictureInput.addEventListener('change', function() {
             const chosenPhoto = this.files[0];
@@ -32,13 +60,9 @@
                 const reader = new FileReader();
                 reader.addEventListener('load', function() {
                     img_profilepicture.setAttribute('src', reader.result);
-                  //  img_profilepicture.style.display = 'contents';
                 });
                 reader.readAsDataURL(chosenPhoto);
-              //  h1_photo.style.display="contents";
             }
         });
     </script>
-
-</body>
-</html>
+@endsection

@@ -27,5 +27,5 @@ Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'
 Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
 Route::post('/aboutyou/skip', [App\Http\Controllers\AboutYouController::class, 'skip']);
 
-Route::get('/editarPerfil', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name('editProfile');
-Route::post('/editarPerfil/save', [App\Http\Controllers\ProfileController::class, 'editProfileSave']);
+Route::get('/editarperfil', [App\Http\Controllers\ProfileController::class, 'index'])->name('edit profile');
+Route::post('/editarperfil/save', [App\Http\Controllers\ProfileController::class, 'editProfileSave']);
