@@ -24,3 +24,4 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/editarPerfil', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name('editProfile');
 Route::post('/editarPerfil/save', [App\Http\Controllers\ProfileController::class, 'editProfileSave']);
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);

@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function showProfile(Request $request){
+       $user = User::select('*')->where('username','=',$request->username)->get();
+       if (!$user) return redirect()->back()->with('status', 'Error');
+       return view('profile', ['user'=>$user]);
+    }
+
     public function editProfile(){
         $user =  User::select('*')->where('id','=',Auth::user()->id)->get();
        return view('editProfile', ['user'=>$user]);
