@@ -11,6 +11,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
     margin: -20px 0 50px;
+    overflow: scroll;
 }
 
 h1 {
@@ -173,3 +174,15 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

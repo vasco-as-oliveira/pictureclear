@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
+
 @section('content')
 
-<link rel="stylesheet" href="css/styleCreateCourse.css">
-    <div class="container-fluid container-register" id="container-register">
-        <div class="form-container sign-up-container">
+
+@if(Route::getCurrentRoute()->getName() == 'course')
+<link rel="stylesheet" href="{{asset('css/styleCreateCourse.css?v=').time()}}">
+<div class="container-fluid container-register" id="container-register">
+<div class="form-container sign-up-container">
+    
             <form method="POST" action="{{ url('/course/create') }}" class="register">
                 @csrf
                 <h1>Cria um curso</h1>
@@ -45,6 +49,118 @@
                     {{ __('Criar Curso') }}
                 </button>
             </form>
-        </div>
     </div>
+</div>
+@endif
+
+@if(Route::getCurrentRoute()->getName() == 'tier')
+
+<link rel="stylesheet" href="{{asset('css/styleTier.css?v=').time()}}">
+
+
+<form method="POST" action="{{ url('/course/tiers/create') }}" class="register">
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="container-fluid container-register" id="container-register">
+                <div class="form-container sign-up-container">
+                    @csrf
+                    <h1>Tier 1</h1>
+                    </br>
+                    <h5>Acesso a Video-aulas - &#10003;</h5>
+                    <h5>Acesso a Chat privado com o Professor - &#x2717;</h5>
+                    <h5>Acesso a um horário de marcação - &#x2717;</h5>
+
+
+                    <input min="1" step="any" placeholder="Preço" class="@error('price') is-invalid @enderror" type="number"
+                        name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+
+                    @error('price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    </br>
+                    <input id="chooseTier1" class="@error('chooseTier1') is-invalid @enderror btn-check" type="checkbox" 
+                    name="chooseTier1" value="true" autocomplete="chooseTier1" autofocus>
+                    <label class="checkbox btn btn-success" for="chooseTier1">Selecionar Tier</label>
+                </div>
+            </div>          
+        </div>
+        <div class="col-3">
+            <div class="container-fluid container-register" id="container-register">
+                <div class="form-container sign-up-container">
+                    @csrf
+                    <h1>Tier 2</h1>
+                    </br>
+                    <h5>Acesso a Video-aulas - &#10003;</h5>
+                    <h5>Acesso a Chat privado com o Professor - &#10003;</h5>
+                    <h5>Acesso a um horário de marcação - &#x2717;</h5>
+                    <input min="1" step="any" placeholder="Preço" class="@error('price') is-invalid @enderror" type="number"
+                        name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+
+                    @error('price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    </br>
+                    <input id="chooseTier2" class="@error('chooseTier2') is-invalid @enderror btn-check" type="checkbox" 
+                    name="chooseTier2" value="true" autocomplete="chooseTier2" autofocus>
+                    <label class="checkbox btn btn-success" for="chooseTier2">Selecionar Tier</label>
+
+                </div>
+            </div>  
+        </div>
+        <div class="col-3">
+            <div class="container-fluid container-register" id="container-register">
+                <div class="form-container sign-up-container">
+                    @csrf
+                    <h1>Tier 3</h1>
+                    </br>
+                    <h5>Acesso a Video-aulas - &#10003;</h5>
+                    <h5>Acesso a Chat privado com o Professor - &#10003;</h5>
+                    <h5>Acesso a um horário de marcação -  &#10003;</h5>
+                    <input min="1" step="any" placeholder="Preço" class="@error('price') is-invalid @enderror" type="number"
+                        name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+
+                    @error('price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    </br>
+                    <input id="chooseTier3" class="@error('chooseTier3') is-invalid @enderror btn-check" type="checkbox" 
+                    name="chooseTier3" value="true" autocomplete="chooseTier3" autofocus>
+                    <label class="checkbox btn btn-success" for="chooseTier3">Selecionar Tier</label>
+
+                </div>
+            </div>      
+        </div>
+
+        <div class="col-3 center">
+                    <button type="submit" class="registerbtn">
+                    {{ __('Avançar ⮚') }}
+                    </button>
+        </div>
+
+    </div>
+</div>
+
+</form>
+
+
+
+               
+
+                
+          
+
+@endif
+
+
 @endsection

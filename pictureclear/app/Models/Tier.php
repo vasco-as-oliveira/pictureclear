@@ -14,17 +14,12 @@ class Tier extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'owner_id',
-        'language',
-        'title',
-        'description',
-        'rating',
-        'has_certificate',
-        'total_hours',
+        'course_id',
+        'price',
+        'hasSchedulePerk',
+        'hasChatPerk',
     ];
 
-    protected $hidden = [
-        'owner_id'
-    ];
+
     
 }
