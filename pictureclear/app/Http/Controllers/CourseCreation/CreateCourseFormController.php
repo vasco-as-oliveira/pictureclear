@@ -33,7 +33,7 @@ class CreateCourseFormController extends Controller
         
 
         //  Store data in database
-        Course::insert(array(
+        $id=Course::insertGetId(array(
             'owner_id' => Auth::id(),
             'title' => $request['title'],
             'language' => $request['language'],
@@ -42,8 +42,9 @@ class CreateCourseFormController extends Controller
             'has_certificate' => $certificate,
             'total_hours' => 1,
         ));
-        
+
+        $request->session()->put('tier', $id);
         // 
-        return view()->with('success', 'Acabaste de iniciar o teu curso!');
+        return redirect('/course/tier')->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }

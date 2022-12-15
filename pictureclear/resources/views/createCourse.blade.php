@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="css/styleCreateCourse.css">
+
+<link rel="stylesheet" href="css/styleCreateCourse.css">
     <div class="container-fluid container-register" id="container-register">
         <div class="form-container sign-up-container">
             <form method="POST" action="{{ url('/course/create') }}" class="register">
@@ -26,9 +27,10 @@
                     </span>
                 @enderror
 
-                <input id="language" placeholder="Linguagem" class="@error('language') is-invalid @enderror" type="text"
-                    name="language" value="{{ old('language') }}" required autocomplete="language" autofocus>
-
+                <select id="language" placeholder="Linguagem" class="@error('language') is-invalid @enderror" type="text"
+                    name="language" required autocomplete="language" autofocus>
+                    <option value="Português">Português</option>
+                </select>
                 @error('language')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -44,6 +46,5 @@
                 </button>
             </form>
         </div>
-       
     </div>
 @endsection
