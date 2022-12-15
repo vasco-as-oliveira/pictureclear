@@ -49,11 +49,6 @@
         const img_profilepicture = document.querySelector('#profilepicture');
         const input_profilepictureInput = document.querySelector('#profilepictureInput');
 
-        if (!($user->value('picture'))) {
-          return redirect('https://youtu.be/Imc-i-VYi8g');
-            img_profilepicture.setAttribute('src', 'images/default-profilepicture.png');
-        }
-
         input_profilepictureInput.addEventListener('change', function() {
             const chosenPhoto = this.files[0];
             if (chosenPhoto) {
