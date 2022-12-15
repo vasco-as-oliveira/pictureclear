@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Login' }}
+@endsection
+
 @section('content')
     <link rel='stylesheet' href='css/styleLogin.css' />
     <div class="container-login">
@@ -36,8 +40,8 @@
                     {{ __('Log In') }}
                 </button>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                <div class="check">
+                    <input class="checkbox" type="checkbox" name="remember" id="remember"
                         {{ old('remember') ? 'checked' : '' }}>
 
                     <label class="form-check-label" for="remember">

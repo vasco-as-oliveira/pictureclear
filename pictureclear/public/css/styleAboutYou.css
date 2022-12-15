@@ -55,7 +55,7 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 button:hover {
@@ -75,7 +75,7 @@ button.ghost {
     border-color: #FFFFFF;
 }
 
-form.register {
+form.login {
     background-color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -86,15 +86,25 @@ form.register {
     text-align: center;
 }
 
-input {
+.text {
     background-color: #eee;
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
+    height: 15vh;
+    word-break: break-word;
+    resize: none;
 }
 
-.container-register {
+img{
+    width: 150px;
+    height: 150px;
+    margin-bottom: 25px;
+}
+
+
+.container-login {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
@@ -119,7 +129,7 @@ input {
     z-index: 2;
 }
 
-.container-register .sign-in-container {
+.container-login.right-panel-active .sign-in-container {
     transform: translateX(100%);
 }
 
@@ -130,7 +140,7 @@ input {
     z-index: 1;
 }
 
-.container-register .sign-up-container {
+.container-login.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
@@ -163,7 +173,7 @@ input {
     z-index: 100;
 }
 
-.container-register .overlay-container {
+.container-login.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
@@ -183,7 +193,7 @@ input {
     transition: transform 0.6s ease-in-out;
 }
 
-.container-register .overlay {
+.container-login.right-panel-active .overlay {
     transform: translateX(50%);
 }
 
@@ -206,7 +216,7 @@ input {
     transform: translateX(-20%);
 }
 
-.container-register .overlay-left {
+.container-login.right-panel-active .overlay-left {
     transform: translateX(0);
 }
 
@@ -215,7 +225,7 @@ input {
     transform: translateX(0);
 }
 
-.container-register .overlay-right {
+.container-login.right-panel-active .overlay-right {
     transform: translateX(20%);
 }
 
@@ -234,33 +244,46 @@ input {
     width: 40px;
 }
 
-img{
-    width: 150px;
-    height: 150px;
-    margin-bottom: 25px;
+input[type=checkbox] {
+    accent-color: #de639a !important;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    top: 2px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
+h1#photo {
+    display:none;
+    padding: 3%;
+}
+
+#profilepicture {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+/*
+    box-shadow: 0 5px 5px rgba(255, 255, 255, 0.25),
+    0 5px 5px rgba(255,255, 255, 0.22);
+*/
+}
+
+label > button {
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.close {
+    color: #fff ;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px;
+    height: auto;
+    width: min-content !important;
+    position: absolute;
     right: 0;
-    text-align: center;
-    z-index: 999;
+    top: 0;
+    font-size: 30px;
 }
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
+.close:hover {
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 33px;
 }
