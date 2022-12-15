@@ -62,6 +62,9 @@
                                                      document.getElementById('logout-form').submit();">
                                                 {{ __('Logout') }}
                                             </a>
+                                            <a class="dropdown-item" href="{{ route('editProfile') }}">
+                                                {{ __('Editar perfil') }}
+                                            </a>
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -79,8 +82,9 @@
     <main class="py-4">
         @yield('content')
     </main>
-    </div>
     @yield('profile')
+    </div>
+    
     
 </body>
 
