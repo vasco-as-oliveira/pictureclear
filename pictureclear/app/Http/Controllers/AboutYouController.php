@@ -43,17 +43,25 @@ class AboutYouController extends Controller
 
     public function finishSetup(Request $request)
     {
+        /*
         $request->validate([
             'description' => ['string', 'max:150'],
             'inputImage' => ['image','mimes:png,jpg,jpeg'],
         ]);
+        */
         if(!empty($request->input('description'))){
+            $request->validate([
+                'description' => ['string', 'max:150'],
+            ]);
             //return redirect('https://youtu.be/EvlAO8dUTgs');
             DB::update("update users set description=? where id=?", [$request->description, Auth::user()->id]);
         }
 
         if($request->file('inputImage') != null){
-            return redirect('https://youtu.be/EvlAO8dUTgs');
+            $request->validate([
+                'inputImage' => ['image','mimes:png,jpg,jpeg'],
+            ]);
+            //return redirect('https://youtu.be/EvlAO8dUTgs');
             $request->file('inputImage')->store('public/images');
             DB::update("update users set picture =? where id=?", [$request->file('inputImage')->hashName(), Auth::user()->id]);
         }
