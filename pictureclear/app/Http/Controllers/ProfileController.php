@@ -12,21 +12,34 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
     }
-    public function editProfile(){
-        $user =  User::select('*')->where('id','=',Auth::user()->id)->get();
-       return view('editProfile', ['user'=>$user]);
-    }
-
-
+    
     public function showProfile(Request $request){
         $user = User::select('*')->where('username','=',$request->username)->get();
         if (!$user) return redirect()->back()->with('status', 'Error');
         return view('profile', ['user'=>$user]);
      }
+
+    
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $user =  User::select('*')->where('id', '=', Auth::user()->id)->get();
+        return view('editProfile', ['user' => $user]);
+    }
     public function editProfileSave(Request $request)
     {
         if (!$request->file('image')) {
