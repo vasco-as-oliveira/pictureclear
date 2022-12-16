@@ -10,14 +10,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="icon/logoBigger.ico">
-<<<<<<< HEAD
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>{{ config('app.name', 'Picture Clear') }}</title>
  
-=======
     <title>@yield('title')</title>
 
->>>>>>> origin/dev
     <!-- Fonts -->
 
     <!-- Scripts -->
