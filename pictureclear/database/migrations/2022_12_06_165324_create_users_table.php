@@ -24,7 +24,7 @@ return new class extends Migration
             $table->float('balance')->default(0);
             $table->string('picture')->nullable();
             $table->string('description')->nullable();
-            $table->float('rating')->nullable();
+            $table->float('rating')->default(0);
             $table->boolean('finished_setup')->default(0);
             $table->rememberToken();
             $table->timestamps();
