@@ -22,6 +22,9 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
+Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
+Route::post('/aboutyou/skip', [App\Http\Controllers\AboutYouController::class, 'skip']);
 Route::get('/editarPerfil', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name('editProfile');
 Route::post('/editarPerfil/save', [App\Http\Controllers\ProfileController::class, 'editProfileSave']);
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);

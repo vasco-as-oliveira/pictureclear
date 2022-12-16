@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('picture')->nullable();
             $table->string('description')->nullable();
             $table->float('rating')->default(0);
+            $table->boolean('finished_setup')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
