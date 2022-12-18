@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 
 class CreateCourseFormController extends Controller
 {
+
+    
     public function createForm(Request $request) {
         return view('createCourse');
     }
@@ -44,6 +46,7 @@ class CreateCourseFormController extends Controller
         ));
 
         $request->session()->put('tier', $id);
+        
         // 
         return redirect('/course/tier')->with('success', 'Acabaste de iniciar o teu curso!');
     }

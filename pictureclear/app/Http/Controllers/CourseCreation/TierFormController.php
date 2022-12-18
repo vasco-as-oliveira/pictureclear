@@ -26,12 +26,10 @@ class TierFormController extends Controller
             $request->validate([
                         
             ]);
-
-
             //  Store data in database
             Tier::insert(array(
                 'course_id' => $request->session()->get('tier'),
-                'price' => $request['price'],
+                'price' => $request['price1'],
                 'hasSchedulePerk' => false,
                 'hasChatPerk' => false,
             ));
@@ -47,7 +45,7 @@ class TierFormController extends Controller
             //  Store data in database
             Tier::insert(array(
                 'course_id' => $request->session()->get('tier'),
-                'price' => $request['price'],
+                'price' => $request['price2'],
                 'hasSchedulePerk' => false,
                 'hasChatPerk' => true,
             ));
@@ -63,14 +61,14 @@ class TierFormController extends Controller
             //  Store data in database
             Tier::insert(array(
                 'course_id' => $request->session()->get('tier'),
-                'price' => $request['price'],
+                'price' => $request['price3'],
                 'hasSchedulePerk' => true,
                 'hasChatPerk' => true,
             ));
         }
 
         
-        
+        $request->session()->remove('tier');
         // 
         return view('home')->with('success', 'Acabaste de iniciar o teu curso!');
     }
