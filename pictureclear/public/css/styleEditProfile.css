@@ -269,6 +269,8 @@ h1#photo {
     height: 200px;
     width: 200px;
     border-radius: 50%;
+    object-fit: cover;
+
 /*
     box-shadow: 0 5px 5px rgba(255, 255, 255, 0.25),
     0 5px 5px rgba(255,255, 255, 0.22);

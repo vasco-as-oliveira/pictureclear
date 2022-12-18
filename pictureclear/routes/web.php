@@ -29,6 +29,7 @@ Route::post('/course/create', [App\Http\Controllers\CourseCreation\CreateCourseF
 Route::post('/course/tiers/create', [App\Http\Controllers\CourseCreation\TierFormController::class, 'CreateCourseForm'])->name('tier.store');
 Route::get('/checkCourse', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'checkCourse']);
 Route::get('/checkCourse/search', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'viewCourse'])->name('getCourse');
+Route::post('/checkCourse/update/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'finishSetup'])->name('finishSetup');
 
 
 

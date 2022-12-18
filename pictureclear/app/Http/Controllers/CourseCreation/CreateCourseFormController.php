@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 
 class CreateCourseFormController extends Controller
@@ -19,13 +20,15 @@ class CreateCourseFormController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'IsTierBeingUsed']);
     }
 
     public function CreateCourseForm(Request $request) {
         $certificate = false;
         if($request['has_certificate'] == 'true') $certificate = true;
         // Form validation
+        
+        
 
         $request->validate([
             'title' => 'required',
@@ -46,6 +49,7 @@ class CreateCourseFormController extends Controller
         ));
 
         $request->session()->put('tier', $id);
+        
         
         // 
         return redirect('/course/tier')->with('success', 'Acabaste de iniciar o teu curso!');

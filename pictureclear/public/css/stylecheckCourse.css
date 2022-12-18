@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+textarea{
+  width: 100%;
+  max-height: 200px;
+}
+
 
 
 .h1 {
@@ -36,17 +41,16 @@
 }
 
 .button {
-    border-radius: 20px;
     border: 1px solid #de639a;
     background-color: #de639a;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
-    padding: 10px 30px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
     cursor: pointer;
+    margin: 5px;
 }
 .button:hover {
     background-color: #ae4f7a;
@@ -116,7 +120,7 @@
 
 .form-container {
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 5px;
     transition: all 0.6s ease-in-out;
 }
 
@@ -333,3 +337,33 @@ mark {
 .dark-color {
     color: #20247b;
 }
+
+.btnImage{
+  border: none;
+  transition: transform .2s; /* Animation */
+}
+
+.btnImage:hover{
+  transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.change{
+  opacity: 0;
+}
+
+.change:hover{
+  opacity: 1;
+}
+
+
+#profilepicture {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+label > button {
+  cursor: pointer;
+  pointer-events: none;
+}
+

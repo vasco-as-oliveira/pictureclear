@@ -23,7 +23,7 @@ class CourseFactory extends Factory
         return [
             'owner_id' => User::factory(),
             'language' => fake()->languageCode(),
-            'title' => fake()->title(),
+            'title' => fake()->realTextBetween(5,15),
             'description' => fake()->text(),
             'rating' => fake()->numberBetween(1,5),
             'has_certificate' => fake()->boolean(),

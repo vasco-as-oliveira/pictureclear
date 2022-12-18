@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class checkTier
+class CheckIfTierIsBeingUsed
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,9 @@ class checkTier
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->session()->exists('tier')) {
-            return redirect('/home');
+        if($request->session()->exists('tier')) {
+            return redirect('/course/tier');
         }
-
         return $next($request);
-
-
     }
 }

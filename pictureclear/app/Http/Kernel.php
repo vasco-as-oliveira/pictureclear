@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'usersession' => \App\Http\Middleware\CheckUserSession::class,
         'checktier' => \App\Http\Middleware\checkTier::class,
+        'IsTierBeingUsed' => \App\Http\Middleware\CheckIfTierIsBeingUsed::class,
+
     ];
 }
