@@ -53,7 +53,6 @@ class AboutYouController extends Controller
             $request->validate([
                 'description' => ['string', 'max:150'],
             ]);
-            //return redirect('https://youtu.be/EvlAO8dUTgs');
             DB::update("update users set description=? where id=?", [$request->description, Auth::user()->id]);
         }
 
@@ -61,7 +60,6 @@ class AboutYouController extends Controller
             $request->validate([
                 'inputImage' => ['image','mimes:png,jpg,jpeg'],
             ]);
-            //return redirect('https://youtu.be/EvlAO8dUTgs');
             $request->file('inputImage')->store('public/images');
             DB::update("update users set picture =? where id=?", [$request->file('inputImage')->hashName(), Auth::user()->id]);
         }

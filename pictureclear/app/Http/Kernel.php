@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\checkTier;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,5 +65,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'usersession' => \App\Http\Middleware\CheckUserSession::class,
+        'checktier' => \App\Http\Middleware\checkTier::class,
+        'IsTierBeingUsed' => \App\Http\Middleware\CheckIfTierIsBeingUsed::class,
+
     ];
 }

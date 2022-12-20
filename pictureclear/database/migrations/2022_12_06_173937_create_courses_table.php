@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('language', 20);
             $table->float('rating')->default(0);
             $table->boolean('has_certificate');
-            $table->float('total_hours');
+            $table->float('total_hours')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

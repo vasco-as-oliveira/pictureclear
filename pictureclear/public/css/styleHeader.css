@@ -1,9 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower:400,800');
 
+body {
+    background: #f6f5f7;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    padding: -20px 0 50px;
+}
+
 .navbar {
-    position: absolute;
-    top: 0.5%;
+    position: fixed;
+    top: 0;
     width: 100%;
     height: 8%;
     display: flex;
@@ -20,17 +28,67 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
         0 10px 10px rgba(0, 0, 0, 0.22);
 }
+body{
+    top:10% !important;
+}
 
 .nav-links a {
     color: #7f2982;
 }
 
-/* LOGO */
 a {
     text-decoration: none;
 
 }
 
+   
+
+   .search{
+    width: 60%;
+   position: relative;
+   box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+   }
+
+   .search input{
+
+    height: 40px;
+    text-indent: 10px;
+    border: 2px solid #d6d4d4;
+
+
+   }
+
+
+   .search input:focus{
+
+    box-shadow: none;
+    border: 2px solid blue;
+
+
+   }
+
+   .search .fa-search{
+
+    position: absolute;
+    top: 20px;
+    left: 16px;
+
+   }
+
+   .search button{
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 70px;
+    background: blue;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+
+   }
+/* 
 li {
     list-style: none;
 }
@@ -41,7 +99,6 @@ li {
     font-size: 32px;
 }
 
-/* NAVBAR MENU */
 
 .menu {
     display: flex;
@@ -59,7 +116,6 @@ li {
     padding: 5px 14px;
 }
 
-/* DROPDOWN MENU */
 
 .services {
     position: relative;
@@ -69,7 +125,6 @@ li {
     background-color: rgb(1, 139, 139);
     padding: 1em 0;
     position: absolute;
-    /*WITH RESPECT TO PARENT*/
     display: none;
     border-radius: 8px;
     top: 35px;
@@ -110,3 +165,4 @@ li {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+ */
