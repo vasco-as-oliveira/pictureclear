@@ -4,7 +4,7 @@
     {{ 'PictureClear - Editar Perfil' }}
 @endsection
 
-@section('content')
+@section('editProfile')
     <link rel='stylesheet' href='css/styleEditProfile.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="container-login">
@@ -49,10 +49,7 @@
         const img_profilepicture = document.querySelector('#profilepicture');
         const input_profilepictureInput = document.querySelector('#profilepictureInput');
 
-        if (!($user->value('picture'))) {
-          return redirect('https://youtu.be/Imc-i-VYi8g');
-            img_profilepicture.setAttribute('src', 'images/default-profilepicture.png');
-        }
+        
 
         input_profilepictureInput.addEventListener('change', function() {
             const chosenPhoto = this.files[0];
