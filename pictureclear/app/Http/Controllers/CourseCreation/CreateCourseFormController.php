@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,8 +28,10 @@ class CreateCourseFormController extends Controller
         $certificate = false;
         if($request['has_certificate'] == 'true') $certificate = true;
         // Form validation
+
+        $course = array('id'=>Auth::id(), 'title' => $request['title'], 'language' => $request['language'], 'description' => $request['description'],'certificate' => $certificate);
         
-        
+        $request->session()->put(['course' => $course]);
 
         $request->validate([
             'title' => 'required',
@@ -37,18 +40,9 @@ class CreateCourseFormController extends Controller
          ]);
         
 
-        //  Store data in database
-        $id=Course::insertGetId(array(
-            'owner_id' => Auth::id(),
-            'title' => $request['title'],
-            'language' => $request['language'],
-            'description' => $request['description'],
-            'rating' => 0,
-            'has_certificate' => $certificate,
-            'total_hours' => 1,
-        ));
+        
 
-        $request->session()->put('tier', $id);
+        $request->session()->put('tier', 'true');
         
         
         // 
