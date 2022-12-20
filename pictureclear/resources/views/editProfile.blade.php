@@ -49,8 +49,6 @@
         const img_profilepicture = document.querySelector('#profilepicture');
         const input_profilepictureInput = document.querySelector('#profilepictureInput');
 
-        
-
         input_profilepictureInput.addEventListener('change', function() {
             const chosenPhoto = this.files[0];
             if (chosenPhoto) {
