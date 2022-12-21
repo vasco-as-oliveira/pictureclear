@@ -9,7 +9,6 @@
 
 
 
-
 <!-- Apresentação página do curso -->
 
 <section class="section about-section gray-bg" id="about">
@@ -23,7 +22,6 @@
                         @endif
 
                         @if(Auth::user()->id == $checkUser[0]->id)
-
                         @else
                             <h3 class="dark-color">{{$checkCourse[0]->title}}</h3>
                         @endif
@@ -50,8 +48,7 @@
                                         <label>Biografia</label>
                                         <p>{{$checkUser[0]->description}}</p>
                                     </div>
-                                    
-                                    
+    
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Exemplo para adicionar em col/row -->
@@ -59,9 +56,6 @@
                                         <label>E-mail</label>
                                         <p>{{$checkUser[0]->email}}</p>
                                     </div>
-                                    
-                                   
-                                   
                                 </div>
                             </div>
                         </div>
@@ -74,10 +68,10 @@
                                         <div class="overlay-panel overlay-right">
                                             <div class="profilepicture">
                                                 <br>
-                                                <img src="{{ $checkCourse[0]->image != null ? 'storage/images/'.$checkCourse[0]->image : 'images/default-profilepicture.png' }}" alt="default-profilepicture" id="profilepicture">
+                                                
+                                                <img src="{{ $checkCourse[0]->image != null ? URL::asset('storage/images/'.$checkCourse[0]->image) : URL::asset('images/default-profilepicture.png') }}" alt="default-profilepicture" id="profilepicture">
                                                 <input type="file" id="file" style="display: none;"  name="inputImage">
                                                 <label for="file"><button class="button"style="heigth:50%; width:200px;" >Carregar Imagem</button></label>
-
                                             </div>
                                         </div>
                                     </div>
@@ -86,11 +80,12 @@
                                 <div class="overlay-container">
                                     <div class="overlay">
                                         <div class="profilepicture">
-                                            <img src="{{ $checkCourse[0]->image != null ? 'storage/images/'.$checkCourse[0]->image : 'images/default-profilepicture.png' }}" alt="default-profilepicture" id="profilepicture">
+                                            <img src="{{ $checkCourse[0]->image != null ? URL::asset('storage/images/'.$checkCourse[0]->image) : URL::asset('images/default-profilepicture.png') }}" alt="default-profilepicture" id="profilepicture">
                                         </div>
                                     </div>
                                 </div>
                                 @endif
+                                
                             </div>
                     </div>
                     @if(Auth::user()->id == $checkUser[0]->id)
@@ -100,6 +95,8 @@
                     </form>
                     @endif
                 </div>
+                <form method="GET" action="{{ url('/addLesson', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
+
                 <div class="counter">
                     <div class="row">
                         <div class="col-6 col-lg-3">
@@ -120,14 +117,21 @@
                                 <p class="m-0px font-w-600">Photo Capture</p>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <h6 class="count h2" data-to="190" data-speed="190">190</h6>
-                                <p class="m-0px font-w-600">Telephonic Talk</p>
+                        @if(Auth::user()->id == $checkUser[0]->id)
+                            <div class="col-6 col-lg-3">
+                                <div class="count-data text-center">
+                                    <h6 class="count h2" >
+                                        <input type="submit" id="filevid" style="display: none;"  name="inputImage">
+                                        <label for="filevid" class="btnAdd"><button type="submit"  class="btnAdd">+</button></label>   
+                                    </h6>
+                                    <p class="m-0px font-w-600">Adicionar aulas</p>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+                        
                     </div>
                 </div>
+            </form>
             </div>
         </section>
 
@@ -148,8 +152,7 @@
 @elseif(count($checkCourse)>1)
 @php($i=0)
 <div class="container">
-@csrf
-@forelse ($checkCourse as $course)
+@foreach ($checkCourse as $course)
     @if($i==0)   
         <div class="row">
     @endif  
@@ -170,6 +173,7 @@
                         </h5>
 
                         <form method="GET" action="{{ url('/checkCourse/search') }}">
+                        @csrf
                         <input type="text" name="selectCourse" value="{{$course->id}}" hidden>
                         <button type="submit" id="selectCourse" class="btn btn-success">Ver Mais</button>
                         </form>
@@ -183,15 +187,14 @@
         </div>
         @php($i=0)
     @endif  
-@empty
-    <p>Não existem cursos</p>
-@endforelse
+@endforeach
     </div>
 </div>
 @endif
 @else
 <p>Não existem cursos</p>
 @endif
+
 
 <script>
         const div_pfp = document.querySelector('.profilepicture');

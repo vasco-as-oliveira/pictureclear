@@ -75,7 +75,7 @@
 
 
                     <input min="1" step="any" placeholder="Preço" class="input @error('price1') is-invalid @enderror" type="number"
-                        name="price1" value="{{ old('price1') }}" required autocomplete="price1" autofocus>
+                        name="price1" value="{{ (old('price1')==null) ? 1 : old('price1') }}" required autocomplete="price1" autofocus>
 
                     @error('price1')
                         <span class="span invalid-feedback" role="alert">
@@ -100,7 +100,7 @@
                     <h5>Acesso a Chat privado com o Professor - &#10003;</h5>
                     <h5>Acesso a um horário de marcação - &#x2717;</h5>
                     <input min="1" step="any" placeholder="Preço" class="input @error('price') is-invalid @enderror" type="number"
-                        name="price2" value="{{ old('price2') }}" required autocomplete="price2" autofocus>
+                        name="price2" value="{{  (old('price2')==null) ? 1 : old('price2')  }}" required autocomplete="price2" autofocus>
 
                     @error('price2')
                         <span class="span invalid-feedback" role="alert">
@@ -126,7 +126,7 @@
                     <h5>Acesso a Chat privado com o Professor - &#10003;</h5>
                     <h5>Acesso a um horário de marcação -  &#10003;</h5>
                     <input min="1" step="any" placeholder="Preço" class="input @error('price3') is-invalid @enderror" type="number"
-                        name="price3" value="{{ old('price') }}" required autocomplete="price3" autofocus>
+                        name="price3" value="{{  (old('price3')==null) ? 1 : old('price3')  }}" required autocomplete="price3" autofocus>
 
                     @error('price3')
                         <span class="span invalid-feedback" role="alert">
@@ -154,11 +154,7 @@
 </form>
 
 
-
-               
-
-                
-          
+   
 
 @endif
 
