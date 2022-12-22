@@ -24,6 +24,18 @@
     @for($i=0; $i<$user->value("rating"); $i++)
         <span class="fa fa-star"></span>
     @endfor
+
+    
+    @foreach ($courses as $course)
+    <p>{{$course->title}} </p>
+        <button>
+        a partir de {{$prices[$course->title]}}€
+    </button>
+    @endforeach
+    
+
+    
+    
     @endsection
 
 </body>

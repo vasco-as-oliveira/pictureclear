@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Foundation\Course;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -24,8 +25,20 @@ class ProfileController extends Controller
     
     public function showProfile(Request $request){
         $user = User::select('*')->where('username','=',$request->username)->get();
+
+
+        $courses = DB::select("SELECT * from courses where owner_id =". $user->value('id'));
+        $aux_array = array();
+        if (count($courses)){
+            foreach ($courses as $course){
+                $price = DB::select("SELECT MIN(price) FROM tiers WHERE course_id=".$course->id);
+                 $aux_array[$course->title] = $price[0]->min; 
+         
+             }
+        }
+        
         if (!$user) return redirect()->back()->with('status', 'Error');
-        return view('profile', ['user'=>$user]);
+       return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array]);
      }
 
     
