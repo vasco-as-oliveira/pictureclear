@@ -22,6 +22,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);
 
 Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'createForm'])->name('course');
 Route::get('/course/tier', [App\Http\Controllers\CourseCreation\TierFormController::class, 'createForm'])->name('tier');
@@ -30,9 +31,6 @@ Route::post('/course/tiers/create', [App\Http\Controllers\CourseCreation\TierFor
 Route::get('/checkCourse', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'checkCourse']);
 Route::get('/checkCourse/search', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'viewCourse'])->name('getCourse');
 Route::post('/checkCourse/update/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'finishSetup'])->name('finishSetup');
-
-
-
 Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
 Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
 Route::post('/aboutyou/skip', [App\Http\Controllers\AboutYouController::class, 'skip']);
