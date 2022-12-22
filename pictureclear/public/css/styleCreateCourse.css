@@ -129,14 +129,9 @@
     }
 }
 
-
-
-
-
-img{
-    width: 150px;
-    height: 150px;
-    margin-bottom: 25px;
+#profilepicture { 
+    border-radius: 50% !important; 
+    height: 25px !important
 }
 
 footer {

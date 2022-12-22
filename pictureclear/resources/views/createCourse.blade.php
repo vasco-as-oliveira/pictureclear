@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Criar Curso' }}
+@endsection
 
 @section('content')
-
-
 @if(Route::getCurrentRoute()->getName() == 'course')
 <link rel="stylesheet" href="{{asset('css/styleCreateCourse.css?v=').time()}}">
 

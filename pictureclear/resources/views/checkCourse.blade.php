@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Curso' }}
+@endsection
 
 @section('content')
 
 <link rel="stylesheet" href="{{asset('css/stylecheckCourse.css?v=').time()}}">
 @if($checkCourse)
 @if(count($checkCourse)==1)
-
-
-
 
 <!-- Apresentação página do curso -->
 
