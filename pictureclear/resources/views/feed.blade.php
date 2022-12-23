@@ -23,9 +23,11 @@
                             ->select('*')
                             ->where('id', $course->owner_id)
                             ->get();
-                    @endphp
+                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id IN(select id from tiers where course_id='.$course->id.' )');
+                        print_r($costumerCount);
+                   @endphp
                     <a style="text-decoration: none;color: inherit;"
-                        href={{ 'checkCourse/search?selectCourse=' . $course->id }}>
+                        href={{ 'checkCourse/search?selectCourse=' . $course->id  }}>
                         <div class="container-course">
                             <h1>{{ $course->title }}</h1>
                             <p>{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</p>
@@ -33,7 +35,8 @@
                                 @for ($i = 0; $i < $course->rating; $i++)
                                     <span class="fa fa-star"></span>
                                 @endfor
-                                {{ "(0)" }}
+                                {{ "(". $course->contagem .")" }}
+                                
                             </h2>
                             <h2>Linguagem: {{ $course->language }}</h2>
                             <h2>Desde: {{ $price =DB::table('tiers')->where('id', $course->id)->min('price') . '€' }}</p>
