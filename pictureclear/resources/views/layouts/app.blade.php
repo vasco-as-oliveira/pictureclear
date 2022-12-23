@@ -84,34 +84,30 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/course') }}">{{ __('Criar Curso') }}</a>
-                            </li>
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/course') }}">{{ __('Criar Curso') }}</a>
+                                    </li>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
-                                        <img id="profilepicture"  style="border-radius: 50% !important; height: 25px !important"
-                                            src="{{ Auth::user()->picture != null ? 'storage/images/' . Auth::user()->picture : 'images/default-profilepicture.png' }}"
-                                            alt="{{ Auth::user()->picture != null ? Auth::user()->picture : 'default-profilepicture.png' }}">
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" > 
-                                        {{ __('Meu perfil') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('edit profile') }}">
-                                        {{ __('Editar perfil') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                                    <li class="nav-item">
+                                        <a class="nav-link">Saldo: {{Auth::user()->balance}}€</a>
+                                    </li>
+                                   
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                            role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false" v-pre>
+                                            {{ Auth::user()->firstname." ".Auth::user()->lastname }}
+                                        </a>
+                                        
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>

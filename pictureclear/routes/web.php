@@ -22,6 +22,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);
 
 Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'createForm'])->name('course');
 Route::get('/course/tier', [App\Http\Controllers\CourseCreation\TierFormController::class, 'createForm'])->name('tier');
