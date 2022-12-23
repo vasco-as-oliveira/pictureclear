@@ -68,7 +68,7 @@
             <div class="container-fluid container-register" id="container-register">
                 <div class="form-container sign-up-container">
                     @csrf
-                    <h1 class="h1">Tier 1</h1>
+                    <h1 class="h1">Básico</h1>
                     </br>
                     <h5>Acesso a Video-aulas - &#10003;</h5>
                     <h5>Acesso a Chat privado com o Professor - &#x2717;</h5>
@@ -95,7 +95,7 @@
             <div class="container-fluid container-register" id="container-register">
                 <div class="form-container sign-up-container">
                     @csrf
-                    <h1 class="h1">Tier 2</h1>
+                    <h1 class="h1">Extra</h1>
                     </br>
                     <h5>Acesso a Video-aulas - &#10003;</h5>
                     <h5>Acesso a Chat privado com o Professor - &#10003;</h5>
@@ -121,7 +121,7 @@
             <div class="container-fluid container-register" id="container-register">
                 <div class="form-container sign-up-container">
                     @csrf
-                    <h1 class="h1">Tier 3</h1>
+                    <h1 class="h1">Ultimate</h1>
                     </br>
                     <h5>Acesso a Video-aulas - &#10003;</h5>
                     <h5>Acesso a Chat privado com o Professor - &#10003;</h5>

@@ -23,25 +23,27 @@
                             ->select('*')
                             ->where('id', $course->owner_id)
                             ->get();
-                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id IN(select id from tiers where course_id='.$course->id.' )');
+                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id IN(select id from tiers where course_id=' . $course->id . ' )');
                         //print_r($costumerCount);
-                   @endphp
-                    <a style="text-decoration: none;color: inherit;"
-                        href={{ 'checkCourse/search?selectCourse=' . $course->id  }}>
-                        <div class="container-course">
+                    @endphp
+                    <div class="container-course">
+                        <a style="text-decoration: none;color: inherit;"
+                            href={{ 'checkCourse/search?selectCourse=' . $course->id }}>
                             <h1>{{ $course->title }}</h1>
                             <p>{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</p>
-                            <h2>Avaliação:@if ($course->rating==0) Sem avaliações @endif
+                            <h2>Avaliação:@if ($course->rating == 0)
+                                    Sem avaliações
+                                @endif
                                 @for ($i = 0; $i < $course->rating; $i++)
                                     <span class="fa fa-star"></span>
                                 @endfor
-                                {{ "(". $costumerCount[0]->contagem .")" }}
-                                
+                                {{ '(' . $costumerCount[0]->contagem . ')' }}
+
                             </h2>
                             <h2>Linguagem: {{ $course->language }}</h2>
                             <h2>Desde: {{ $price =DB::table('tiers')->where('id', $course->id)->min('price') . '€' }}</p>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </form>
