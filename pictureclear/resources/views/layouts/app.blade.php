@@ -93,6 +93,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/course') }}">{{ __('Criar Curso') }}</a>
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link">Saldo: {{Auth::user()->balance}}€</a>
+                                    </li>
                                    
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
