@@ -27,6 +27,12 @@ class HomeController extends Controller
         $allSessions = session()->all();
         dd($allSessions);
         */
-        return view('home');
+        //return view('home');
+        return view('feed');
+    }
+
+    public function showCourses(Request $request){
+        $courses = DB::table('courses')->select('*')->get();
+
     }
 }
