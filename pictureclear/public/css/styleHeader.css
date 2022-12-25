@@ -9,6 +9,12 @@ body {
     padding: -20px 0 50px;
 }
 
+#profilepicture{
+    max-height: 100%;
+    max-width: 40px;
+    object-fit: cover;
+}
+
 .navbar {
 
     position: fixed;

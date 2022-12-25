@@ -50,7 +50,6 @@
                         <form method="GET" action="{{ url('/checkCourse') }}">
                             <div class="col-md-8">
                                 <div class="search">
-                                    <i class="fa fa-search"></i>
                                     <input min="1" step="any" placeholder="Procurar curso"
                                         class="form-control @error('findCourse') is-invalid @enderror" type="search"
                                         name="findCourse" value="{{ old('findCourse') }}" required
@@ -98,8 +97,8 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
-                                    <img id="profilepicture"  style="border-radius: 50% !important; height: 25px !important"
-                                        src="{{ Auth::user()->picture != null ? 'storage/images/' . Auth::user()->picture .'' : 'images/default-profilepicture.png' }}"
+                                    <img id="profilepicture" class="profilepic"  style="border-radius: 50% !important; height: 25px !important"
+                                        src="{{ Auth::user()->picture != null ? URL::asset('storage/images/' . Auth::user()->picture .'') : URL::asset('images/default-profilepicture.png') }}"
                                         alt="{{ Auth::user()->picture != null ? Auth::user()->picture : 'default-profilepicture.png' }}">
                             </a>
 
