@@ -9,7 +9,7 @@ body {
     padding: -20px 0 50px;
 }
 
-#profilepicture{
+.profilepic{
     max-height: 100%;
     max-width: 40px;
     object-fit: cover;
