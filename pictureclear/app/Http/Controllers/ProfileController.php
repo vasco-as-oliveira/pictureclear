@@ -8,11 +8,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Foundation\Course;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -22,6 +22,26 @@ class ProfileController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
+    
+    public function showProfile(Request $request){
+        $user = User::select('*')->where('username','=',$request->username)->get();
+
+
+        $courses = DB::select("SELECT * from courses where owner_id =". $user->value('id'));
+        $aux_array = array();
+        if (count($courses)){
+            foreach ($courses as $course){
+                $price = DB::select("SELECT MIN(price) FROM tiers WHERE course_id=".$course->id);
+                 $aux_array[$course->title] = $price[0]->min; 
+         
+             }
+        }
+        
+        if (!$user) return redirect()->back()->with('status', 'Error');
+       return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array]);
+     }
+
+    
 
     /**
      * Show the application dashboard.
@@ -37,7 +57,7 @@ class ProfileController extends Controller
     {
         if (!$request->file('image')) {
             DB::update('update users set firstname=?, lastname=?, description=? where id=?', [$request->firstname, $request->lastname, $request->about, Auth::user()->id]);
-            return redirect()->back()->with('status', 'info updated');
+            return redirect(url("/profile/?username=" . Auth::user()->username));
         }
         $request->validate([
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
@@ -51,6 +71,6 @@ class ProfileController extends Controller
 
         $request->file('image')->store('public/images');
         DB::update('update users set firstname=?, lastname=?, description=?, picture=? where id=?', [$request->firstname, $request->lastname, $request->about, $request->file('image')->hashName(), Auth::user()->id]);
-        return redirect()->back()->with('status', 'info updated'); // redirect to profile
+        return redirect(url("/profile/?username=" . Auth::user()->username));
     }
 }

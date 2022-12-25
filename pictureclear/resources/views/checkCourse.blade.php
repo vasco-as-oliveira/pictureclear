@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ 'PictureClear - Curso' }}
+@endsection
 
 @section('content')
 
