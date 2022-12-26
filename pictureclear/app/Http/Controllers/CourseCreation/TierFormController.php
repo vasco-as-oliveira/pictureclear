@@ -86,6 +86,6 @@ class TierFormController extends Controller
         $request->session()->remove('course');
         $request->session()->remove('tier');
         // 
-        return redirect('/home')->with('success', 'Acabaste de iniciar o teu curso!');
+        return redirect('/addLesson/'.$id)->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }

@@ -8,37 +8,46 @@
 
 <link rel="stylesheet" href="{{asset('css/stylecheckCourse.css?v=').time()}}">
 @if($checkCourse)
-@if(count($checkCourse)==1)
+    @if(count($checkCourse)==1)
 
+    <div class="form-popup" id="myForm">
+        <div class="card w-25">
+        <h5 class="card-header">Confirmação</h5>
+            <div class="card-body">
+                <p class="card-text">Depois de tornar público, não poderá voltar a tornar privado. Deseja prosseguir?</p>
+                <form method="POST" action="{{ url('/checkCourse/launchcourse', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit" id="setPublic" class="label checkbox btn btn-success">Tornar publico</button>
+                </form>
+                <button type="button" class="btn cancel" onclick="closeForm()">Ainda não</button>
+            </div>
+        </div>
+    </div>
 
-
-<!-- Apresentação página do curso -->
-
-<section class="section about-section gray-bg" id="about">
+        <!-- Apresentação página do curso -->
+        <section class="section about-section gray-bg" id="about">
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-lg-6">
                         <div class="about-text go-to">
-                        @if(Auth::user()->id == $checkUser[0]->id)
-                        <form method="POST" action="{{ url('/checkCourse/update', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
-                        @csrf
-                        @endif
+                            @if(Auth::user()->id == $checkUser[0]->id)
+                                <form method="POST" action="{{ url('/checkCourse/update', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
+                                @csrf
+                            @endif
 
-                        @if(Auth::user()->id == $checkUser[0]->id)
-                        @else
-                            <h3 class="dark-color">{{$checkCourse[0]->title}}</h3>
-                        @endif
+                            @if(Auth::user()->id == $checkUser[0]->id)
+                            @else
+                                <h3 class="dark-color">{{$checkCourse[0]->title}}</h3>
+                            @endif
                             <h6 class="theme-color lead">Rating: {{$checkCourse[0]->rating}}</h6>
                             <p>I <mark>Descrição: </mark>
                             
                             
                             @if(Auth::user()->id == $checkUser[0]->id)
-                            <textarea maxlength="150" name="description" class="text" placeholder="{{$checkCourse[0]->description}}"></textarea>
+                                <textarea maxlength="150" name="description" class="text" placeholder="{{$checkCourse[0]->description}}"></textarea>
                             @else
-                            {{$checkCourse[0]->description}}
+                                {{$checkCourse[0]->description}}
                             @endif
-                                
-                            
                             </p>
                             <div class="row about-list">
                                 <h6 class="theme-color lead">Informação Sobre o Professor</h6>
@@ -91,12 +100,13 @@
                                 
                             </div>
                     </div>
-                    @if(Auth::user()->id == $checkUser[0]->id)
+                    
                     <div class="profilepicture">
                         <button name="done" type="submit" class="button" style="heigth:50%; width:200px; text-align:center;">Concluído</button>
                     </div>    
                     </form>
                     @endif
+                    
                 </div>
                 <form method="GET" action="{{ url('/addLesson', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
 
@@ -131,14 +141,31 @@
                                 </div>
                             </div>
                         @endif
+                    </form>
+                        @if(Auth::user()->id == $checkUser[0]->id)
+                        @if(!$checkCourse[0]->public)
+
+                        <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
+
+                        @else
+
+                        @endif
                         
                     </div>
                 </div>
-            </form>
+            
             </div>
         </section>
 
+        <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "flex";
+}
 
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
 
 
 
@@ -156,6 +183,7 @@
 @php($i=0)
 <div class="container">
 @foreach ($checkCourse as $course)
+@if($course->public)
     @if($i==0)   
         <div class="row">
     @endif  
@@ -186,10 +214,11 @@
 
             </div>
         @php($i++)
-    @if($i==3)   
-        </div>
-        @php($i=0)
-    @endif  
+        @if($i==3)   
+            </div>
+            @php($i=0)
+        @endif  
+    @endif
 @endforeach
     </div>
 </div>

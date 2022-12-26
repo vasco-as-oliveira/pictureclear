@@ -18,6 +18,7 @@
             @endphp
             <div class="courses">
                 @foreach ($courses as $course)
+                @if($course->public)
                     @php
                         $user = DB::table('users')
                             ->select('*')
@@ -44,6 +45,7 @@
                             <h2>Desde: {{ $price =DB::table('tiers')->where('id', $course->id)->min('price') . '€' }}</p>
                         </a>
                     </div>
+                    @endif
                 @endforeach
             </div>
         </form>

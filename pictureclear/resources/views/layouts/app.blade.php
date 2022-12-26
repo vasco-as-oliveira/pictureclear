@@ -56,7 +56,7 @@
                                         autocomplete="findCourse" autofocus aria-label="Search"
                                         aria-describedby="search-addon">
                                     <button class="btn btn-outline-primary" type="submit">
-                                        Procurar
+                                        <h6>&#128269;</h6>
                                     </button>
                                     @error('findCourse')
                                         <span class="invalid-feedback" role="alert">
@@ -89,10 +89,7 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/course') }}">{{ __('Criar Curso') }}</a>
-                        </li>
-
+                        
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -103,11 +100,14 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url("/profile/?username=" . Auth::user()->username) }}">
+                                <a class="dropdown-item" href="{{ url('/profile/?username=' . Auth::user()->username) }}">
                                     {{ __('Meu perfil') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('edit profile') }}">
                                     {{ __('Editar perfil') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/course') }}">
+                                    {{ __('Criar Curso') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -118,6 +118,9 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                               
+
                                 </div>
                             </li>
                         @endguest
