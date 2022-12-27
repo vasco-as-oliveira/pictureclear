@@ -34,36 +34,45 @@ body {
 }
 
 .info p {
-  
+    width: 100%;
+    height: auto;
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
     letter-spacing: 0.5px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+#description {
+    width: 500px;
 }
 #profile {
     border-radius: 50%;
-    width: 35%;
+    width: 300px;
     height: auto;
 }
 
 .info { 
     position: relative;
-    float: right;
-    margin-top: 5%;
-
+    float: left;
+    margin-top: -25%;
+    margin-left: 35%;
 }
 .image {
     position: relative;
-    float: left;
-    left: 40%;
     margin-top: 3%;
+    float: left;
 }
 
 .user {
-    position:relative;
-    top: 10%;
     width: 60%;
-    height: 50%;
+    height: 60%;
+    position: absolute;
+    left: 25%;
+    top: 10%;
+    justify-content: center !important;
+
 }
 
 .container-course {

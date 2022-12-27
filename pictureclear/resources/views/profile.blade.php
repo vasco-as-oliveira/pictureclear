@@ -13,7 +13,7 @@
 
     <div class="user">
         <div class="image">
-            <img id="profile" src="storage/images/{{ $user->value('picture') }}" alt="Avatar">
+            <img id="profile" src="{{ $user->value('picture') != null ? 'storage/images/'.$user->value('picture') : 'images/default-profilepicture.png' }}" alt="Avatar">
         </div>
         <div class="info">
             <h1 id="title">{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</h1>
