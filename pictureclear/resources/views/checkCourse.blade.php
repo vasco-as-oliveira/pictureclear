@@ -80,6 +80,10 @@
                                     </div>
                                 </div>
                                 @else
+                                <form method="get" action="{{url('/comprarCurso')}}">
+                                    <input type="text" name="course" value="{{$checkCourse[0]->id}}" style="display: none;">
+                                    <input type="submit">
+                                </form>
                                 <div class="overlay-container">
                                     <div class="overlay">
                                         <div class="profilepicture">

@@ -42,3 +42,6 @@ Route::post('/aboutyou/skip', [App\Http\Controllers\AboutYouController::class, '
 
 Route::get('/editarperfil', [App\Http\Controllers\ProfileController::class, 'index'])->name('edit profile');
 Route::post('/editarperfil/save', [App\Http\Controllers\ProfileController::class, 'editProfileSave']);
+Route::get('/comprarCurso', [App\Http\Controllers\BuyController::class, 'index']);
+Route::post('/comprarCurso/tier',[App\Http\Controllers\BuyController::class, 'buy']);
+Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'success']);
