@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\CourseRating;
 
 
 
@@ -30,8 +31,9 @@ class CheckCourseFormController extends Controller
         return redirect('/home');
 
     } */
-
-    public function viewCourse(Request $request) {
+    
+    public function viewCourse(Request $request) 
+    {
         $user = null;
         $find = $request['selectCourse'];
         $course = DB::select('select * from courses where id = '.$find.'');
@@ -42,9 +44,39 @@ class CheckCourseFormController extends Controller
         return view('checkCourse', ['checkCourse' => $course, 'checkUser' => $user])->with('success', '!');
     }
 
+    public function publishRating (Request $request, $id)
+    {
+        //$rating = $request->input('rate');
+
+        //$request->validate(['rating'=>'required|integer|between:1,5']);
+        //return redirect("https://youtu.be/-GGixCs0290");
+        
+        CourseRating::insert([
+            ['user_id' => Auth::user()->id, 'course_id' => $id, 'rating' => $request->input('rating')]
+        ]);
+        
+        $getCourse = DB::select('select * from courses where id = ?', [$id]);
+        $getUserRating = DB::select('select * from users where id = ?', [$getCourse[0]->owner_id]);
+        
+        
+        if($getUserRating[0]->rating == 0){
+            $update = DB::update('update users set rating = ? where id = ?', [$request->input('rating'),$getCourse[0]->owner_id]);
+        }else{
+            $update = DB::update('update users set rating = ? where id = ?', [($request->input('rating')/2),$getCourse[0]->owner_id]);
+        }
+
+        if($getCourse[0]->rating == 0){
+            $update = DB::update('update courses set rating = ? where id = ?', [$request->input('rating'),$id]);
+        }else{
+            $update = DB::update('update courses set rating = ? where id = ?', [($request->input('rating')/2),$id]);
+        }
+        
+        return back();
+    }
+
+
     public function finishSetup(Request $request, $id)
     {
-      
         if(!empty($request->input('description'))){
             $request->validate([
                 'description' => ['string', 'max:150'],

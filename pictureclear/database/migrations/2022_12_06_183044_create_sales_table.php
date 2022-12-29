@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tier_id');
             $table->foreign('tier_id')->references('id')->on('tiers');
-            $table->timestamp('bought');
+            $table->timestamps();
         });
     }
 

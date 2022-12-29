@@ -32,7 +32,8 @@
                             href={{ 'checkCourse/search?selectCourse=' . $course->id }}>
                             <h1>{{ $course->title }}</h1>
                             <p>{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</p>
-                            <h2>Avaliação:@if ($course->rating == 0)
+                            <h2>Avaliação: 
+                                @if ($course->rating == 0)
                                     Sem avaliações
                                 @endif
                                 @for ($i = 0; $i < $course->rating; $i++)
@@ -42,7 +43,7 @@
 
                             </h2>
                             <h2>Linguagem: {{ $course->language }}</h2>
-                            <h2>Desde: {{ $price =DB::table('tiers')->where('id', $course->id)->min('price') . '€' }}</p>
+                            <h2>Desde: {{ $price =DB::table('tiers')->where('course_id', $course->id)->min('price') . '€' }}</p>
                         </a>
                     </div>
                     @endif

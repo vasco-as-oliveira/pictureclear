@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
+                        <a class="nav-link page-scroll" href="">HOME <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <span class="nav-item">
@@ -79,8 +79,8 @@
                         <div class="text-container">
                             <h1>Picture Clear</h1>
                             <p class="p-large">Uma plataforma para partilhares os teus conhecimentos!</p>
-                            @if (Route::has('login'))
-                            <a class="btn-solid-lg page-scroll" href="{{ url('/home') }}">Junta-te a nós!</a>
+                            @if (Auth::user())
+                                <a class="btn-solid-lg page-scroll" href="{{ url('/home') }}">Junta-te a nós!</a>
                             @else
                                 <a class="btn-solid-lg page-scroll" href="{{ route('register') }}">Junta-te a nós!</a>
                             @endif
