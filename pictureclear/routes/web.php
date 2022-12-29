@@ -28,9 +28,11 @@ Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormContr
 Route::get('/course/tier', [App\Http\Controllers\CourseCreation\TierFormController::class, 'createForm'])->name('tier');
 Route::post('/course/create', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'CreateCourseForm'])->name('course.store');
 Route::post('/course/tiers/create', [App\Http\Controllers\CourseCreation\TierFormController::class, 'CreateCourseForm'])->name('tier.store');
-Route::get('/checkCourse', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'checkCourse'])->name('getCourse');
+Route::get('/checkCourse', [App\Http\Controllers\CourseCreation\SearchCourseFormController::class, 'checkCourse'])->name('getCourse');
 Route::get('/checkCourse/search', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'viewCourse'])->name('getCourse');
 Route::post('/checkCourse/update/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'finishSetup'])->name('finishSetup');
+Route::post('/checkCourse/launchcourse/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'launchCourse']);
+
 Route::get('/addLesson/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'createForm']);
 Route::post('/addLesson/create/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'LessonForm']);
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('has_certificate');
             $table->float('total_hours')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('public')->default(false);
             $table->timestamps();
         });
     }

@@ -19,30 +19,32 @@ class CheckCourseFormController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
-    public function checkCourse(Request $request) {
+    /* public function checkCourse(Request $request) {
         $user = null;
         $find = $request['findCourse'];
         $courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
-        if($courses)$user = DB::select('select * from users where id = '.$courses[0]->owner_id.'');
-        return view('checkCourse', ['checkCourse' => $courses, 'checkUser' => $user])->with('success', '!');
-    }
+        if($courses){
+            $user = DB::select('select * from users where id = '.$courses[0]->owner_id.'');
+            if($courses[0]->public || ($courses[0]->owner_id == Auth::id())) return view('checkCourse', ['checkCourse' => $courses, 'checkUser' => $user])->with('success', '!');
+        }
+        return redirect('/home');
+
+    } */
 
     public function viewCourse(Request $request) {
         $user = null;
         $find = $request['selectCourse'];
         $course = DB::select('select * from courses where id = '.$find.'');
-        if($course)$user = DB::select('select * from users where id = '.$course[0]->owner_id.'');
+        if($course){
+            $user = DB::select('select * from users where id = '.$course[0]->owner_id.'');
+            if($course[0]->public || ($course[0]->owner_id == Auth::id())) return redirect('/home');
+        }
         return view('checkCourse', ['checkCourse' => $course, 'checkUser' => $user])->with('success', '!');
     }
 
     public function finishSetup(Request $request, $id)
     {
-        /*
-        $request->validate([
-            'description' => ['string', 'max:150'],
-            'inputImage' => ['image','mimes:png,jpg,jpeg'],
-        ]);
-        */
+      
         if(!empty($request->input('description'))){
             $request->validate([
                 'description' => ['string', 'max:150'],
@@ -57,7 +59,12 @@ class CheckCourseFormController extends Controller
             $request->file('inputImage')->store('public/images');
             DB::update("update courses set image =? where id=?", [$request->file('inputImage')->hashName(), $id]);
         }
+        return back();
+    }
 
+    public function launchCourse(Request $request, $id)
+    {
+        DB::update("update courses set public = NOT public where id=?", [$id]);
         return back();
     }
 }
