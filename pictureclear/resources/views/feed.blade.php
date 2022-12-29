@@ -41,7 +41,7 @@
 
                             </h2>
                             <h2>Linguagem: {{ $course->language }}</h2>
-                            <h2>Desde: {{ $price =DB::table('tiers')->where('id', $course->id)->min('price') . '€' }}</p>
+                            <h2>Desde: {{ $price =DB::table('tiers')->where('course_id', $course->id)->min('price') . '€' }}</p>
                         </a>
                     </div>
                 @endforeach
