@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/stylecheckCourse.css?v=') . time() }}">
     <link rel="stylesheet" href="{{ asset('css/styleRate.css?v=') . time() }}">
 
-
+    
     @if ($checkCourse)
         @if (count($checkCourse) == 1)
             <div class="form-popup" id="myForm">
@@ -155,96 +155,49 @@
                                 <p class="m-0px font-w-600">Adicionar aulas</p>
                             </div>
                         </div>
+                    
                     @else
-        </form>
-        @php
-            $courseId = $checkCourse[0]->id;
-            $userId = Auth::user()->id;
-            $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $courseId . ') and user_id=' . $userId . '');
-            
-        @endphp
-
-        @if (!empty($subscribed_users[0]) && empty($checkRating[0]))
-            <div class="col-6 col-lg-3">
-                <div class="count-data text-center">
-                    <div class="rate">
-                        <form name="publish" method="POST"
-                            action="{{ url('/publishrating', ['id' => $checkCourse[0]->id]) }}">
-                            @csrf
-                            <input type="radio" id="star5" name="rating" value="5"
-                                onchange="this.form.submit();" />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rating" value="4"
-                                onchange="this.form.submit();" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rating" value="3"
-                                onchange="this.form.submit();" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rating" value="2"
-                                onchange="this.form.submit();" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rating" value="1"
-                                onchange="this.form.submit();" />
-                            <label for="star1" title="text">1 star</label>
-                        </form>
-                    </div>
-                    <p class="m-0px font-w-600">Tua Rating</p>
-                </div>
-            </div>
-        @endif
-    @endif
-
-
-    @if (Auth::user()->id == $checkUser[0]->id)
-        @if (!$checkCourse[0]->public)
-            <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
-        @else
-            </div>
-            </section>
-
-            <script>
-                function openForm() {
-                    document.getElementById("myForm").style.display = "flex";
-                }
-
-                function closeForm() {
-                    document.getElementById("myForm").style.display = "none";
-                }
-            </script>
-        @elseif(count($checkCourse) > 1)
-            @php($i = 0)
-            <div class="container">
-                @foreach ($checkCourse as $course)
-                    @if ($course->public)
-                        @if ($i == 0)
-                            <div class="row">
-                        @endif
-                        <div class="col-4">
-
-                            <!-- Cada Container -->
-
-                            <div class="container-register">
-
-                                <h1>{{ $course->title }}</h1>
-                                <h5>Rating: {{ $course->rating }}</h5>
-                                <h5>Linguagem: {{ $course->language }}</h5>
-                                <h5>Recebe certificado?: @if ($course->has_certificate)
-                                        &#10003;
-                                    @else
-                                        &#x2717;
-                                    @endif
-                                </h5>
-
-                                <form method="GET" action="{{ url('/checkCourse/search') }}">
-                                    @csrf
-                                    <input type="text" name="selectCourse" value="{{ $course->id }}" hidden>
-                                    <button type="submit" id="selectCourse" class="btn btn-success">Ver Mais</button>
-                                </form>
-
+                </form>
+                        @php
+                            $courseId = $checkCourse[0]->id;
+                            $userId = Auth::user()->id;
+                            $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $courseId . ') and user_id=' . $userId . '');
+                            
+                        @endphp
+                    
+                        @if (!empty($subscribed_users[0]) && empty($checkRating[0]))
+                            <div class="col-6 col-lg-3">
+                                <div class="count-data text-center">
+                                    <div class="rate">
+                                        <form name="publish" method="POST" action="{{ url('/publishrating', ['id' => $checkCourse[0]->id]) }}">
+                                            @csrf
+                                            <input type="radio" id="star5" name="rating" value="5" onchange="this.form.submit();"/>
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rating" value="4" onchange="this.form.submit();"/>
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rating" value="3" onchange="this.form.submit();"/>
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rating" value="2" onchange="this.form.submit();"/>
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rating" value="1" onchange="this.form.submit();"/>
+                                            <label for="star1" title="text">1 star</label>
+                                        </form>
+                                    </div>
+                                    <p class="m-0px font-w-600">Tua Rating</p>
+                                </div>
                             </div>
-                            <!-- Cada Container -->
+                        @endif
+                    @endif
+                
 
-                        </div>
+        @if (Auth::user()->id == $checkUser[0]->id)
+            @if (!$checkCourse[0]->public)
+                <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
+            @else
+            
+            @endif
+
+            </div>
             </div>
 
             </div>
