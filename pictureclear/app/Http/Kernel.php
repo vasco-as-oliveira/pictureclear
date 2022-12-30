@@ -68,6 +68,5 @@ class Kernel extends HttpKernel
         'checktier' => \App\Http\Middleware\checkTier::class,
         'IsTierBeingUsed' => \App\Http\Middleware\CheckIfTierIsBeingUsed::class,
         'IsCoursePublic' => \App\Http\Middleware\IsCoursePublic::class,
-        'checkIfBought' => \App\Http\Middleware\checkIfBought::class,
     ];
 }

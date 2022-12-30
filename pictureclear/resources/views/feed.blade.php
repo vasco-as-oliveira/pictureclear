@@ -10,7 +10,6 @@
     <div>
         <form action="">
             @php
-                
                 $courses = DB::table('courses')
                     ->select('*')
                     ->get();
@@ -24,7 +23,7 @@
                             ->select('*')
                             ->where('id', $course->owner_id)
                             ->get();
-                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id IN(select id from tiers where course_id=' . $course->id . ' )');
+                        $costumerCount = DB::select('select count(*) as contagem from course_ratings where course_id=' . $course->id);
                         //print_r($costumerCount);
                     @endphp
                     <div class="container-course">
@@ -32,7 +31,8 @@
                             href={{ 'checkCourse/search?selectCourse=' . $course->id }}>
                             <h1>{{ $course->title }}</h1>
                             <p>{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</p>
-                            <h2>Avaliação:@if ($course->rating == 0)
+                            <h2>Avaliação: 
+                                @if ($course->rating == 0)
                                     Sem avaliações
                                 @endif
                                 @for ($i = 0; $i < $course->rating; $i++)
@@ -50,4 +50,36 @@
             </div>
         </form>
     </div>
+    <script>
+        var ENDPOINT = "{{ url('/') }}";
+        var page = 1;
+        infinteLoadMore(page);
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                infinteLoadMore(page);
+            }
+        });
+        function infinteLoadMore(page) {
+            $.ajax({
+                    url: ENDPOINT + "/blogs?page=" + page,
+                    datatype: "html",
+                    type: "get",
+                    beforeSend: function () {
+                        $('.auto-load').show();
+                    }
+                })
+                .done(function (response) {
+                    if (response.length == 0) {
+                        $('.auto-load').html("We don't have more data to display :(");
+                        return;
+                    }
+                    $('.auto-load').hide();
+                    $("#data-wrapper").append(response);
+                })
+                .fail(function (jqXHR, ajaxOptions, thrownError) {
+                    console.log('Server error occured');
+                });
+        }
+    </script>
 @endsection

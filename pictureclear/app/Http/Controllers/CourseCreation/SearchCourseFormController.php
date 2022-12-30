@@ -23,9 +23,13 @@ class SearchCourseFormController extends Controller
         $user = null;
         $find = $request['findCourse'];
         $courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
+        
         if($courses){
             $user = DB::select('select * from users where id = '.$courses[0]->owner_id.'');
-            if($courses[0]->public || ($courses[0]->owner_id == Auth::id()))         return view('checkCourse', ['checkCourse' => $courses, 'checkUser' => $user])->with('success', '!');
+            if($courses[0]->public || ($courses[0]->owner_id == Auth::id())){
+                $rating = DB::select('select * from course_ratings where user_id=? and course_id =? ', [Auth::id(), $courses[0]->id]);
+                return view('checkCourse', ['checkCourse' => $courses, 'checkUser' => $user, 'checkRating'=> $rating])->with('success', '!');
+            }
         } 
         return redirect('/home');
     }

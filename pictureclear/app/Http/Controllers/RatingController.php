@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User;
 
-class HomeController extends Controller
+
+class RatingController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,10 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        return view('feed');
+        return view('rate');
     }
 
-    public function showCourses(Request $request){
-        $courses = DB::table('courses')->select('*')->get();
-    }
 }

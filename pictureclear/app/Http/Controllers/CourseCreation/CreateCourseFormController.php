@@ -38,12 +38,8 @@ class CreateCourseFormController extends Controller
             'description' => 'required',
             'language' => 'required',
          ]);
-        
-
-        
 
         $request->session()->put('tier', 'true');
-        
         
         // 
         return redirect('/course/tier')->with('success', 'Acabaste de iniciar o teu curso!');

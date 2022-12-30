@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('course_ratings', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('chat_id');
-            $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
-            //$table->timestamps('sentOn');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->integer('rating');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('course_rating');
     }
 };
