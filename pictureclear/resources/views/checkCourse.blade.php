@@ -194,6 +194,7 @@
             @if (!$checkCourse[0]->public)
                 <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
             @else
+            
             @endif
 
             </div>
