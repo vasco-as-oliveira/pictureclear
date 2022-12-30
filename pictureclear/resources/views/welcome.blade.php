@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="">HOME <span class="sr-only">(current)</span></a>
+                        <a class="nav-link page-scroll" href="{{ url('/home') }}">{{ !empty(Auth::user()) ? "HOME" : "WELCOME" }}<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <span class="nav-item">

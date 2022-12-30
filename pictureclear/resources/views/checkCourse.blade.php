@@ -120,7 +120,10 @@
 
         </div>
         <form method="GET" action="{{ url('/addLesson', ['id' => $checkCourse[0]->id]) }}" enctype="multipart/form-data">
-
+            @php
+                $countLessons = DB::select('select count(*) as lcontagem from lessons where course_id = ?', [$checkCourse[0]->id]);
+                $countSubs = DB::select('select count(*) as scontagem from sales where tier_id IN(select id from tiers where course_id=' . $checkCourse[0]->id . ')');
+            @endphp
             <div class="counter">
                 <div class="row">
                     <div class="col-6 col-lg-3">
@@ -131,14 +134,14 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <div class="count-data text-center">
-                            <h6 class="count h2" data-to="150" data-speed="150">150</h6>
+                            <h6 class="count h2" data-to="150" data-speed="150">{{ $countLessons[0]->lcontagem }}</h6>
                             <p class="m-0px font-w-600">Lições</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3">
                         <div class="count-data text-center">
-                            <h6 class="count h2" data-to="850" data-speed="850">850</h6>
-                            <p class="m-0px font-w-600">Inscrições</p>
+                            <h6 class="count h2" data-to="850" data-speed="850">{{ $countSubs[0]->scontagem }}</h6>
+                            <p class="m-0px font-w-600">Inscritos</p>
                         </div>
                     </div>
                     @if (Auth::user()->id == $checkUser[0]->id)
