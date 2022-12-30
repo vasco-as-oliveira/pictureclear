@@ -19,6 +19,9 @@ class checkTier
         if(!$request->session()->exists('tier')) {
             return redirect('/home');
         }
+
         return $next($request);
+
+
     }
 }
