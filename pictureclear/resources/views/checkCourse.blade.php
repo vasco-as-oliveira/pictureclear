@@ -174,16 +174,6 @@ function closeForm() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 @elseif(count($checkCourse)>1)
 @php($i=0)
 <div class="container">
