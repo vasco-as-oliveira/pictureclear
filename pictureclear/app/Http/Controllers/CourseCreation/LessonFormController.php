@@ -11,6 +11,9 @@ use App\Models\Lesson;
 use App\Models\Video;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
+
 
 
 class LessonFormController extends Controller
@@ -34,22 +37,22 @@ class LessonFormController extends Controller
             'description' => 'required',
         ]);
 
-        
         if ($request->hasFile('inputvideo'))
         {
-        $path = $request->file('inputvideo')->store('public/images');
+        ini_set('post_max_size','2024M');
+        ini_set('upload_max_filesize','2024M');
+        $file = $request->file('inputvideo')->get();
+        Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         
         Lesson::insertGetId(array(
             'course_id' => $id,
             'title' => $request['title'],
             'description' => $request['description'],
             'url' => $request->file('inputvideo')->hashName(),
-         ));
+        ));
         }
 
         
-
-        // 
-        return redirect('/')->with('success', 'Acabaste de iniciar o teu curso!');
+        return redirect('/profile?username='.Auth::user()->username)->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }

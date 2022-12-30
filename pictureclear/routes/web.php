@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -47,3 +50,8 @@ Route::post('/editarperfil/save', [App\Http\Controllers\ProfileController::class
 Route::get('/comprarCurso', [App\Http\Controllers\BuyController::class, 'index']);
 Route::post('/comprarCurso/tier',[App\Http\Controllers\BuyController::class, 'buy']);
 Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'success']);
+
+Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index']);
+Route::post('/player/{videoUrl}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
+
+

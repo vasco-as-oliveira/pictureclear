@@ -65,8 +65,7 @@
                                 <div class="col-md-6">
                                     <!-- Exemplo para adicionar em col/row -->
                                     <div class="media">
-                                        <label>E-mail</label>
-                                        <p>{{$checkUser[0]->email}}</p>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +109,10 @@
                     </div>    
                     </form>
                     @endif
-                    
+                    <form method="GET" id="viewVideos" action="{{ url('/videos', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
+                    @csrf
+                    <button form="viewVideos" type="submit" id="viewClasses" class="label checkbox btn btn-success">Visualizar Aulas</button>
+                    </form>
                 </div>
                 <form method="GET" action="{{ url('/addLesson', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
 
@@ -130,8 +132,7 @@
                         </div>
                         <div class="col-6 col-lg-3">
                             <div class="count-data text-center">
-                                <h6 class="count h2" data-to="850" data-speed="850">850</h6>
-                                <p class="m-0px font-w-600">Photo Capture</p>
+                            
                             </div>
                         </div>
                         @if(Auth::user()->id == $checkUser[0]->id)
@@ -150,7 +151,7 @@
                         @if(!$checkCourse[0]->public)
 
                         <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
-
+                        
                         @else
 
                         @endif
