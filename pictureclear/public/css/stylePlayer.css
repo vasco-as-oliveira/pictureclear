@@ -17,7 +17,7 @@ body {
     min-height: 100%;
     background: #00bcd4;
     font-size: 16px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 *,
@@ -140,8 +140,12 @@ body {
 }
 
 video {
-    width: 70%    !important;
-  height: auto   !important;
+    width: 50%    !important;
+    height: auto   !important;
+}
+
+.video_div{
+    box-shadow: 5px 10px #888888;
 }
 
 a{

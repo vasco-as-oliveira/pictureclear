@@ -51,7 +51,7 @@ Route::get('/comprarCurso', [App\Http\Controllers\BuyController::class, 'index']
 Route::post('/comprarCurso/tier',[App\Http\Controllers\BuyController::class, 'buy']);
 Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'success']);
 
-Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index']);
-Route::post('/player/{videoUrl}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
+Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index'])->name('{id}');
+Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
 
 

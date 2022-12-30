@@ -13,14 +13,14 @@ class VideoListController extends Controller
         return view('videos', ['result'=>$result]);
     }
 
-    public function watchvideo(Request $request, $id){
-        $result = DB::select('select * from lessons Where id ='.$id);
+    public function watchvideo(Request $request, $courseId, $videoid){
+        $result = DB::select('select * from lessons Where id ='.$videoid);
         return view('player', ['lesson' => $result[0]]);
     }
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'checkIfBought']);
     }
 
 }

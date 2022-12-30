@@ -2,10 +2,10 @@
 
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container-fluid content">
+<div class="content">
     <div class="card">
-        <div class="container-fluid firstinfo"> 
-            <video controls id="videoLesson">
+        <div class="firstinfo"> 
+            <video controls id="videoLesson" class="video_div">
                 <source src="{{URL::asset('storage/videos/'.$lesson->url.'')}}" type="video/mp4">
                     Your browser does not support the video tag.
             </video>

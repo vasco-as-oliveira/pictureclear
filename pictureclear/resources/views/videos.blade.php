@@ -33,8 +33,8 @@
 					
                     @foreach($result as $lesson)
 						<tr>
-							<td class="text-center">
-								<a href="#" class="user-link">{{$lesson->title}}</a>
+							<td class="text-center" style="width: 20%;">
+							<span class="label label-default">{{$lesson->title}}</span>
 							</td>
 							<td>
                                 {{$lesson->created_at}}
@@ -42,8 +42,8 @@
 							<td class="text-center">
 								<span class="label label-default">{{$lesson->description}}</span>
 							</td>
-							<td class="text-center" style="width: 20%;">
-							<form method="POST" action="{{ url('/player', ['id'=>$lesson->id]) }}" enctype="multipart/form-data">
+							<td class="text-center" style="width: 10%;">
+							<form method="POST" action="{{ url('/player', ['courseId'=>$lesson->course_id,'videoid'=>$lesson->id]) }}" enctype="multipart/form-data">
 								@csrf
 								<button type="submit" class="label checkbox btn btn-success">Assistir Aula</button>
 							</form>

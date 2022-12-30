@@ -41,6 +41,7 @@ class LessonFormController extends Controller
         {
         ini_set('post_max_size','2024M');
         ini_set('upload_max_filesize','2024M');
+        
         $file = $request->file('inputvideo')->get();
         Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         
