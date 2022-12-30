@@ -97,6 +97,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="profilepicture">
+                                    <button name="done" type="submit" class="button" style="heigth:50%; width:200px; text-align:center;">Concluído</button>
+                                </div>    
                                 @else
                                     <div class="overlay-container">
                                         <div class="overlay">
