@@ -16,18 +16,28 @@
                 alt="Avatar">
         </div>
         <div class="info">
+            @php
+                $costumerCount = DB::select('select count(*) as contagem from course_ratings where user_id=' . $user->value('id'));
+                $courseCount = DB::select('select count(*) as ccontagem from courses where owner_id = ?', [$user->value('id')])
+            @endphp
             <h1 id="title">{{ $user->value('firstname') . ' ' . $user->value('lastname') }}</h1>
             <h2 id="username">{{ '@' . $user->value('username') }}</h2>
             <p id="description">{{ $user->value('description') }}</p>
-            <p>Cursos: 15</p>
-            Avaliações: @if ($user->value('rating') == 0)
-                Sem avaliações
+            <p>
+                {{ $courseCount[0]->ccontagem }}
+            </p>
+            <p class="m-0px font-w-600">Cursos</p>
+            <p>
+            @if ($user->value('rating') == 0)
+                {{ "0" }}
             @else
                 @for ($i = 0; $i < $user->value('rating'); $i++)
                     <span class="fa fa-star"></span>
                 @endfor
-                {{ '(' . 'contagem' . ')' }}
+                {{ '(' . $costumerCount[0]->contagem . ')' }}
             @endif
+            </p>
+            <p class="m-0px font-w-600">Avaliações</p>
         </div>
     </div>
     </br>

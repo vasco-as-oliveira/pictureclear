@@ -33,7 +33,6 @@ class ProfileController extends Controller
             foreach ($courses as $course){
                 $price = DB::select("SELECT MIN(price) FROM tiers WHERE course_id=".$course->id);
                  $aux_array[$course->title] = $price[0]->min; 
-         
              }
         }
         

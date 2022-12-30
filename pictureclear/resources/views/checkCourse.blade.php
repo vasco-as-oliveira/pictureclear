@@ -5,9 +5,10 @@
 @endsection
 
 @section('content')
-
     <link rel="stylesheet" href="{{ asset('css/stylecheckCourse.css?v=') . time() }}">
-    <link rel="stylesheet" href="{{ asset('css/css/styleRate.css?v=') . time() }}">
+    <link rel="stylesheet" href="{{ asset('css/styleRate.css?v=') . time() }}">
+
+    
     @if ($checkCourse)
         @if (count($checkCourse) == 1)
             <div class="form-popup" id="myForm">
@@ -158,9 +159,10 @@
                             $courseId = $checkCourse[0]->id;
                             $userId = Auth::user()->id;
                             $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $courseId . ') and user_id=' . $userId . '');
+                            
                         @endphp
-
-                        @if (!empty($subscribed_users[0]))
+                    
+                        @if (!empty($subscribed_users[0]) && empty($checkRating[0]))
                             <div class="col-6 col-lg-3">
                                 <div class="count-data text-center">
                                     <div class="rate">
