@@ -87,6 +87,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="profilepicture">
+                                    <button name="done" type="submit" class="button" style="heigth:50%; width:200px; text-align:center;">Concluído</button>
+                                </div>    
                                 @else
                                 <form method="get" action="{{url('/comprarCurso')}}">
                                     <input type="text" name="course" value="{{$checkCourse[0]->id}}" style="display: none;">
@@ -104,9 +107,7 @@
                             </div>
                     </div>
                     
-                    <div class="profilepicture">
-                        <button name="done" type="submit" class="button" style="heigth:50%; width:200px; text-align:center;">Concluído</button>
-                    </div>    
+                   
                     </form>
                     @endif
                     <form method="GET" id="viewVideos" action="{{ url('/videos', ['id'=>$checkCourse[0]->id]) }}" enctype="multipart/form-data">
