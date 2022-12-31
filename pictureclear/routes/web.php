@@ -39,8 +39,6 @@ Route::post('/checkCourse/launchcourse/{id}', [App\Http\Controllers\CourseCreati
 Route::get('/addLesson/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'createForm']);
 Route::post('/addLesson/create/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'LessonForm']);
 
-
-
 Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
 Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
 Route::post('/aboutyou/skip', [App\Http\Controllers\AboutYouController::class, 'skip']);
@@ -54,4 +52,4 @@ Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'succe
 Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index'])->name('{id}');
 Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
 
-
+Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'publishRating']);
