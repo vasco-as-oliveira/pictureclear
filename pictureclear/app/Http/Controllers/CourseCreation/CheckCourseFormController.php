@@ -19,27 +19,19 @@ class CheckCourseFormController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
-    /* public function checkCourse(Request $request) {
-        $user = null;
-        $find = $request['findCourse'];
-        $courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
-        if($courses){
-            $user = DB::select('select * from users where id = '.$courses[0]->owner_id.'');
-            if($courses[0]->public || ($courses[0]->owner_id == Auth::id())) return view('checkCourse', ['checkCourse' => $courses, 'checkUser' => $user])->with('success', '!');
-        }
-        return redirect('/home');
-
-    } */
-
     public function viewCourse(Request $request) {
         $user = null;
         $find = $request['selectCourse'];
         $course = DB::select('select * from courses where id = '.$find.'');
         if($course){
             $user = DB::select('select * from users where id = '.$course[0]->owner_id.'');
-            if($course[0]->public || ($course[0]->owner_id == Auth::id())) return redirect('/home');
+            if($course[0]->owner_id == Auth::id()){
+                return view('coursePageOwner', ['checkCourse' => $course[0], 'checkUser' => $user[0]]);
+            } else if($course[0]->public) {
+                return view('checkCourse', ['checkCourse' => $course[0], 'checkUser' => $user[0]]);
+            }
         }
-        return view('checkCourse', ['checkCourse' => $course, 'checkUser' => $user])->with('success', '!');
+        return redirect('/home');
     }
 
     public function finishSetup(Request $request, $id)

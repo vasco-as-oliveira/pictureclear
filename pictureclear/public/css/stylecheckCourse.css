@@ -10,8 +10,6 @@ textarea{
   max-height: 200px;
 }
 
-
-
 .h1 {
     font-weight: bold;
     margin: 0;
@@ -179,9 +177,11 @@ textarea{
 }
 
 
+.row{
+  margin: 5px;
+}
 
 
- 
 
 footer {
     background-color: #222;
@@ -249,7 +249,7 @@ footer a {
     color: #6F8BA4;
 }
 .section {
-    padding: 100px 0;
+    padding: 0px 0;
     position: relative;
 }
 .gray-bg {
