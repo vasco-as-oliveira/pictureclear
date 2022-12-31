@@ -41,7 +41,7 @@ class CheckCourseFormController extends Controller
         if($course){
             $user = DB::select('select * from users where id = '.$course[0]->owner_id.'');
             if($course[0]->public || ($course[0]->owner_id == Auth::id())){
-                //$rating = DB::select('select * from course_ratings where user_id=? and course_id =? ', [Auth::id(), $course[0]->id]);
+                $rating = DB::select('select * from course_ratings where user_id=? and course_id =? ', [Auth::id(), $course[0]->id]);
                 return view('checkCourse', ['checkCourse' => $course, 'checkUser' => $user, 'checkRating'=> $rating])->with('success', '!');
             }
             
