@@ -31,7 +31,7 @@ class CheckCourseFormController extends Controller
             $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $course[0]->id . ') and user_id=' . Auth::user()->id . '');
             $ratesCount = DB::select('select count(*) as contagem from course_ratings where course_id = ?', [$course[0]->id]);
             if($course[0]->owner_id == Auth::id()){
-                return view('coursePageOwner', ['checkCourse' => $course[0], 'checkUser' => $user[0]]);
+                return view('coursePageOwner', ['checkCourse' => $course[0], 'checkUser' => $user[0], 'checkRating' => $rating, 'checkLesson' => $lessons, 'checkSubbedUsers' => $subscribed_users, 'checkRatesCount'=> $ratesCount]);
             } else if($course[0]->public) {
                 //dd($lessons);
             return view('checkCourse', ['checkCourse' => $course[0], 'checkUser' => $user[0], 'checkRating' => $rating, 'checkLesson' => $lessons, 'checkSubbedUsers' => $subscribed_users, 'checkRatesCount'=> $ratesCount]);

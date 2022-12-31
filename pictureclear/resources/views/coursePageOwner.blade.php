@@ -7,6 +7,8 @@
 @section('content')
 
 <link rel="stylesheet" href="{{asset('css/stylecheckCourse.css?v=').time()}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <!-- POP UP DE CONFIRMAÇÃO -->
 <div class="form-popup" id="myForm">
@@ -32,8 +34,17 @@
                     <!-- Update of course -->
                     <form method="POST" action="{{ url('/checkCourse/update', ['id'=>$checkCourse->id]) }}" enctype="multipart/form-data">
                         @csrf
-
-                        <h6 class="theme-color lead">Rating: {{$checkCourse->rating}}</h6>
+                        <h3 class="dark-color">{{ $checkCourse->title }}</h3>
+                        <h6 class="theme-color lead">Avaliação:
+                            @if ($checkCourse->rating == 0)
+                                {{ '0' }}
+                            @else
+                                @for ($i = 0; $i < $checkCourse->rating; $i++)
+                                    <span class="fa fa-star"></span>
+                                @endfor
+                                {{ '(' . $checkRatesCount[0]->contagem . ')' }}
+                            @endif
+                        </h6>
                         <p>I <mark>Descrição: </mark>
                             <textarea maxlength="150" name="description" class="text" placeholder="{{$checkCourse->description}}"></textarea>
                         </p>
@@ -85,6 +96,12 @@
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="500" data-speed="500">{{$checkCourse->total_hours}}</h6>
                             <p class="m-0px font-w-600">Hora(s) de curso</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="150" data-speed="150">{{ count($checkLesson) }}</h6>
+                            <p class="m-0px font-w-600">Lições</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3">
