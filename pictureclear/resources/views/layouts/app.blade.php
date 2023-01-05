@@ -109,6 +109,9 @@
                                 <a class="dropdown-item" href="{{ url('/course') }}">
                                     {{ __('Criar Curso') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ url('/CashOut') }}">
+                                    {{ __('Levantar dinheiro') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
