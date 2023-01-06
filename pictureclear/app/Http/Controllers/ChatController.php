@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Course;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+
+
 
 class ChatController extends Controller
 {
@@ -54,6 +58,10 @@ class ChatController extends Controller
             'message' => $request['message'],
             'sentOn' => now(),
         ));
+
+        
+
+
         return back();
     }
 
