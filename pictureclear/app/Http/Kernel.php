@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'IsTierBeingUsed' => \App\Http\Middleware\CheckIfTierIsBeingUsed::class,
         'IsCoursePublic' => \App\Http\Middleware\IsCoursePublic::class,
         'checkIfBought' => \App\Http\Middleware\checkIfBought::class,
+        'BelongsToChat' => \App\Http\Middleware\BelongsToChat::class,
     ];
 }
