@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('chat_id');
             $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
+            $table->string('message');
             $table->timestamp('sentOn');
         });
     }
