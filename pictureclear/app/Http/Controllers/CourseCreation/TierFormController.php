@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Chats;
 use App\Models\Course;
 
 
@@ -81,6 +82,8 @@ class TierFormController extends Controller
                 'hasSchedulePerk' => true,
                 'hasChatPerk' => true,
             ));
+
+          
         }
 
         $request->session()->remove('course');

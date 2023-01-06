@@ -56,4 +56,6 @@ Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController:
 
 Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'publishRating']);
 
-Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index']);
+Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'showChat']);
+Route::post('/messageSent/{id}', [App\Http\Controllers\ChatController::class, 'messageSent']);
+

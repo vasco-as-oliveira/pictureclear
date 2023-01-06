@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Chats;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
@@ -12,6 +13,7 @@ use App\Models\Sale;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
+
 
 
 
@@ -57,6 +59,14 @@ class BuyController extends Controller
                 Sale::insert([
                     ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
                 ]);
+                
+                $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+                if($tierBought[0]->hasChatPerk){
+                    Chats::insert(array(
+                        'student_id' => Auth::user()->id,
+                        'teacher_id' => $sellerId,
+                    ));
+                }
             }//
         } else {
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
@@ -92,7 +102,17 @@ class BuyController extends Controller
         Sale::insert([
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
         ]);
-        echo "Compra efetuada e registada com sucesso. <br> Redirecionar para página o curso";
+
+        $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+
+        if($tierBought[0]->hasChatPerk){
+            Chats::insert(array(
+                'student_id' => Auth::user()->id,
+                'teacher_id' => $request->sellerId,
+            ));
+        }
+
+        return view('home');
     }
 
    
