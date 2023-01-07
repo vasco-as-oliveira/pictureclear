@@ -33,7 +33,6 @@ class ProfileController extends Controller
             foreach ($courses as $course){
                 $price = DB::select("SELECT MIN(price) FROM tiers WHERE course_id=".$course->id);
                  $aux_array[$course->title] = $price[0]->min; 
-         
              }
         }
         
@@ -63,9 +62,7 @@ class ProfileController extends Controller
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
         ]);
 
-
         if (Storage::exists('public/images/' . Auth::user()->picture)) {
-
             Storage::delete('public/images/' . Auth::user()->picture);
         }
 

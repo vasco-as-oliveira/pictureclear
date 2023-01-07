@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -21,18 +24,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {   
-        /*
-        $allSessions = session()->all();
-        dd($allSessions);
-        */
-        //return view('home');
-        return view('feed');
+       
+        if($request->dropdown==NULL){
+            $courses = DB::table('courses')
+            ->select('*')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        }else{
+            $order = explode('_',$request->dropdown);
+            $courses = DB::table('courses')
+            ->select('*')
+            ->orderBy($order[0], $order[1])
+            ->paginate(10);         
+        }
+        return view('feed', ['courses'=> $courses]);
     }
 
-    public function showCourses(Request $request){
-        $courses = DB::table('courses')->select('*')->get();
 
+    public function changeOrder(Request $request)
+    {
+        $order = explode("_",$request->dropdown);
+        $courses = DB::table('courses')->select('*')->orderBy($order[1], $order[0])->paginate(10);
+        return view('feed', ['courses'=> $courses]);
     }
 }

@@ -25,6 +25,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::post('/home/dropdown', [App\Http\Controllers\HomeController::class, 'changeOrder']);
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);
 
 Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'createForm'])->name('course');
@@ -38,8 +39,6 @@ Route::post('/checkCourse/launchcourse/{id}', [App\Http\Controllers\CourseCreati
 
 Route::get('/addLesson/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'createForm']);
 Route::post('/addLesson/create/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'LessonForm']);
-
-
 
 Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
 Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
