@@ -64,13 +64,31 @@
                         </p>
                     </div>
                 </div>
+            </form>
                 <div class="profile-info">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
-                                aria-selected="true">Cursos</a>
-                        </li>
-                    </ul>
+                    <form method="GET" name="courses" id="courses" action="{{ url('/profile') }}" enctype="multipart/form-data" >
+                    @csrf
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item ">
+                            <label for="coursesSelected1" title="text">
+                                    <a class="nav-link @php if($active == 0){echo 'active';} @endphp" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                                        aria-selected="true">Cursos</a>
+                            </label>
+                                <input form="courses" type="radio" id="coursesSelected1" name="coursesSelected" value="coursesSelected1"
+                                    style="border: none; display:none;" onchange="submitForm(this)">
+                                </input>
+                            </li>
+                            <li class="nav-item">
+                                <label for="coursesSelected2" title="text">
+                                    <a class="nav-link @php if($active == 1){echo 'active';} @endphp" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                                        aria-selected="true">Cursos inscrito/a</a>
+                                </label>
+                                <input form="courses" type="radio" id="coursesSelected2" name="coursesSelected" value="coursesSelected2"
+                                    style="border: none; display:none;" onchange="submitForm(this)">
+                                </input>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
                 <div class="col-md-8">
                     <div class="tab-content profile-tab" id="myTabContent">
@@ -96,4 +114,11 @@
             </div>
         
     </div>
+
+    <script>
+        function submitForm(form){
+           form.form.submit();
+        }
+
+    </script>
     @endsection

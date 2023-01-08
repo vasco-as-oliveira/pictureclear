@@ -25,6 +25,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::post('/home/dropdown', [App\Http\Controllers\HomeController::class, 'changeOrder']);
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);
 
 Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'createForm'])->name('course');
@@ -38,8 +39,6 @@ Route::post('/checkCourse/launchcourse/{id}', [App\Http\Controllers\CourseCreati
 
 Route::get('/addLesson/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'createForm']);
 Route::post('/addLesson/create/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'LessonForm']);
-
-
 
 Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
 Route::post('/aboutyou/save', [App\Http\Controllers\AboutYouController::class, 'finishSetup']);
@@ -60,3 +59,11 @@ Route::get('/painelAdmin/users',[App\Http\Controllers\AdminController::class, 'u
 Route::get('/admin/apagarCurso',[App\Http\Controllers\AdminController::class, 'deleteCourse']);
 Route::get('/admin/deleteUser',[App\Http\Controllers\AdminController::class, 'deleteUser']);
 
+
+Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'showChat']);
+Route::post('/messageSent/{id}', [App\Http\Controllers\ChatController::class, 'messageSent']);
+
+Route::post('/addHour/{id}', [App\Http\Controllers\ScheduleController::class, 'addHour']);
+Route::get('/schedule/{id}', [App\Http\Controllers\ScheduleController::class, 'checkSchedule']);
+Route::get('/schedule/reserve/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'makeAnAppointment']);
+Route::post('/schedule_slot_delete/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'deleteSlot']);

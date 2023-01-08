@@ -28,12 +28,7 @@ class SearchCourseFormController extends Controller
             if($numOfCourses>1){
                 return view('listCourses', ['checkCourse' => $courses])->with('success', '!');
             } else if($numOfCourses == 1) {
-                $user = DB::select('select * from users where id = '.$courses[0]->owner_id.'');
-                if($courses[0]->owner_id == Auth::id()){
-                    return view('coursePageOwner', ['checkCourse' => $courses[0], 'checkUser' => $user[0]]);
-                } else if($courses[0]->public) {
-                    return view('checkCourse', ['checkCourse' => $courses[0], 'checkUser' => $user[0]]);
-                }
+                return redirect('checkCourse/search?selectCourse=' . $courses[0]->id);
             }
         }
         return redirect('/home');

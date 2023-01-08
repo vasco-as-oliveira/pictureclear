@@ -27,14 +27,14 @@ Picture Clear - Comprar curso
                         </br>
                         <h5>Acesso a Video-aulas - &#10003;</h5>
                         <h5>Acesso a chat com professor 
-                            @if($tier->hasSchedulePerk)
+                            @if($tier->hasscheduleperk)
                                 &#10004;
                             @else
                                 X
                             @endif
                         </h5>
                         <h5>Acesso a chat com professor 
-                            @if ($tier->hasChatPerk)
+                            @if ($tier->haschatperk)
                                 &#10004;
                             @else
                                 X

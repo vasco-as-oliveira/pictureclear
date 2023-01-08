@@ -20,7 +20,48 @@
                 @csrf
                 <button type="submit" id="setPublic" class="label checkbox btn btn-success">Tornar publico</button>
             </form>
-            <button type="button" class="btn cancel" onclick="closeForm()">Ainda não</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Retornar</button>
+        </div>
+    </div>
+</div>
+<!-- FIM: POP UP DE CONFIRMAÇÃO -->
+
+<!-- POP UP DE ADIÇÃO DE HORA -->
+<div class="form-popup" id="horasForm">
+    <div class="card">
+        <h5 class="card-header">ESCOLHA AS HORAS</h5>
+        <div class="card-body">
+            <form method="POST" id="addHour" action="{{ url('/addHour', ['id'=>$checkCourse->id]) }}" enctype="multipart/form-data">
+                @csrf
+                Data<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedDia') is-invalid @enderror" type="date"
+                        name="schedDia" value="{{ (old('sched')==null) ? 1 : old('schedDia') }}" required autocomplete="schedDia" autofocus>
+
+                    @error('schedDia')
+                        <span class="span invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                
+                Hora inicial<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedHoraInicial') is-invalid @enderror" type="time"
+                    name="schedHoraInicial" value="{{ (old('schedHoraInicial')==null) ? 1 : old('schedHoraInicial') }}" required autocomplete="schedHoraInicial" autofocus>
+
+                @error('schedHoraInicial')
+                    <span class="span invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
+                Hora final<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedHoraFinal') is-invalid @enderror" type="time"
+                        name="schedHoraFinal" value="{{ (old('schedHoraFinal')==null) ? 1 : old('schedHoraFinal') }}" required autocomplete="schedHoraFinal" autofocus>
+
+                    @error('schedHoraFinal')
+                        <span class="span invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                <button type="submit" form="addHour" class="label checkbox btn btn-success">Confirmar</button>
+            </form>
+            <button type="button"  class="btn cancel" onclick="closeFormHoras()">Ainda não</button>
         </div>
     </div>
 </div>
@@ -129,11 +170,63 @@
                             </p>
                         </div>
                     </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2">Ver Horários!</h6>
+                            <p class="m-0px font-w-600">
+                            <!-- Redirects to page for schedule -->
+                            <form method="GET" id="sched" action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
+                                    enctype="multipart/form-data">
+                                        @csrf
+                                        <button form="sched" type="submit" id="viewClasses"
+                                            class="label checkbox btn btn-success">Ver</button>
+                                    </form>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2">Ver Chat!</h6>
+                            <p class="m-0px font-w-600">
+                            <!-- Redirects to page for schedule -->
+                            <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
+                            enctype="multipart/form-data">
+                                @csrf
+                                <button form="chat" type="submit" id="viewClasses"
+                                    class="label checkbox btn btn-success">Ver mensagens</button>
+                            </form>
+                            </p>
+                        </div>
+                    </div>
+
+                    @if(!$checkCourse->public)
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2">Publicar site</h6>
+                            <p class="m-0px font-w-600">
+                            <!-- Redirects to page for schedule -->
+                            <button type="button" onclick="openForm()"
+                                class=" open-button label checkbox btn btn-success">Tornar o site publico</button>
+                            </p>
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2">Adicionar horas</h6>
+                            <p class="m-0px font-w-600">
+                            <!-- Redirects to page for schedule -->
+                            <button type="button" onclick="openFormHoras()"
+                                class=" open-button label checkbox btn btn-success">Adicionar</button>
+                            </p>
+                        </div>
+                    </div>
         <!-- It launches the site, opens a modal with the confirmation, once the site is public,
             It is impossible to turn it private again -->
-        @if(!$checkCourse->public)
-        <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
-        @endif
+       
+
 
     </div>
     </div>
@@ -148,6 +241,14 @@
 
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
+    }
+
+    function openFormHoras() {
+        document.getElementById("horasForm").style.display = "flex";
+    }
+
+    function closeFormHoras() {
+        document.getElementById("horasForm").style.display = "none";
     }
 </script>
 

@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schedule_slots', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->integer('schedule_id');
-            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
-            $table->boolean('isfree')->default('true');
-            $table->timestamp('begin');
-            $table->timestamp('end');
-            $table->integer('student_id')->nullable();
+            $table->integer('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('student_id');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedule_slots');
+        Schema::dropIfExists('chats');
     }
 };

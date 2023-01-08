@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->float('price');
-            $table->boolean('hasSchedulePerk');
-            $table->boolean('hasChatPerk');
+            $table->boolean('hasscheduleperk');
+            $table->boolean('haschatperk');
             $table->timestamps();
         });
 
