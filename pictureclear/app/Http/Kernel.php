@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'IsCoursePublic' => \App\Http\Middleware\IsCoursePublic::class,
         'checkIfBought' => \App\Http\Middleware\checkIfBought::class,
         'BelongsToChat' => \App\Http\Middleware\BelongsToChat::class,
+        'HasScheduleAccess' => \App\Http\Middleware\HasScheduleAccess::class,
     ];
 }

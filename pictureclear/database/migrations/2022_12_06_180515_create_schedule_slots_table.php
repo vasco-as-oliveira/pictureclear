@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('schedule_id');
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
-            $table->boolean('isFree')->default('true');
+            $table->boolean('isfree')->default('true');
             $table->timestamp('begin');
             $table->timestamp('end');
         });

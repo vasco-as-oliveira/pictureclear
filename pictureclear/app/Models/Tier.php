@@ -16,8 +16,8 @@ class Tier extends Model
     protected $fillable = [
         'course_id',
         'price',
-        'hasSchedulePerk',
-        'hasChatPerk',
+        'hasscheduleperk',
+        'haschatperk',
     ];
 
 

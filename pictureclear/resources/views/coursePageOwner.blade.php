@@ -20,7 +20,48 @@
                 @csrf
                 <button type="submit" id="setPublic" class="label checkbox btn btn-success">Tornar publico</button>
             </form>
-            <button type="button" class="btn cancel" onclick="closeForm()">Ainda não</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Retornar</button>
+        </div>
+    </div>
+</div>
+<!-- FIM: POP UP DE CONFIRMAÇÃO -->
+
+<!-- POP UP DE ADIÇÃO DE HORA -->
+<div class="form-popup" id="horasForm">
+    <div class="card">
+        <h5 class="card-header">ESCOLHA AS HORAS</h5>
+        <div class="card-body">
+            <form method="POST" id="addHour" action="{{ url('/addHour', ['id'=>$checkCourse->id]) }}" enctype="multipart/form-data">
+                @csrf
+                Data<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedDia') is-invalid @enderror" type="date"
+                        name="schedDia" value="{{ (old('sched')==null) ? 1 : old('schedDia') }}" required autocomplete="schedDia" autofocus>
+
+                    @error('schedDia')
+                        <span class="span invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                
+                Hora inicial<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedHoraInicial') is-invalid @enderror" type="time"
+                    name="schedHoraInicial" value="{{ (old('schedHoraInicial')==null) ? 1 : old('schedHoraInicial') }}" required autocomplete="schedHoraInicial" autofocus>
+
+                @error('schedHoraInicial')
+                    <span class="span invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
+                Hora final<input min="1" step="any" placeholder="Primeira Hora" class="input @error('schedHoraFinal') is-invalid @enderror" type="time"
+                        name="schedHoraFinal" value="{{ (old('schedHoraFinal')==null) ? 1 : old('schedHoraFinal') }}" required autocomplete="schedHoraFinal" autofocus>
+
+                    @error('schedHoraFinal')
+                        <span class="span invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                <button type="submit" form="addHour" class="label checkbox btn btn-success">Confirmar</button>
+            </form>
+            <button type="button"  class="btn cancel" onclick="closeFormHoras()">Ainda não</button>
         </div>
     </div>
 </div>
@@ -134,6 +175,8 @@
         @if(!$checkCourse->public)
         <button type="button" class="open-button" onclick="openForm()">Tornar o site publico</button>
         @endif
+        <button type="button" class="open-button" onclick="openFormHoras()">Adicionar Aula</button>
+
 
     </div>
     </div>
@@ -148,6 +191,14 @@
 
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
+    }
+
+    function openFormHoras() {
+        document.getElementById("horasForm").style.display = "flex";
+    }
+
+    function closeFormHoras() {
+        document.getElementById("horasForm").style.display = "none";
     }
 </script>
 

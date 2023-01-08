@@ -59,3 +59,6 @@ Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCour
 Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'showChat']);
 Route::post('/messageSent/{id}', [App\Http\Controllers\ChatController::class, 'messageSent']);
 
+Route::post('/addHour/{id}', [App\Http\Controllers\ScheduleController::class, 'addHour']);
+Route::get('/schedule/{id}', [App\Http\Controllers\ScheduleController::class, 'checkSchedule']);
+Route::get('/schedule/reserve/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'makeAnAppointment']);

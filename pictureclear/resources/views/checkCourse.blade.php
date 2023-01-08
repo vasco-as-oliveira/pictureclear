@@ -40,6 +40,25 @@
                                     <label>Biografia</label>
                                     <p>{{ $checkUser->description }}</p>
                                 </div>
+                                <div>
+                                @if($chat)
+                                    <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
+                                    enctype="multipart/form-data">
+                                        @csrf
+                                        <button form="chat" type="submit" id="viewClasses"
+                                            class="label checkbox btn btn-success">Enviar mensagem</button>
+                                    </form>
+                                @endif
+                                
+                                @if($schedule)
+                                    <form method="GET" id="sched" action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
+                                    enctype="multipart/form-data">
+                                        @csrf
+                                        <button form="sched" type="submit" id="viewClasses"
+                                            class="label checkbox btn btn-success">Ver Horarios</button>
+                                    </form>
+                                @endif
+                                </div>
                             </div>
                         </div>
                     </div>

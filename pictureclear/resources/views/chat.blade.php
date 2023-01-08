@@ -44,7 +44,7 @@
 							<div class="position-relative">
 								<img src="{{ Auth::user()->picture != null ? URL::asset('storage/images/'.Auth::user()->picture) : URL::asset('images/default-profilepicture.png') }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" style="object-fit: cover;">
 							</div>
-							<div class="flex-grow-1 pl-3">
+							<div class="flex-grow-1 pl-3"> 
 								<strong>{{Auth::user()->firstname.' '.Auth::user()->lastname}}</strong>
 							</div>
 						</div>

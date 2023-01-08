@@ -9,7 +9,7 @@ use app\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Chats;
 use App\Models\Course;
-
+use App\Models\Schedule;
 
 class TierFormController extends Controller
 {
@@ -47,8 +47,8 @@ class TierFormController extends Controller
             Tier::insert(array(
                 'course_id' => $id,
                 'price' => $request['price1'],
-                'hasSchedulePerk' => false,
-                'hasChatPerk' => false,
+                'hasscheduleperk' => false,
+                'haschatperk' => false,
             ));
         }
 
@@ -63,8 +63,8 @@ class TierFormController extends Controller
             Tier::insert(array(
                 'course_id' => $id,
                 'price' => $request['price2'],
-                'hasSchedulePerk' => false,
-                'hasChatPerk' => true,
+                'hasscheduleperk' => false,
+                'haschatperk' => true,
             ));
         }
 
@@ -79,16 +79,22 @@ class TierFormController extends Controller
             Tier::insert(array(
                 'course_id' => $id,
                 'price' => $request['price3'],
-                'hasSchedulePerk' => true,
-                'hasChatPerk' => true,
+                'hasscheduleperk' => true,
+                'haschatperk' => true,
             ));
 
           
         }
 
+        Schedule::insert(array(
+            'user_id' => Auth::user()->id,
+            'course_id' => $id,
+        ));
+        
+
         $request->session()->remove('course');
         $request->session()->remove('tier');
-        // 
+        
         return redirect('/addLesson/'.$id)->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }

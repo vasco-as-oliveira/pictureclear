@@ -401,11 +401,12 @@ label > button {
 .form-popup{
   position:fixed;
   z-index: 9999;
-  height: 25%;
+  height: 50%;
   width:100%;
   display: none;
   justify-content: center;
   text-align: center;
+  overflow: scroll;
 }
 
 /****************************************************/

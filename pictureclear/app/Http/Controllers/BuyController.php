@@ -105,7 +105,7 @@ class BuyController extends Controller
 
         $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
 
-        if($tierBought[0]->hasChatPerk){
+        if($tierBought[0]->haschatperk){
             Chats::insert(array(
                 'student_id' => Auth::user()->id,
                 'teacher_id' => $request->sellerId,

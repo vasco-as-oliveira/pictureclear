@@ -31,7 +31,7 @@ class ChatController extends Controller
     public function showChat(Request $request, $id){
         $chat = DB::select("SELECT * FROM chats WHERE id =".$id);
         $senderId=0;
-        if($senderId==$chat[0]->teacher_id) $senderId = $chat[0]->student_id;
+        if(Auth::user()->id==$chat[0]->teacher_id) $senderId = $chat[0]->student_id;
         else $senderId = $chat[0]->teacher_id;
 
         $sentMessages = DB::select("SELECT * from Messages WHERE chat_id = ?", [$id]);
