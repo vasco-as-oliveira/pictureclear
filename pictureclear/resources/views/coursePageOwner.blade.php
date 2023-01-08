@@ -184,8 +184,9 @@
                             </p>
                         </div>
                     </div>
-
+                    @if ($chat)
                     <div class="col-6 col-lg-3">
+
                         <div class="count-data text-center">
                             <h6 class="count h2">Ver Chat!</h6>
                             <p class="m-0px font-w-600">
@@ -199,6 +200,7 @@
                             </p>
                         </div>
                     </div>
+                    @endif
 
                     @if(!$checkCourse->public)
                     <div class="col-6 col-lg-3">

@@ -24,20 +24,20 @@ class ProfileController extends Controller
     }
     
     public function showProfile(Request $request){
-        $user = User::select('*')->where('id','=',Auth::user()->id)->get();
+        $user = User::select('*')->where('username','=',$request->username)->get();
         $courses = null;
         $active = 0;
         if($request['coursesSelected'] == "coursesSelected1"){
-            $courses = DB::select("SELECT * from courses where owner_id =". Auth::user()->id);
+            $courses = DB::select("SELECT * from courses where owner_id =". $user[0]->id);
         } else if ($request['coursesSelected'] == "coursesSelected2") {
             $courses = DB::select("SELECT * from courses where id IN(
                 select course_id from tiers where id IN(
                     select tier_id from sales where user_id = ?
                 )
-            )", [Auth::user()->id]);
+            )", [$user[0]->id]);
             $active = 1;
         } else {
-            $courses = DB::select("SELECT * from courses where owner_id =". Auth::user()->id);
+            $courses = DB::select("SELECT * from courses where owner_id =". $user[0]->id);
         }
 
         $aux_array = array();

@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     @else
-                        <!-- <div class="col-6 col-lg-3">
+                         <div class="col-6 col-lg-3">
                             <div class="count-data text-center">
                                 @if (Auth::user()->is_admin)
                                 <h6 class="count h2">Apagar curso!</h6>
@@ -131,7 +131,7 @@
                                 </p>
                                 @endif
                             </div>
-                        </div> -->
+                        </div>
                     @endif
                     @if($chat)
                                 <div class="col-6 col-lg-3">

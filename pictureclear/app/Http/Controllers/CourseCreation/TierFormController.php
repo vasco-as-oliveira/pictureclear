@@ -90,6 +90,7 @@ class TierFormController extends Controller
             'user_id' => Auth::user()->id,
             'course_id' => $id,
         ));
+
         
 
         $request->session()->remove('course');
