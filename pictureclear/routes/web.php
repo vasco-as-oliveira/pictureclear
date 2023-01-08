@@ -62,3 +62,4 @@ Route::post('/messageSent/{id}', [App\Http\Controllers\ChatController::class, 'm
 Route::post('/addHour/{id}', [App\Http\Controllers\ScheduleController::class, 'addHour']);
 Route::get('/schedule/{id}', [App\Http\Controllers\ScheduleController::class, 'checkSchedule']);
 Route::get('/schedule/reserve/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'makeAnAppointment']);
+Route::post('/schedule_slot_delete/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'deleteSlot']);

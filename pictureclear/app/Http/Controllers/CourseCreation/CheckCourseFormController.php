@@ -32,9 +32,11 @@ class CheckCourseFormController extends Controller
             $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $course[0]->id . ') and user_id=' . Auth::user()->id . '');
             $ratesCount = DB::select('select count(*) as contagem from course_ratings where course_id = ?', [$course[0]->id]);
             $chat = DB::select('select * from chats where teacher_id = ? AND student_id = ?', [$course[0]->owner_id, Auth::user()->id ]);
+            $chatTeacher = DB::select('select * from chats where teacher_id = ?', [Auth::user()->id]);
             $schedule = DB::select('select * from schedules where user_id = ? AND course_id = ?', [$course[0]->owner_id, $course[0]->id]);
 
             if(!$chat) $chat[0] = 0;
+            if(!$chatTeacher) $chatTeacher[0] = 0;
             if(!$schedule) $schedule[0] = 0;
 
             if($course[0]->owner_id == Auth::id()){
@@ -45,7 +47,7 @@ class CheckCourseFormController extends Controller
                      'checkLesson' => $lessons,
                      'checkSubbedUsers' => $subscribed_users,
                      'checkRatesCount'=> $ratesCount,
-                     'chat' => $chat[0],
+                     'chat' => $chatTeacher[0],
                      'schedule' => $schedule[0],
                     ]);
             } else if($course[0]->public) {

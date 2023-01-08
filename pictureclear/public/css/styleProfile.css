@@ -23,6 +23,14 @@ body{
 .profile-img{
     text-align: center;
 }
+
+img {
+    object-fit: cover;
+}
+
+form{
+    width: 100%;
+}
 .profile-img img{
     border-radius: 50%;
     width: 250px;

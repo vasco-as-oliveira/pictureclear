@@ -31,22 +31,34 @@
                         <div class="timetable-item-main">
                           <div class="timetable-item-time">Dia {{explode(" ", $card->begin)[0]}}</div>
                           <div class="timetable-item-name">Começa às {{explode(" ", $card->begin)[1]}} e termina às {{explode(" ", $card->end)[1]}}</div>
+                          
+                          
+                          
+                          <!-- Student can book if it's not booked previously -->
                           @if($card->isfree)
-                          <form method="GET" id="bookAClass" action="{{ url('/schedule/reserve', ['id' => $schedule->course_id, '$slotId' => $card->id]) }}"
-                          enctype="multipart/form-data">
-                              @csrf
-                              <button form="bookAClass" type="submit" id="viewClasses"
-                                  class="btn btn-primary btn-book">Reservar hora</button>
-                          </form>
+                            @if($schedule->user_id != Auth::user()->id)
+                              <form method="GET" id="bookAClass" action="{{ url('/schedule/reserve', ['id' => $schedule->course_id, '$slotId' => $card->id]) }}"
+                              enctype="multipart/form-data">
+                                  @csrf
+                                  <button form="bookAClass" type="submit" id="viewClasses"
+                                      class="btn btn-primary btn-book">Reservar hora</button>
+                              </form>
+                            @else
+                              <form method="POST" id="deleteClass" action="{{ url('/schedule_slot_delete', ['id' => $schedule->course_id, '$slotId' => $card->id]) }}"
+                              enctype="multipart/form-data">
+                                  @csrf
+                                  <button form="deleteClass" type="submit"
+                                      class="btn btn-primary btn-book">Apagar Hora</button>
+                              </form>
+                            @endif
                           @else
-                          <button form="bookAClass" type="submit" id="viewClasses"
+                            @if($schedule->user_id == Auth::user()->id)
+                              <div class="timetable-item-name">Aula marcada por {{'@'.DB::select('select * from users where id = ?', [$card->student_id])[0]->username}}</div>
+                            @endif
+                          <button form="bookAClass" type="button" id="viewClasses"
                                   class="btn btn-secondary btn-book">Hora já reservada!</button>
                           @endif
-                          <div class="timetable-item-like">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <div class="timetable-item-like-count">11</div>
-                          </div>
+                       
                         </div>
                       </div>
                     </div>

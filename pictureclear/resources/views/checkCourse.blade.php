@@ -41,23 +41,6 @@
                                     <p>{{ $checkUser->description }}</p>
                                 </div>
                                 <div>
-                                @if($chat)
-                                    <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
-                                    enctype="multipart/form-data">
-                                        @csrf
-                                        <button form="chat" type="submit" id="viewClasses"
-                                            class="label checkbox btn btn-success">Enviar mensagem</button>
-                                    </form>
-                                @endif
-                                
-                                @if($schedule)
-                                    <form method="GET" id="sched" action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
-                                    enctype="multipart/form-data">
-                                        @csrf
-                                        <button form="sched" type="submit" id="viewClasses"
-                                            class="label checkbox btn btn-success">Ver Horarios</button>
-                                    </form>
-                                @endif
                                 </div>
                             </div>
                         </div>
@@ -79,12 +62,6 @@
             </div>
             <div class="counter">
                 <div class="row">
-                    <div class="col-6 col-lg-3">
-                        <div class="count-data text-center">
-                            <h6 class="count h2" data-to="500" data-speed="500">{{ $checkCourse->total_hours }}</h6>
-                            <p class="m-0px font-w-600">Hora(s) de curso</p>
-                        </div>
-                    </div>
                     <div class="col-6 col-lg-3">
                         <div class="count-data text-center">
                             <h6 class="count h2" data-to="150" data-speed="150">{{ count($checkLesson) }}</h6>
@@ -132,7 +109,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="col-6 col-lg-3">
+                        <!-- <div class="col-6 col-lg-3">
                             <div class="count-data text-center">
                                 <h6 class="count h2">Comprar curso!</h6>
                                 <p class="m-0px font-w-600">
@@ -143,8 +120,41 @@
                                 </form>
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     @endif
+                    @if($chat)
+                                <div class="col-6 col-lg-3">
+                                    <div class="count-data text-center">
+                                        <h6 class="count h2">Ver Chat!</h6>
+                                        <p class="m-0px font-w-600">
+                                        <!-- Redirects to page for schedule -->
+                                        <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
+                                        enctype="multipart/form-data">
+                                            @csrf
+                                            <button form="chat" type="submit" id="viewClasses"
+                                                class="label checkbox btn btn-success">Ver mensagens</button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </div>
+                                @endif
+                                
+                                @if($schedule)
+                                <div class="col-6 col-lg-3">
+                                    <div class="count-data text-center">
+                                        <h6 class="count h2">Ver Horários!</h6>
+                                        <p class="m-0px font-w-600">
+                                        <!-- Redirects to page for schedule -->
+                                        <form method="GET" id="sched" action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
+                                                enctype="multipart/form-data">
+                                                    @csrf
+                                                    <button form="sched" type="submit" id="viewClasses"
+                                                        class="label checkbox btn btn-success">Ver</button>
+                                                </form>
+                                        </p>
+                                    </div>
+                                </div>
+                                @endif
                 </div>
             </div>
 

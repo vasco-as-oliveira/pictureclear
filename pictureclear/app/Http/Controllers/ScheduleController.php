@@ -31,15 +31,13 @@ class ScheduleController extends Controller
         $schedule_slots = DB::table('schedule_slots')
             ->where('schedule_id', '=', $schedule[0]->id)
             ->paginate(6);
-        //$schedule_slots = DB::select("SELECT * FROM schedule_slots WHERE schedule_id = ?", [$schedule[0]->id])->paginate(1);
 
         return view('schedule', ['schedule_slots'=>$schedule_slots, 'schedule' => $schedule[0]]);
     }
 
     public function makeAnAppointment(Request $request, $id, $slotId){
-        $schedule = DB::select("SELECT * FROM schedules WHERE id = ?", [$slotId]);
-        
-        DB::update('update schedule_slots set isfree = FALSE where id=?', [$slotId]);
+        //$schedule = DB::select("SELECT * FROM schedules WHERE id = ?", [$slotId]);
+        DB::update('update schedule_slots set isfree = FALSE, student_id = ? where id=?', [Auth::user()->id, $slotId]);
         return back();
     }
 
@@ -57,6 +55,12 @@ class ScheduleController extends Controller
         ));
         
         
+        return back();
+    }
+
+    public function deleteSlot(Request $request, $id, $slotId){
+        //$schedule = DB::select("SELECT * FROM schedules WHERE id = ?", [$slotId]);
+        $slot = ScheduleSlots::where('id',$slotId)->delete();
         return back();
     }
 }

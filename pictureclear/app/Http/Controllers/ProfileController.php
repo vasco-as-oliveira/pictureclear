@@ -24,21 +24,32 @@ class ProfileController extends Controller
     }
     
     public function showProfile(Request $request){
-        $user = User::select('*')->where('username','=',$request->username)->get();
+        $user = User::select('*')->where('id','=',Auth::user()->id)->get();
+        $courses = null;
+        $active = 0;
+        if($request['coursesSelected'] == "coursesSelected1"){
+            $courses = DB::select("SELECT * from courses where owner_id =". Auth::user()->id);
+        } else if ($request['coursesSelected'] == "coursesSelected2") {
+            $courses = DB::select("SELECT * from courses where id IN(
+                select course_id from tiers where id IN(
+                    select tier_id from sales where user_id = ?
+                )
+            )", [Auth::user()->id]);
+            $active = 1;
+        } else {
+            $courses = DB::select("SELECT * from courses where owner_id =". Auth::user()->id);
+        }
 
-
-        $courses = DB::select("SELECT * from courses where owner_id =". $user->value('id'));
         $aux_array = array();
         if (count($courses)){
             foreach ($courses as $course){
                 $price = DB::select("SELECT MIN(price) FROM tiers WHERE course_id=".$course->id);
                  $aux_array[$course->title] = $price[0]->min; 
-         
              }
         }
         
         if (!$user) return redirect()->back()->with('status', 'Error');
-       return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array]);
+       return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array, 'active' => $active]);
      }
 
     
@@ -53,6 +64,7 @@ class ProfileController extends Controller
         $user =  User::select('*')->where('id', '=', Auth::user()->id)->get();
         return view('editProfile', ['user' => $user]);
     }
+
     public function editProfileSave(Request $request)
     {
         if (!$request->file('image')) {

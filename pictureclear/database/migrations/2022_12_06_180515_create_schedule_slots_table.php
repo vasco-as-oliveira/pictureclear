@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('isfree')->default('true');
             $table->timestamp('begin');
             $table->timestamp('end');
+            $table->integer('student_id')->nullable();
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
