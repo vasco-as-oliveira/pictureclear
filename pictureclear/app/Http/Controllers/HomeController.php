@@ -35,10 +35,18 @@ class HomeController extends Controller
 
         }else{
             $order = explode('_',$request->dropdown);
-            $courses = DB::table('courses')
-            ->select('*')
-            ->orderBy($order[0], $order[1])
-            ->paginate(10);         
+            if($order[0]=='price'){
+                $courses = DB::table('courses')
+                ->select('courses.*')
+                ->whereIn('id',DB::table('tiers')->select(DB::raw('course_id as id, MIN(price) as price'))->groupby('course_id')->orderby('price',$order[1])->pluck('id')->toArray())
+                ->orderby('id', $order[1])
+                ->paginate(10); 
+            }else{
+                $courses = DB::table('courses')
+                ->select('*')
+                ->orderBy($order[0], $order[1])
+                ->paginate(10);   
+            }      
         }
         return view('feed', ['courses'=> $courses]);
     }

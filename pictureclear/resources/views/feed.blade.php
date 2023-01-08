@@ -14,8 +14,8 @@
                 <select name="dropdown" onchange="this.form.submit()">
                     <option value="id_asc">Criação Ascendente</option>
                     <option value="id_asc">Criação Descendente</option>
-                    <!--<option value="price_asc">Preço Ascendente</option>
-                    <option value="price_desc">Preço Descendente</option>-->
+                    <option value="price_asc">Preço Ascendente</option>
+                    <option value="price_desc">Preço Descendente</option>
                     <option value="rating_asc">Rating Ascendente</option>
                     <option value="rating_desc">Rating Descendente</option>
                 </select>
