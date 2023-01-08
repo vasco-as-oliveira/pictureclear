@@ -27,14 +27,17 @@ class ProfileController extends Controller
         $user = User::select('*')->where('username','=',$request->username)->get();
         $courses = null;
         $active = 0;
+
         if($request['coursesSelected'] == "coursesSelected1"){
             $courses = DB::select("SELECT * from courses where owner_id =". $user[0]->id);
         } else if ($request['coursesSelected'] == "coursesSelected2") {
+
             $courses = DB::select("SELECT * from courses where id IN(
                 select course_id from tiers where id IN(
                     select tier_id from sales where user_id = ?
                 )
             )", [$user[0]->id]);
+
             $active = 1;
         } else {
             $courses = DB::select("SELECT * from courses where owner_id =". $user[0]->id);
@@ -49,7 +52,7 @@ class ProfileController extends Controller
         }
         
         if (!$user) return redirect()->back()->with('status', 'Error');
-       return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array, 'active' => $active]);
+        return view('profile', ['user'=>$user, 'courses' => $courses, 'prices' => $aux_array, 'active' => $active]);
      }
 
     

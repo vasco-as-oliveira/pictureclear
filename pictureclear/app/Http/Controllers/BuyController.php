@@ -112,7 +112,7 @@ class BuyController extends Controller
             ));
         }
 
-        return view('home');
+        return view('feed');
     }
 
    

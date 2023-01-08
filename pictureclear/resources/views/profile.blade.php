@@ -68,6 +68,7 @@
                 <div class="profile-info">
                     <form method="GET" name="courses" id="courses" action="{{ url('/profile') }}" enctype="multipart/form-data" >
                     @csrf
+                        <input name="username" value="{{$user->value('username')}}" style="display: none;">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item ">
                             <label for="coursesSelected1" title="text">
