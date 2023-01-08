@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -28,11 +28,15 @@ class HomeController extends Controller
         dd($allSessions);
         */
         //return view('home');
+        if (Auth::user()->is_admin){
+            return redirect(url("painelAdmin?section=" . '1'));
+        }
+
         return view('feed');
     }
 
-    public function showCourses(Request $request){
-        $courses = DB::table('courses')->select('*')->get();
+ //   public function showCourses(Request $request){
+   //     $courses = DB::table('courses')->select('*')->get();
 
-    }
+ //   }
 }

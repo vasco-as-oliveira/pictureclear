@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->float('rating')->default(0);
             $table->boolean('finished_setup')->default(0);
+            $table->boolean('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

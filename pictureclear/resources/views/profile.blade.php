@@ -14,7 +14,16 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <div class="container emp-profile">
-        <form>
+        @if (Auth::user()->is_admin && $user->value('username')!= Auth::user()->username)
+                        <p>
+                            <form action='{{url("/admin/deleteUser")}}' method="get">
+                                @csrf
+                                <input type="text" value="{{$user->value('id')}}" style="display: none" name="user">
+                                <input type="submit" value="Apagar utilizador">
+                            </form>
+                        </p>
+                        @endif
+        
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -49,6 +58,7 @@
                             @endif
 
                         </p>
+                        
                         <p class="proile-rating">
                             CURSOS CRIADOS: {{ $courseCount[0]->ccontagem }}
                         </p>
@@ -84,6 +94,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        
     </div>
     @endsection
