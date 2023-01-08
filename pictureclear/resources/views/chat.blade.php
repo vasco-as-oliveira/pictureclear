@@ -24,16 +24,19 @@
 					</div>
 
 					<!-- LISTA DE TODOS OS CHATS -->
-					<!-- <a href="#" class="list-group-item list-group-item-action border-0">
-						<div class="badge bg-success float-right">5</div>
-						<div class="d-flex align-items-start">
-							<img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-							<div class="flex-grow-1 ml-3">
-								Vanessa Tucker
-								<div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+					@if($all_chats_teacher)
+						@foreach($all_chats_teacher as $chat)
+						<a href="{{url('/chat', ['id' => $chat->id]) }}" class="list-group-item list-group-item-action border-0">
+							<div class="d-flex align-items-start">
+								<img src="{{ DB::select('select * from users where id ='.$chat->student_id)[0]->picture != null ? URL::asset('storage/images/'.DB::select('select * from users where id ='.$chat->student_id)[0]->picture) : URL::asset('images/default-profilepicture.png') }}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40" style="object-fit: cover;">
+								<div class="flex-grow-1 ml-3">
+									{{DB::select('select * from users where id ='.$chat->student_id)[0]->username}}
+									<div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+								</div>
 							</div>
-						</div>
-					</a> -->
+						</a>
+						@endforeach
+					@endif
 					<!-- LISTA DE TODOS OS CHATS -->
 
 					<hr class="d-block d-lg-none mt-1 mb-0">

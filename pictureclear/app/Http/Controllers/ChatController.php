@@ -31,7 +31,11 @@ class ChatController extends Controller
     public function showChat(Request $request, $id){
         $chat = DB::select("SELECT * FROM chats WHERE id =".$id);
         $senderId=0;
-        if(Auth::user()->id==$chat[0]->teacher_id) $senderId = $chat[0]->student_id;
+        $allChats = null;
+        if(Auth::user()->id==$chat[0]->teacher_id){
+            $senderId = $chat[0]->student_id;
+            $allChats = DB::select("SELECT * FROM chats WHERE teacher_id =".Auth::user()->id);
+        }
         else $senderId = $chat[0]->teacher_id;
 
         $sentMessages = DB::select("SELECT * from Messages WHERE chat_id = ?", [$id]);
@@ -42,7 +46,10 @@ class ChatController extends Controller
             'chatId' => $chat,
             'presentChatId' => $id,
             'sentMessages' => $sentMessages,
-            'sender' => $sender[0]]
+            'sender' => $sender[0],
+            'all_chats_teacher' => $allChats,
+            
+        ],
         );
     }
 
