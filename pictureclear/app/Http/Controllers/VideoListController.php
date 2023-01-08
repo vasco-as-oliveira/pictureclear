@@ -22,5 +22,4 @@ class VideoListController extends Controller
     {
         $this->middleware(['auth', 'verified', 'checkIfBought']);
     }
-
 }

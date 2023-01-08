@@ -19,7 +19,7 @@ class TierFormController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'checktier']);
+        $this->middleware(['auth', 'verified', 'checktier', 'IsAdmin']);
     }
 
 

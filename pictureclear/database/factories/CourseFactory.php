@@ -28,6 +28,7 @@ class CourseFactory extends Factory
             'rating' => fake()->numberBetween(1,5),
             'has_certificate' => fake()->boolean(),
             'total_hours' => fake()->randomNumber(),
+            'public' => fake()->boolean(true),
         ];
     }
 }

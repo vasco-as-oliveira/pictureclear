@@ -23,7 +23,7 @@ class ScheduleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'HasScheduleAccess']);
+        $this->middleware(['auth', 'verified', 'HasScheduleAccess', 'IsAdmin']);
     }
 
     public function checkSchedule(Request $request, $id){

@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
         \App\Models\Course::factory(10)->create();
+        \App\Models\Tier::factory(10)->create();
+        \App\Models\Schedule::factory(10)->create();
+
+
         /*$courses = DB::select("SELECT id from courses");
         foreach ($courses as $id){
             \App\Models\Course::factory(10)->create();

@@ -26,7 +26,7 @@ class LessonFormController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'IsAdmin']);
     }
 
     public function LessonForm(Request $request, $id) {

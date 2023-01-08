@@ -13,13 +13,16 @@ use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified', 'OnlyAdmin']);
+    }
+
+
     public function courses(Request $request){
         if (!Auth::user()->is_admin) return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley');
         $courses = DB::table("courses")->select('*')->paginate(10);
         $number = DB::select("Select count(*) from courses");
-        
-        
-        
         return view('painelAdminCourses', ['courses' => $courses, 'number' => $number]);
     }
 

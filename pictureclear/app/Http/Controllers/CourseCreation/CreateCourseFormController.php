@@ -21,7 +21,7 @@ class CreateCourseFormController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'IsTierBeingUsed']);
+        $this->middleware(['auth', 'verified', 'IsTierBeingUsed', 'IsAdmin']);
     }
 
     public function CreateCourseForm(Request $request) {

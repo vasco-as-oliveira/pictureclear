@@ -25,7 +25,7 @@ class ChatController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'BelongsToChat']);
+        $this->middleware(['auth', 'verified', 'BelongsToChat', 'IsAdmin']);
     }
     
     public function showChat(Request $request, $id){

@@ -71,5 +71,8 @@ class Kernel extends HttpKernel
         'checkIfBought' => \App\Http\Middleware\checkIfBought::class,
         'BelongsToChat' => \App\Http\Middleware\BelongsToChat::class,
         'HasScheduleAccess' => \App\Http\Middleware\HasScheduleAccess::class,
+        'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
+        'OnlyAdmin' => \App\Http\Middleware\OnlyAdmin::class,
+
     ];
 }

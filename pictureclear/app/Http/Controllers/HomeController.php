@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'IsAdmin']);
     }
 
     /**
@@ -26,9 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {   
-        if (Auth::user()->is_admin){
-            return redirect(url("painelAdmin/courses"));
-        }
+       
 
         if($request->dropdown==NULL){
             $courses = DB::table('courses')
