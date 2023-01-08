@@ -55,7 +55,8 @@ Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'in
 Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
 
 Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'publishRating']);
-Route::get('/painelAdmin',[App\Http\Controllers\AdminController::class, 'index']);
+Route::get('/painelAdmin/courses',[App\Http\Controllers\AdminController::class, 'courses']);
+Route::get('/painelAdmin/users',[App\Http\Controllers\AdminController::class, 'users']);
 Route::get('/admin/apagarCurso',[App\Http\Controllers\AdminController::class, 'deleteCourse']);
 Route::get('/admin/deleteUser',[App\Http\Controllers\AdminController::class, 'deleteUser']);
 

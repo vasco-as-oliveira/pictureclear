@@ -29,7 +29,7 @@ class HomeController extends Controller
         */
         //return view('home');
         if (Auth::user()->is_admin){
-            return redirect(url("painelAdmin?section=" . '1'));
+            return redirect(url("painelAdmin/courses"));
         }
 
         return view('feed');

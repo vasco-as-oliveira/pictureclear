@@ -9,21 +9,20 @@
 </head>
 <body>
     @section('content')
-    <form action={{url('painelAdmin')}} method="get">
-    <input type="text" name="section" value ='1' style="display: none">
+    <form action={{url('painelAdmin/users')}} method="get">
+    
     <input type="submit" value="Utilizadores">
     </form>
-    <form action={{url('painelAdmin')}} method="get">
-        <input type="text" name="section" value ='2' style="display: none">
+    <form action={{url('painelAdmin/courses')}} method="get">
         <input type="submit" value="Cursos">
         </form>
-        
-    @if ($section == 1)
+        {{$number[0]->count}} Utilizadores <br>
+    
 
     <ul>
-         {{count($users)}} Utilizadores
+         
         @foreach ($users as $user)
-            <a href={{'profile?username=' . $user->username}}>
+            <a href={{url('profile?username=' . $user->username)}}>
             <li>{{$user->username}}</li>
             </a>
         @endforeach
@@ -31,16 +30,11 @@
         {!! $users->links('pagination::bootstrap-4') !!}
 
 
-    @else
     
-    @foreach ($courses as $course)
-        <a href={{'checkCourse/search?selectCourse=' . $course->id}}>
-        {{$course->title}}<br>
-        </a>
-    @endforeach
     
-    {!! $courses->links('pagination::bootstrap-4') !!}
-    @endif
+    
+    
+    
 
     @endsection
 

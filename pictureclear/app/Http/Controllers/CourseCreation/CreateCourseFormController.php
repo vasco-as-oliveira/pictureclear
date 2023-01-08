@@ -25,6 +25,7 @@ class CreateCourseFormController extends Controller
     }
 
     public function CreateCourseForm(Request $request) {
+        
         $certificate = false;
         if($request['has_certificate'] == 'true') $certificate = true;
         // Form validation
