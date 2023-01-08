@@ -34,7 +34,7 @@
                             <div class="col-md-6">
                                 <div class="media">
                                     <label>Nome</label>
-                                    <a href={{url("/profile?username=". $checkuser->username)}}>
+                                    <a href={{url("/profile?username=". $checkUser->username)}}>
                                         <p>{{ $checkUser->firstname }} {{ $checkUser->lastname }}</p>
                                     </a>
                                 </div>
