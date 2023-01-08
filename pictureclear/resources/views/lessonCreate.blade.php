@@ -20,7 +20,7 @@
                     </span>
                 @enderror
 
-                <input id="description" placeholder="Descrição do curso" class="input @error('description') is-invalid @enderror" type="text"
+                <input id="description" placeholder="Descrição da aula" class="input @error('description') is-invalid @enderror" type="text"
                     name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>
 
                 @error('description')
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <button class="button" type="submit" class="registerbtn">
-                    {{ __('Criar Curso') }}
+                    {{ __('Criar Aula') }}
                 </button>
             </form>
     </div>
