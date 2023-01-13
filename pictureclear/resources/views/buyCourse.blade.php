@@ -6,6 +6,8 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/styleTier.css?v=') . time() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <h2>{{ $course[0]->title }}</h2>
     <form method="post" action="{{ url('/comprarCurso/tier') }}" enctype="multipart/form-data" class="form register">
         <input type="text" value="{{ $course[0]->id }}" style="display: none" name="course">
@@ -60,7 +62,6 @@
 
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
 
