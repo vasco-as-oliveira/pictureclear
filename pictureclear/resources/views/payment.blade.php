@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="{{ asset('/css/payment.css') }}" />
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"
+integrity="sha384-Af044HDnlFb8FD1DzMtPCnFXTGCgQxkn+0GLaVHa3pm3GKV4BUpDfrXuWNifEq3u"
+crossorigin="anonymous"></script>
 <form action="{{ url('charge') }}" method="post" id="payment-form">
     <div class="form-row">
         <p><input type="text" name="amount" placeholder="Enter Amount" /></p>
