@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    response()->header('Access-Control-Allow-Origin', "*"),
 
     'allowed_origins_patterns' => [],
 
