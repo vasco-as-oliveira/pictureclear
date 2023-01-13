@@ -40,7 +40,7 @@
   -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   -o-transition-property: transform;
-  transition-property: transform, -webkit-transform;
+  /* transition-property: transform, -webkit-transform; */
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
@@ -88,8 +88,8 @@
   -webkit-transition-property: height, -webkit-transform;
   transition-property: height, -webkit-transform;
   -o-transition-property: transform, height;
-  transition-property: transform, height;
-  transition-property: transform, height, -webkit-transform;
+ /*  transition-property: transform, height;
+  transition-property: transform, height, -webkit-transform; */
 }
 /* 3D Effects */
 .swiper-container-3d {
