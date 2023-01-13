@@ -221,14 +221,8 @@
 
                     <!-- Card-->
                     <div class="card">
-                        <!--<div class="label">
-                            <p class="best-value">Best Value</p>
-                        </div> -->
                         <div class="card-body">
                             <div class="card-title">ULTIMATE</div>
-                            <!--
-                            <div class="price"><span class="currency">€</span><span class="value">39.99</span></div>
-                            -->
                             <div class="divider"></div>
                             <ul class="list-unstyled li-space-lg">
                                 <li class="media">

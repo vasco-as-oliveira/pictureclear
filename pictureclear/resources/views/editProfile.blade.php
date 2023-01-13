@@ -29,8 +29,9 @@
                     <div class="profilepicture">
                         <h1 id="photo">Wow, ainda melhor!</h1>
                         <br>
-                        <img id="profilepicture" src="{{ $user->value('picture') != null ? 'storage/images/'.$user->value('picture') : 'images/default-profilepicture.png' }}"
-                            alt="{{ $user->value('picture') != null ? $user->value('picture') : "default-profilepicture.png" }}">
+                        <img id="profilepicture"
+                            src="{{ $user->value('picture') != null ? 'storage/images/' . $user->value('picture') : 'images/default-profilepicture.png' }}"
+                            alt="{{ $user->value('picture') != null ? $user->value('picture') : 'default-profilepicture.png' }}">
                         <input type="file" id="profilepictureInput" name='image' style="display: none"
                             value="{{ $user->value('picture') }}">
                         <!--<button class="ghost" id="upload">-->
