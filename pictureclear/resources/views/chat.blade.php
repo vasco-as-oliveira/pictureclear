@@ -25,12 +25,18 @@
                                 <a href="{{ url('/chat', ['id' => $chat->id]) }}"
                                     class="list-group-item list-group-item-action border-0">
                                     <div class="d-flex align-items-start">
-                                        <img src="{{ DB::select('select * from users where id =' . $chat->student_id)[0]->picture != null ? URL::asset('storage/images/' . DB::select('select * from users where id =' . $chat->student_id)[0]->picture) : URL::asset('images/default-profilepicture.png') }}"
+                                        <img
+										src="{{DB::select('select * from users where id =' . $chat->student_id)[0]->picture != null ?
+											 URL::asset('storage/images/'.DB::select('select * from users where id ='.$chat->student_id)[0]->picture) :
+											URL::asset('images/default-profilepicture.png')}}"
                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                             style="object-fit: cover;">
                                         <div class="flex-grow-1 ml-3">
-                                            {{ DB::select('select * from users where id =' . $chat->student_id)[0]->username }}
-                                            <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                                            {{DB::select('select * from users where id ='
+											.$chat->student_id)[0]->username}}
+                                            <div class="small">
+												<span class="fas fa-circle chat-online">
+													</span>Online</div>
                                         </div>
                                     </div>
                                 </a>
@@ -44,7 +50,9 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img src="{{ Auth::user()->picture != null ? URL::asset('storage/images/' . Auth::user()->picture) : URL::asset('images/default-profilepicture.png') }}"
+                                    <img src="{{ Auth::user()->picture != null ?
+									 URL::asset('storage/images/' . Auth::user()->picture) :
+									  URL::asset('images/default-profilepicture.png') }}"
                                         class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                         style="object-fit: cover;">
                                 </div>
@@ -66,11 +74,15 @@
                                     @endif
                                     <div>
                                         @if ($message->user_id == Auth::user()->id)
-                                            <img src="{{ Auth::user()->picture != null ? URL::asset('storage/images/' . Auth::user()->picture) : URL::asset('images/default-profilepicture.png') }}"
+                                            <img src="{{ Auth::user()->picture != null ?
+											 URL::asset('storage/images/' . Auth::user()->picture) :
+											  URL::asset('images/default-profilepicture.png') }}"
                                                 class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                                 style="object-fit: cover;">
                                         @else
-                                            <img src="{{ $sender->picture != null ? URL::asset('storage/images/' . $sender->picture) : URL::asset('images/default-profilepicture.png') }}"
+                                            <img src="{{ $sender->picture != null ?
+											 URL::asset('storage/images/' . $sender->picture) :
+											  URL::asset('images/default-profilepicture.png') }}"
                                                 class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                                 style="object-fit: cover;">
                                         @endif

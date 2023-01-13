@@ -45,7 +45,9 @@
                     @enderror
 
                     <label for="has_certificate" class="label">O/A Aluno/a irá obter certificado?</label>
-                    <input id="has_certificate" class="input @error('has_certificate') is-invalid @enderror" type="checkbox"
+                    <input id="has_certificate"
+                    class="input @error('has_certificate') is-invalid @enderror"
+                    type="checkbox"
                         name="has_certificate" value="true" autocomplete="has_certificate" autofocus>
 
                     <button class="button" type="submit" class="registerbtn">
@@ -77,7 +79,8 @@
 
                                 <input min="1" step="any" placeholder="Preço"
                                     class="input @error('price1') is-invalid @enderror" type="number" name="price1"
-                                    value="{{ old('price1') == null ? 1 : old('price1') }}" required autocomplete="price1"
+                                    value="{{ old('price1') == null ? 1 : old('price1') }}"
+                                    required autocomplete="price1"
                                     autofocus>
 
                                 @error('price1')
@@ -87,8 +90,10 @@
                                 @enderror
 
                                 </br>
-                                <input id="chooseTier1" class="input @error('chooseTier1') is-invalid @enderror btn-check"
-                                    type="checkbox" name="chooseTier1" value="true" autocomplete="chooseTier1" autofocus>
+                                <input id="chooseTier1"
+                                    class="input @error('chooseTier1') is-invalid @enderror btn-check"
+                                    type="checkbox" name="chooseTier1" value="true"
+                                    autocomplete="chooseTier1" autofocus>
                                 <label class="label checkbox btn btn-success" for="chooseTier1">Selecionar Tier</label>
                             </div>
                         </div>
@@ -104,7 +109,8 @@
                                 <h5>Acesso a um horário de marcação - &#x2717;</h5>
                                 <input min="1" step="any" placeholder="Preço"
                                     class="input @error('price') is-invalid @enderror" type="number" name="price2"
-                                    value="{{ old('price2') == null ? 1 : old('price2') }}" required autocomplete="price2"
+                                    value="{{ old('price2') == null ? 1 : old('price2') }}"
+                                    required autocomplete="price2"
                                     autofocus>
 
                                 @error('price2')
@@ -114,8 +120,10 @@
                                 @enderror
 
                                 </br>
-                                <input id="chooseTier2" class="input @error('chooseTier2') is-invalid @enderror btn-check"
-                                    type="checkbox" name="chooseTier2" value="true" autocomplete="chooseTier2" autofocus>
+                                <input id="chooseTier2"
+                                    class="input @error('chooseTier2') is-invalid @enderror btn-check"
+                                    type="checkbox" name="chooseTier2" value="true"
+                                    autocomplete="chooseTier2" autofocus>
                                 <label class="label checkbox btn btn-success" for="chooseTier2">Selecionar Tier</label>
 
                             </div>
@@ -142,8 +150,10 @@
                                 @enderror
 
                                 </br>
-                                <input id="chooseTier3" class="input @error('chooseTier3') is-invalid @enderror btn-check"
-                                    type="checkbox" name="chooseTier3" value="true" autocomplete="chooseTier3"
+                                <input id="chooseTier3"
+                                    class="input @error('chooseTier3') is-invalid @enderror btn-check"
+                                    type="checkbox" name="chooseTier3" value="true"
+                                    autocomplete="chooseTier3"
                                     autofocus>
                                 <label class="label checkbox btn btn-success" for="chooseTier3">Selecionar Tier</label>
                             </div>

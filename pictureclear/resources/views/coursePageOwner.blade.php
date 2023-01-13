@@ -15,7 +15,9 @@
         <div class="card w-25">
             <h5 class="card-header">Confirmação</h5>
             <div class="card-body">
-                <p class="card-text">Depois de tornar público, não poderá voltar a tornar privado. Deseja prosseguir?</p>
+                <p class="card-text">
+                    Depois de tornar público, não poderá voltar a tornar privado. Deseja prosseguir?
+                </p>
                 <form method="POST" action="{{ url('/checkCourse/launchcourse', ['id' => $checkCourse->id]) }}"
                     enctype="multipart/form-data">
                     @csrf
@@ -37,7 +39,8 @@
                     @csrf
                     Data<input min="1" step="any" placeholder="Primeira Hora"
                         class="input @error('schedDia') is-invalid @enderror" type="date" name="schedDia"
-                        value="{{ old('sched') == null ? 1 : old('schedDia') }}" required autocomplete="schedDia" autofocus>
+                        value="{{ old('sched') == null ? 1 : old('schedDia') }}"
+                        required autocomplete="schedDia" autofocus>
 
                     @error('schedDia')
                         <span class="span invalid-feedback" role="alert">
@@ -46,7 +49,8 @@
                     @enderror
 
                     Hora inicial<input min="1" step="any" placeholder="Primeira Hora"
-                        class="input @error('schedHoraInicial') is-invalid @enderror" type="time" name="schedHoraInicial"
+                        class="input @error('schedHoraInicial') is-invalid @enderror"
+                        type="time" name="schedHoraInicial"
                         value="{{ old('schedHoraInicial') == null ? 1 : old('schedHoraInicial') }}" required
                         autocomplete="schedHoraInicial" autofocus>
 
@@ -95,7 +99,9 @@
                                 @endif
                             </h6>
                             <p>I <mark>Descrição: </mark>
-                                <textarea maxlength="150" name="description" class="text" placeholder="{{ $checkCourse->description }}"></textarea>
+                                <textarea maxlength="150" name="description"
+                                    class="text" placeholder="{{ $checkCourse->description }}">
+                                </textarea>
                             </p>
                             <div class="row about-list">
                                 <h6 class="theme-color lead">Informação Sobre o Professor</h6>
@@ -120,18 +126,26 @@
                                     <div class="profilepicture">
                                         <br>
 
-                                        <img src="{{ $checkCourse->image != null ? URL::asset('storage/images/' . $checkCourse->image) : URL::asset('images/default-profilepicture.png') }}"
+                                        <img src="{{ $checkCourse->image != null ?
+                                         URL::asset('storage/images/' . $checkCourse->image) :
+                                          URL::asset('images/default-profilepicture.png') }}"
                                             alt="default-profilepicture" id="profilepicture">
                                         <input type="file" id="file" style="display: none;" name="inputImage">
-                                        <label for="file"><button class="button"
-                                                style="heigth:50%; width:200px;">Carregar Imagem</button></label>
+                                        <label for="file">
+                                            <button class="button"
+                                                style="heigth:50%; width:200px;">
+                                                Carregar Imagem
+                                            </button>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="profilepicture">
                             <button name="done" type="submit" class="button"
-                                style="heigth:50%; width:200px; text-align:center;">Concluído</button>
+                                style="heigth:50%; width:200px; text-align:center;">
+                                Concluído
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -177,7 +191,8 @@
                             <p class="m-0px font-w-600">
                                 <!-- Redirects to page with lessons if course is bought -->
                             <form method="GET" id="addLesson"
-                                action="{{ url('/addLesson', ['id' => $checkCourse->id]) }}" enctype="multipart/form-data">
+                                action="{{ url('/addLesson', ['id' => $checkCourse->id]) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <button form="addLesson" id="filevid" type="submit" name="inputImage"
                                     class="label checkbox btn btn-success">+</button>
@@ -225,7 +240,9 @@
                                 <p class="m-0px font-w-600">
                                     <!-- Redirects to page for schedule -->
                                     <button type="button" onclick="openForm()"
-                                        class=" open-button label checkbox btn btn-success">Tornar o site publico</button>
+                                        class=" open-button label checkbox btn btn-success">
+                                        Tornar o site publico
+                                    </button>
                                 </p>
                             </div>
                         </div>

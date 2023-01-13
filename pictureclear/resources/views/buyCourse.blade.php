@@ -1,8 +1,5 @@
 @extends('layouts/app')
 
-<!DOCTYPE html>
-<html lang="en">
-
 @section('title')
     Picture Clear - Comprar curso
 @endsection
@@ -39,7 +36,7 @@
                                 </h5>
                                 </br>
                                 <input id="chooseTier{{ $i }}"
-                                    class="input @error('chooseTier{{ $i }}') is-invalid @enderror btn-check checkoption"
+                                    class="input @error('chooseTier{{ $i }}')is-invalid @enderror btn-check checkoption"
                                     type="checkbox" name="tier" value="{{ $tier->id }}"
                                     autocomplete="chooseTier{{ $i }}" autofocus>
                                 <label class="label checkbox btn btn-success" for="chooseTier{{ $i }}">Selecionar

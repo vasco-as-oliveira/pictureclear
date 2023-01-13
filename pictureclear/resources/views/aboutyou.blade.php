@@ -16,7 +16,6 @@
                     <textarea maxlength="150" name="description" class="text" placeholder="Eu sou @ melhor!"></textarea>
                     <button name="done" type="submit">Concluído</button>
                 </div>
-                <!--</form>-->
         </div>
         <div class="overlay-container">
             <div class="overlay">
@@ -27,7 +26,6 @@
                         <br>
                         <img src="images/default-profilepicture.png" alt="default-profilepicture" id="profilepicture">
                         <input type="file" id="profilepictureInput" style="display: none" name="inputImage">
-                        <!--<button class="ghost" id="upload">-->
                         <label for="profilepictureInput" class="upload">
                             <button class="ghost" id="upload">
                                 Escolhe uma foto!

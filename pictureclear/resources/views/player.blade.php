@@ -6,6 +6,7 @@
     <div class="card">
         <div class="firstinfo">
             <video controls id="videoLesson" class="video_div">
+                <track/>
                 <source src="{{ URL::asset('storage/videos/' . $lesson->url . '') }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>

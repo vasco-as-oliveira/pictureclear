@@ -54,7 +54,9 @@
                         <div class="overlay-container">
                             <div class="overlay">
                                 <div class="profilepicture">
-                                    <img src="{{ $checkCourse->image != null ? URL::asset('storage/images/' . $checkCourse->image) : URL::asset('images/default-profilepicture.png') }}"
+                                    <img src="{{ $checkCourse->image != null ?
+                                     URL::asset('storage/images/' . $checkCourse->image) :
+                                      URL::asset('images/default-profilepicture.png') }}"
                                         alt="default-profilepicture" id="profilepicture">
                                 </div>
                             </div>

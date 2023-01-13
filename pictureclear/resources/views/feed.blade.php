@@ -8,7 +8,6 @@
     <link rel='stylesheet' href='css/styleFeed.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div>
-        <!--<form action="">-->
         {!! $courses->links('pagination::bootstrap-4') !!}
         <form>
             <select name="dropdown" onchange="this.form.submit()">
@@ -28,7 +27,8 @@
                             ->select('*')
                             ->where('id', $course->owner_id)
                             ->get();
-                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id IN(select id from tiers where course_id=' . $course->id . ' )');
+                        $costumerCount = DB::select('select count(*) as contagem from sales where tier_id
+                            IN(select id from tiers where course_id=' . $course->id . ' )');
                         //print_r($costumerCount);
                     @endphp
                     <div class="container-course">
@@ -54,6 +54,5 @@
                 @endif
             @endforeach
         </div>
-        <!--</form>-->
     </div>
 @endsection
