@@ -40,7 +40,6 @@
   -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   -o-transition-property: transform;
-  transition-property: transform;
   transition-property: transform, -webkit-transform;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -71,7 +70,6 @@
   -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   -o-transition-property: transform;
-  transition-property: transform;
   transition-property: transform, -webkit-transform;
 }
 .swiper-slide-invisible-blank {
@@ -314,7 +312,6 @@ button.swiper-pagination-bullet {
   -webkit-transition: 200ms top, 200ms -webkit-transform;
   transition: 200ms top, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms top;
-  transition: 200ms transform, 200ms top;
   transition: 200ms transform, 200ms top, 200ms -webkit-transform;
 }
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
@@ -331,14 +328,12 @@ button.swiper-pagination-bullet {
   -webkit-transition: 200ms left, 200ms -webkit-transform;
   transition: 200ms left, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms left;
-  transition: 200ms transform, 200ms left;
   transition: 200ms transform, 200ms left, 200ms -webkit-transform;
 }
 .swiper-container-horizontal.swiper-container-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
   -webkit-transition: 200ms right, 200ms -webkit-transform;
   transition: 200ms right, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms right;
-  transition: 200ms transform, 200ms right;
   transition: 200ms transform, 200ms right, 200ms -webkit-transform;
 }
 /* Progress */
