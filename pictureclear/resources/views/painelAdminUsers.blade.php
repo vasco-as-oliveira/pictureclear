@@ -16,7 +16,7 @@
     <form action={{url('painelAdmin/courses')}} method="get">
         <input type="submit" value="Cursos">
         </form>
-        {{$number[0]->count}} Utilizadores <br>
+        {{$number}} Utilizadores <br>
     
 
     <ul>
