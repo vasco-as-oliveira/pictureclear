@@ -176,7 +176,7 @@ img{
 
 .overlay {
     background: #FF416C;
-    background: -webkit-linear-gradient(to bottom, #7f2982, #de639a);
+    background: -webkit-linear-gradient(bottom, #7f2982, #de639a);
     background: linear-gradient(to bottom, #7f2982, #de639a);
     background-repeat: no-repeat;
     background-size: cover;
