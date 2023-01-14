@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Chats;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
@@ -39,8 +40,12 @@ class BuyController extends Controller
         if (count($subscribed_users)>0){
             return back();
         }
-        $course = DB::select("SELECT * from courses where id =". $request->course);
-        $tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
+        //$course = DB::select("SELECT * from courses where id =". $request->course);
+        $course = Course::select('*')
+                        ->where('id', '=', $request->course)->get()->toArray();
+        //$tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
+        $tiers = Tier::select('*')
+                    ->where('course_id', '=', $request->course)->get()->toArray();
         return view("buyCourse", ["course"=>$course, "tiers" => $tiers]);
     }
 
