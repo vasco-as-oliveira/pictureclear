@@ -35,7 +35,7 @@ class checkIfBought
         //$courseBelongsToUser = DB::select('select owner_id from courses where id ='.$courseId);
         $courseBelongsToUser = Course::select('owner_id')
                                     ->where('id', '=', $courseId)->get()->toArray();
-        if($subscribed_users || (Auth::User()->id == $courseBelongsToUser[0]->owner_id) || (Auth::user()->is_admin)) {
+        if($subscribed_users || (Auth::User()->id == $courseBelongsToUser[0]['owner_id']) || (Auth::user()->is_admin)) {
             return $next($request);
         }
         return back();
