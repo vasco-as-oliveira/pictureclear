@@ -28,49 +28,33 @@ class AboutYouController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        /*
-        $allSessions = session()->all();
-        dd($allSessions);
-        */
-        $user =  User::select('finished_setup')->where('id','=',Auth::user()->id)->get();
-        if($user->value('finished_setup')){
+    {
+        $user =  User::select('finished_setup')->where('id', '=', Auth::user()->id)->get();
+        if ($user->value('finished_setup')) {
             return redirect('home');
         }
-
         return view('aboutyou');
     }
 
     public function finishSetup(Request $request)
     {
-        /*
-        $request->validate([
-            'description' => ['string', 'max:150'],
-            'inputImage' => ['image','mimes:png,jpg,jpeg'],
-        ]);
-        */
-        if(!empty($request->input('description'))){
+        if (!empty($request->input('description'))) {
             $request->validate([
                 'description' => ['string', 'max:150'],
             ]);
-            DB::update("update users set description=? where id=?", [$request->description, Auth::user()->id]);
+            User::find(Auth::user()->id)->update(['description'=> $request->description]);
         }
 
-        if($request->file('inputImage') != null){
+        if ($request->file('inputImage') != null) {
             $request->validate([
                 'inputImage' => ['image','mimes:png,jpg,jpeg'],
             ]);
             $request->file('inputImage')->store('public/images');
-            DB::update("update users set picture =? where id=?", [$request->file('inputImage')->hashName(), Auth::user()->id]);
+            User::find(Auth::user()->id)->update(['picture'=>$request->file('inputImage')->hashName()]);
         }
 
-        DB::update("update users set finished_setup='t' where id=?", [Auth::user()->id]);
+        User::find(Auth::user()->id)->update(['finished_setup'=> true]);
         return redirect('home');
     }
 
-    public function skip()
-    {
-        DB::update("update users set finished_setup='t' where id=?", [Auth::user()->id]);
-        return redirect('home');
-    }
 }

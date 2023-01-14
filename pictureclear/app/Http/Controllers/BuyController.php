@@ -29,27 +29,25 @@ class BuyController extends Controller
     }
 
     public function index(Request $request)
-    {   
-        //$subscribed_usersTest = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $request->course . ') and user_id=' . Auth::User()->id . '');
+    {
         $arrayOfTiers = Tier::select('id')
                         ->where('course_id', '=', $request->course)
                         ->where('user_id', '=', Auth::User()->id);
-        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
-        if (count($subscribed_users)>0){
+        $subscribedUsers = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
+        if (count($subscribedUsers)>0) {
             return back();
         }
-        //$course = DB::select("SELECT * from courses where id =". $request->course);
+
         $course = Course::select('*')
                         ->where('id', '=', $request->course)->get()->toArray();
-        //$tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
+
         $tiers = Tier::select('*')
                     ->where('course_id', '=', $request->course)->get()->toArray();
         return view("buyCourse", ["course"=>$course, "tiers" => $tiers]);
     }
 
-    public function buy(Request $request){
-        
-        //$price = DB::select("SELECT price from tiers where id =". $request->tier);
+    public function buy(Request $request)
+    {
         $price = Tier::select('price')
                         ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
@@ -119,7 +117,7 @@ class BuyController extends Controller
        
     }
 
-    public function success(Request $request){
+    public function success(Request $request) {
         DB::update('update users set balance=? where id=?', [$request->sellerBalance,$request->sellerId]);
         Sale::insert([
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]

@@ -7,6 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
+use App\Models\Tier;
+
 class HomeController extends Controller
 {
     /**
@@ -25,40 +28,30 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {   
-       
-
-        if($request->dropdown==NULL){
-            $courses = DB::table('courses')
-            ->select('*')
+    {
+        if ($request->dropdown == null) {
+            $courses = Course::select('*')
             ->orderBy('id', 'desc')
             ->paginate(10);
-
-        }else{
-            $order = explode('_',$request->dropdown);
-            if($order[0]=='price'){
-                $courses = DB::table('courses')
-                ->select('courses.*')
-                ->whereIn('id',DB::table('tiers')->select(DB::raw('course_id as id, MIN(price) as price'))->groupby('course_id')->orderby('price',$order[1])->pluck('id')->toArray())
+        } else {
+            $order = explode('_', $request->dropdown);
+            if ($order[0]=='price') {
+                $courses = Course::select('*')
+                ->whereIn(
+                        'id' ,
+                        Tier::select(DB::raw('course_id as id, MIN(price) as price'))
+                        ->groupby('course_id')
+                        ->orderby('price', $order[1])
+                        ->pluck('id')
+                        ->toArray())
                 ->orderby('id', $order[1])
-                ->paginate(10); 
-            }else{
-                $courses = DB::table('courses')
-                ->select('*')
+                ->paginate(10);
+            } else {
+                $courses = Course::select('*')
                 ->orderBy($order[0], $order[1])
-                ->paginate(10);   
-            }      
+                ->paginate(10);
+            }
         }
-        
-
-        return view('feed', ['courses'=> $courses]);
-    }
-
-    
-    public function changeOrder(Request $request)
-    {
-        $order = explode("_",$request->dropdown);
-        $courses = DB::table('courses')->select('*')->orderBy($order[1], $order[0])->paginate(10);
         return view('feed', ['courses'=> $courses]);
     }
 }
