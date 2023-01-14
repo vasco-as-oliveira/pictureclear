@@ -16,8 +16,6 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
 
-
-
 class BuyController extends Controller
 {
     /**
@@ -51,10 +49,12 @@ class BuyController extends Controller
 
     public function buy(Request $request){
         
-        $price = DB::select("SELECT price from tiers where id =". $request->tier);
+        //$price = DB::select("SELECT price from tiers where id =". $request->tier);
+        $price = Tier::select('price')
+                        ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
             if (Auth::user()->balance<$price[0]->price){
-                return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                return back();
                 //RICK ROLL NO HACKER
             } else{
                 $balance  = Auth::user()->balance;
@@ -90,8 +90,12 @@ class BuyController extends Controller
             'quantity' => 1
         ];
 
-        $sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
-        $aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+        //$sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
+        $sellerId = Course::select('owner_id')
+                        ->where('id', '=', $request->course)->get()->toArray();
+        //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+        $aux = User::select('balance')
+                    ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
         $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
         
 
@@ -112,7 +116,9 @@ class BuyController extends Controller
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
         ]);
 
-        $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+        //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+        $tierBought = Tier::select('*')
+                            ->where('id', '=', $request->tier)->get()->toArray();
 
         if($tierBought[0]->haschatperk){
             Chats::insert(array(
