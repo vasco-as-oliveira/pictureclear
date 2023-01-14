@@ -37,13 +37,18 @@ class ChatController extends Controller
         $allChats = null;
         if(Auth::user()->id==$chat[0]->teacher_id){
             $senderId = $chat[0]->student_id;
-            $allChats = DB::select("SELECT * FROM chats WHERE teacher_id =".Auth::user()->id);
+            //$allChats = DB::select("SELECT * FROM chats WHERE teacher_id =".Auth::user()->id);
+            $allChats = Chats::select('*')
+                        ->where('teacher_id', '=', Auth::user()->id)->get()->toArray();
         }
         else $senderId = $chat[0]->teacher_id;
 
-        $sentMessages = DB::select("SELECT * from Messages WHERE chat_id = ?", [$id]);
-        $sender = DB::select("SELECT * FROM users WHERE id = ?", [$senderId]);
-
+        //$sentMessages = DB::select("SELECT * from Messages WHERE chat_id = ?", [$id]);
+        $sentMessages = Message::select('*')
+                        ->where('chat_id', '=', $id)->get()->toArray();
+        //$sender = DB::select("SELECT * FROM users WHERE id = ?", [$senderId]);
+        $sender = User::select('*')
+                        ->where('id', '=', $senderId)->get()->toArray();
         return view('chat', [
             'user' => Auth::user(),
             'chatId' => $chat,

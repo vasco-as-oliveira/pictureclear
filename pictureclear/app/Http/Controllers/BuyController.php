@@ -51,25 +51,31 @@ class BuyController extends Controller
         $price = Tier::select('price')
                         ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
-            if (Auth::user()->balance<$price[0]->price){
+            if (Auth::user()->balance<$price[0]['price']){
                 return back();
                 //RICK ROLL NO HACKER
             } else{
                 $balance  = Auth::user()->balance;
-                $balance = $balance - $price[0]->price;
-                DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
-
+                $balance = $balance - $price[0]['price'];
+                //DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
+                User::find(Auth::user()->id)
+                    ->update([
+                        'balance' => $balance,
+                    ]);
                 //$sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
                 $sellerId = Course::select('owner_id')
                 ->where('id', '=', $request->course)->get()->toArray();
                 //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
                 
                 $aux = User::select('balance')
-                ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
+                ->where('id', '=', $sellerId[0]['owner_id'])->get()->toArray();
 
                 $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
-                DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
-
+                //DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
+                User::find($sellerId[0]['owner_id'])
+                ->update([
+                    'balance' => $sellerBalance,
+                ]);
                 Sale::insert([
                     ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
                 ]);
@@ -118,7 +124,12 @@ class BuyController extends Controller
     }
 
     public function success(Request $request) {
-        DB::update('update users set balance=? where id=?', [$request->sellerBalance,$request->sellerId]);
+        //DB::update('update users set balance=? where id=?', [$request->sellerBalance,$request->sellerId]);
+        User::find($request->sellerId)
+        ->update([
+            'balance' => $request->sellerBalance,
+        ]);
+        
         Sale::insert([
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
         ]);

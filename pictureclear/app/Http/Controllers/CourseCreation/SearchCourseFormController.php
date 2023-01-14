@@ -24,7 +24,7 @@ class SearchCourseFormController extends Controller
         $find = $request['findCourse'];
         //$courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
         $courses = Course::select('*')
-                    ->where(DB::raw('UPPER(title)', 'LIKE', DB::raw("UPPER(\'%'.$find.'%\')")));
+                    ->where(DB::raw('UPPER(title)', 'LIKE', DB::raw("UPPER(\'%'.$find.'%\')")))->get()->toArray();
         if($courses){
             $numOfCourses = count($courses);
             if($numOfCourses>1){
