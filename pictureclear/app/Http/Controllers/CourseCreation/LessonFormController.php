@@ -35,13 +35,10 @@ class LessonFormController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000'
         ]);
 
-        if ($request->hasFile('inputvideo'))
-        {
-        ini_set('post_max_size','2024M');
-        ini_set('upload_max_filesize','2024M');
-        
+     
         $file = $request->file('inputvideo')->get();
         Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         
@@ -51,7 +48,7 @@ class LessonFormController extends Controller
             'description' => $request['description'],
             'url' => $request->file('inputvideo')->hashName(),
         ));
-        }
+        
 
         
         return redirect('/profile?username='.Auth::user()->username)->with('success', 'Acabaste de iniciar o teu curso!');
