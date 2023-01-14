@@ -40,12 +40,13 @@ class LessonFormController extends Controller
 
         $fileName = $request->file('inputvideo')->hashName();
         $targetDirectory = "public/videos/";
-        $path = realpath($targetDirectory . $fileName);
-        if (str_starts_with($path,  $targetDirectory)) {
-            $file=file_get_contents($path);
+        $path = storage_path($targetDirectory . $fileName);
+        $file = null;
+        if ($path) {
+            $file = $request->file('inputvideo')->get();
         }
         //$file = $request->file('inputvideo')->get();
-        Storage::disk('local')->put($path, $file);
+        Storage::disk('local')->put($targetDirectory . $fileName, $file);
         
         Lesson::insertGetId(array(
             'course_id' => $id,
