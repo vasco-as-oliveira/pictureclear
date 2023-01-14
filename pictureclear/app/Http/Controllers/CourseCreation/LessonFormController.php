@@ -40,7 +40,7 @@ class LessonFormController extends Controller
         $path = Storage::url($targetDirectory . $fileName);
         
         if (str_starts_with($path,  '/storage/'.$targetDirectory)) {
-            $file = $request->file('inputvideo')->get();
+            $file = file_get_contents($targetDirectory . $fileName);            
             Storage::disk('local')->put($targetDirectory . $fileName, $file);
         }
         
