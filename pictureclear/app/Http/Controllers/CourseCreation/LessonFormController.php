@@ -13,9 +13,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-
-
-
 class LessonFormController extends Controller
 {
 
@@ -39,11 +36,13 @@ class LessonFormController extends Controller
         ]);
 
         $fileName = $request->file('inputvideo')->hashName();
-        $targetDirectory = "public/videos/";
+        $targetDirectory = "public\\videos\\";
         $path = storage_path($targetDirectory . $fileName);
         $file = null;
-        if ($path) {
-            $file = $request->file('inputvideo')->get();
+        if ($request->hasFile('inputvideo')) {
+            if(Request::file('inputvideo')->isValid()){
+                $file = Request::file('inputvideo');
+            }
         }
         //$file = $request->file('inputvideo')->get();
         Storage::disk('local')->put($targetDirectory . $fileName, $file);
