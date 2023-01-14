@@ -13,6 +13,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+
+
+
 class LessonFormController extends Controller
 {
 
@@ -35,15 +38,12 @@ class LessonFormController extends Controller
             'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000'
         ]);
 
-        $fileName = $request->file('inputvideo')->hashName();
-        $targetDirectory = "/public/videos/";
-        $path = Storage::url($targetDirectory . $fileName);
-        
-        if (str_starts_with($path,  '/storage/'.$targetDirectory)) {
-            $file = file_get_contents($targetDirectory . $fileName);            
-            Storage::disk('local')->put($targetDirectory . $fileName, $file);
+        if($request->hasFile('inputvideo')){
+            if($request['inputvideo']->isValid()){
+                $file = $request->file('inputvideo')->get();
+                Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
+            }
         }
-        
         Lesson::insertGetId(array(
             'course_id' => $id,
             'title' => $request['title'],
