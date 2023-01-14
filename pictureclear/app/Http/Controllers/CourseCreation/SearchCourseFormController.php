@@ -22,7 +22,9 @@ class SearchCourseFormController extends Controller
     public function checkCourse(Request $request) {
         $user = null;
         $find = $request['findCourse'];
-        $courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
+        //$courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
+        $courses = Course::select('*')
+                    ->where(DB::raw('UPPER(title)', 'LIKE', DB::raw("UPPER(\'%'.$find.'%\')")));
         if($courses){
             $numOfCourses = count($courses);
             if($numOfCourses>1){

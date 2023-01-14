@@ -18,7 +18,7 @@
                 <p class="card-text">
                     Depois de tornar público, não poderá voltar a tornar privado. Deseja prosseguir?
                 </p>
-                <form method="POST" action="{{ url('/checkCourse/launchcourse', ['id' => $checkCourse->id]) }}"
+                <form method="POST" action="{{ url('/checkCourse/launchcourse', ['id' => $checkCourse['id']]) }}"
                     enctype="multipart/form-data">
                     @csrf
                     <button type="submit" id="setPublic" class="label checkbox btn btn-success">Tornar publico</button>
@@ -34,7 +34,7 @@
         <div class="card">
             <h5 class="card-header">ESCOLHA AS HORAS</h5>
             <div class="card-body">
-                <form method="POST" id="addHour" action="{{ url('/addHour', ['id' => $checkCourse->id]) }}"
+                <form method="POST" id="addHour" action="{{ url('/addHour', ['id' => $checkCourse['id']]) }}"
                     enctype="multipart/form-data">
                     @csrf
                     Data<input min="1" step="any" placeholder="Primeira Hora"
@@ -84,23 +84,23 @@
                 <div class="col-lg-6">
                     <div class="about-text go-to">
                         <!-- Update of course -->
-                        <form method="POST" action="{{ url('/checkCourse/update', ['id' => $checkCourse->id]) }}"
+                        <form method="POST" action="{{ url('/checkCourse/update', ['id' => $checkCourse['id']]) }}"
                             enctype="multipart/form-data">
                             @csrf
-                            <h3 class="dark-color">{{ $checkCourse->title }}</h3>
+                            <h3 class="dark-color">{{ $checkCourse['title'] }}</h3>
                             <h6 class="theme-color lead">Avaliação:
-                                @if ($checkCourse->rating == 0)
+                                @if ($checkCourse['rating'] == 0)
                                     {{ '0' }}
                                 @else
-                                    @for ($i = 0; $i < $checkCourse->rating; $i++)
+                                    @for ($i = 0; $i < $checkCourse['rating']; $i++)
                                         <span class="fa fa-star"></span>
                                     @endfor
-                                    {{ '(' . $checkRatesCount[0]->contagem . ')' }}
+                                    {{ '(' . $checkRatesCount[0]['contagem'] . ')' }}
                                 @endif
                             </h6>
                             <p>I <mark>Descrição: </mark>
                                 <textarea maxlength="150" name="description"
-                                    class="text" placeholder="{{ $checkCourse->description }}">
+                                    class="text" placeholder="{{ $checkCourse['description'] }}">
                                 </textarea>
                             </p>
                             <div class="row about-list">
@@ -108,11 +108,11 @@
                                 <div class="col-md-6">
                                     <div class="media">
                                         <label>Nome</label>
-                                        <p>{{ $checkUser->firstname }} {{ $checkUser->lastname }}</p>
+                                        <p>{{ $checkUser['firstname'] }} {{ $checkUser['lastname'] }}</p>
                                     </div>
                                     <div class="media">
                                         <label>Biografia</label>
-                                        <p>{{ $checkUser->description }}</p>
+                                        <p>{{ $checkUser['description'] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -126,8 +126,8 @@
                                     <div class="profilepicture">
                                         <br>
 
-                                        <img src="{{ $checkCourse->image != null ?
-                                         URL::asset('storage/images/' . $checkCourse->image) :
+                                        <img src="{{ $checkCourse['image'] != null ?
+                                         URL::asset('storage/images/' . $checkCourse['image']) :
                                           URL::asset('images/default-profilepicture.png') }}"
                                             alt="default-profilepicture" id="profilepicture">
                                         <input type="file" id="file" style="display: none;" name="inputImage">
@@ -160,7 +160,7 @@
                 <div class="row">
                     <div class="col-6 col-lg-3">
                         <div class="count-data text-center">
-                            <h6 class="count h2" data-to="500" data-speed="500">{{ $checkCourse->total_hours }}</h6>
+                            <h6 class="count h2" data-to="500" data-speed="500">{{ $checkCourse['total_hours'] }}</h6>
                             <p class="m-0px font-w-600">Hora(s) de curso</p>
                         </div>
                     </div>
@@ -176,7 +176,8 @@
                             <p class="m-0px font-w-600">
 
                                 <!-- Redirects to page with a list of videos -->
-                            <form method="GET" id="viewVideos" action="{{ url('/videos', ['id' => $checkCourse->id]) }}"
+                            <form method="GET" id="viewVideos" 
+                                action="{{ url('/videos', ['id' => $checkCourse['id']]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <button form="viewVideos" type="submit" id="viewClasses"
@@ -191,7 +192,7 @@
                             <p class="m-0px font-w-600">
                                 <!-- Redirects to page with lessons if course is bought -->
                             <form method="GET" id="addLesson"
-                                action="{{ url('/addLesson', ['id' => $checkCourse->id]) }}"
+                                action="{{ url('/addLesson', ['id' => $checkCourse['id']]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <button form="addLesson" id="filevid" type="submit" name="inputImage"
@@ -206,7 +207,7 @@
                             <p class="m-0px font-w-600">
                                 <!-- Redirects to page for schedule -->
                             <form method="GET" id="sched"
-                                action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
+                                action="{{ url('/schedule', ['id' => $checkCourse['id']]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <button form="sched" type="submit" id="viewClasses"
@@ -222,7 +223,7 @@
                                 <h6 class="count h2">Ver Chat!</h6>
                                 <p class="m-0px font-w-600">
                                     <!-- Redirects to page for schedule -->
-                                <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
+                                <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat['id']]) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button form="chat" type="submit" id="viewClasses"
@@ -233,7 +234,7 @@
                         </div>
                     @endif
 
-                    @if (!$checkCourse->public)
+                    @if (!$checkCourse['public'])
                         <div class="col-6 col-lg-3">
                             <div class="count-data text-center">
                                 <h6 class="count h2">Publicar site</h6>
