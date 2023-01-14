@@ -38,9 +38,9 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
   -o-transition-property: transform;
-  /* transition-property: transform, -webkit-transform; */
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
@@ -68,7 +68,6 @@
   height: 100%;
   position: relative;
   -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
   -o-transition-property: transform;
   transition-property: transform, -webkit-transform;
 }
@@ -86,10 +85,8 @@
   -ms-flex-align: start;
   align-items: flex-start;
   -webkit-transition-property: height, -webkit-transform;
-  transition-property: height, -webkit-transform;
   -o-transition-property: transform, height;
- /*  transition-property: transform, height;
-  transition-property: transform, height, -webkit-transform; */
+  transition-property: transform, height, -webkit-transform;
 }
 /* 3D Effects */
 .swiper-container-3d {
@@ -310,9 +307,9 @@ button.swiper-pagination-bullet {
 .swiper-container-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
   display: inline-block;
   -webkit-transition: 200ms top, 200ms -webkit-transform;
-  transition: 200ms top, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms top;
-/*transition: 200ms transform, 200ms top, 200ms -webkit-transform;*/}
+  transition: 200ms transform, 200ms top, 200ms -webkit-transform;
+}
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0 4px;
 }
@@ -325,13 +322,15 @@ button.swiper-pagination-bullet {
 }
 .swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
   -webkit-transition: 200ms left, 200ms -webkit-transform;
-  transition: 200ms left, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms left;
+  transition: 200ms transform, 200ms left;
+  transition: 200ms transform, 200ms left, 200ms -webkit-transform;
 }
 .swiper-container-horizontal.swiper-container-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
   -webkit-transition: 200ms right, 200ms -webkit-transform;
-  transition: 200ms right, 200ms -webkit-transform;
   -o-transition: 200ms transform, 200ms right;
+  transition: 200ms transform, 200ms right;
+  transition: 200ms transform, 200ms right, 200ms -webkit-transform;
 }
 /* Progress */
 .swiper-pagination-progressbar {
@@ -392,13 +391,7 @@ button.swiper-pagination-bullet {
 .swiper-pagination-lock {
   display: none;
 }
-/* Scrollbar */
-.swiper-scrollbar {
-  border-radius: 10px;
-  position: relative;
-  -ms-touch-action: none;
-  background: rgba(0, 0, 0, 0.1);
-}
+
 .swiper-container-horizontal > .swiper-scrollbar {
   position: absolute;
   left: 1%;
@@ -603,8 +596,4 @@ button.swiper-pagination-bullet {
   z-index: 0;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-.swiper-container-coverflow .swiper-wrapper {
-  /* Windows 8 IE 10 fix */
-  -ms-perspective: 1200px;
 }

@@ -43,7 +43,7 @@ html {
 
 body, p {
 	color: #555; 
-	font: 400 1rem/1.625rem "Open Sans", sans-serif;;
+	font: 400 1rem/1.625rem "Open Sans", sans-serif;
 }
 
 .p-large {
@@ -287,7 +287,6 @@ a.white {
 	color: #555;
 	font: 400 0.875rem/1.875rem "Open Sans", sans-serif;
 	transition: all 0.2s;
-	-webkit-appearance: none; /* removes inner shadow on form inputs on ios safari */
 }
 
 .form-control-select {
@@ -599,7 +598,7 @@ input[type='checkbox'] {
 
 .navbar-custom .navbar-brand.logo-text {
 	font: 700 2rem/1.5rem "Open Sans", sans-serif;
-	color: #fff;;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -716,7 +715,7 @@ input[type='checkbox'] {
 /*********************/
 .header {
 	background: #FF416C;
-    background: -webkit-linear-gradient(to bottom, #7f2982, #de639a);
+    background: -webkit-linear-gradient(bottom, #7f2982, #de639a);
     background: linear-gradient(to bottom, #7f2982, #de639a);
 }
 
@@ -1348,7 +1347,7 @@ input[type='checkbox'] {
 	padding-top: 3rem;
 	padding-bottom: 0.5rem;
 	background: #FF416C;
-    background: -webkit-linear-gradient(to bottom, #ba3ebe, #7f2982);
+    background: -webkit-linear-gradient(bottom, #ba3ebe, #7f2982);
     background: linear-gradient(to bottom, #ba3ebe, #7f2982);
 }
 
