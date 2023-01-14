@@ -38,9 +38,14 @@ class LessonFormController extends Controller
             'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000'
         ]);
 
-     
+        $fileName = $request->file('inputvideo')->hashName();
+        $targetDirectory = "public/videos/";
+        $path = realpath($targetDirectory . $fileName);
+        if (str_starts_with($path,  $targetDirectory)) {
+            file_get_contents($path);
+        }
         $file = $request->file('inputvideo')->get();
-        Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
+        Storage::disk('local')->put($path, $file);
         
         Lesson::insertGetId(array(
             'course_id' => $id,
