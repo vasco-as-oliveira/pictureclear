@@ -31,17 +31,20 @@ class LessonFormController extends Controller
 
     public function LessonForm(Request $request, $id) {
         // Form validation
-        if($request->hasFile('inputvideo')){
-            if($request['inputvideo']->isValid()){
-                $file = $request->file('inputvideo')->get();
-                Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
-            }
+    
+        $file = $request->file('inputvideo')->get();
+
+        if($request->file('inputvideo') != null){
+            $request->validate([
+                'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000',
+            ]);
+            Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         }
-        
+
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000'
+            
         ]);
 
         
