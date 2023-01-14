@@ -33,8 +33,8 @@ class BuyController extends Controller
         $arrayOfTiers = Tier::select('id')
                         ->where('course_id', '=', $request->course)
                         ->where('user_id', '=', Auth::User()->id);
-        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
-        if (count($subscribed_users)>0){
+        $subscribedUsers = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
+        if (count($subscribedUsers)>0) {
             return back();
         }
 
@@ -117,7 +117,7 @@ class BuyController extends Controller
        
     }
 
-    public function success(Request $request){
+    public function success(Request $request) {
         DB::update('update users set balance=? where id=?', [$request->sellerBalance,$request->sellerId]);
         Sale::insert([
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]

@@ -21,7 +21,7 @@ class AdminController extends Controller
     public function courses(Request $request)
     {
         if (!Auth::user()->is_admin) {
-            return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley');
+            return redirect(url("/home"));
         }
         $courses = Course::select('*')->paginate(10);
         $number = Course::count('*');
@@ -31,7 +31,7 @@ class AdminController extends Controller
     public function users()
     {
         if (!Auth::user()->is_admin) {
-            return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley');
+            return redirect(url("/home"));
         }
         $users = User::select('*')->where('is_admin', false)->paginate(10);
         $number = User::where('is_admin', false)->count();
@@ -41,7 +41,7 @@ class AdminController extends Controller
     public function deleteCourse(Request $request)
     {
         if (!Auth::user()->is_admin){
-            return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley');
+            return redirect(url("/home"));
         }
         Course::destroy($request->course);
         return redirect(url("/painelAdmin/courses"));
@@ -50,7 +50,7 @@ class AdminController extends Controller
     public function deleteUser(Request $request)
     {
         if (!Auth::user()->is_admin) {
-            return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley');
+            return redirect(url("/home"));
         }
         User::destroy($request->user);
         return redirect(url("/painelAdmin/users"));
