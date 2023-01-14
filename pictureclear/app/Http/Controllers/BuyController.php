@@ -31,12 +31,13 @@ class BuyController extends Controller
 
     public function index(Request $request)
     {   
-        //$subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $request->course . ') and user_id=' . Auth::User()->id . '');
-        $arrayOfTiers = Tier::where('course_id', '=', $request->course)
+        //$subscribed_usersTest = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $request->course . ') and user_id=' . Auth::User()->id . '');
+        $arrayOfTiers = Tier::select('id')
+                        ->where('course_id', '=', $request->course)
                         ->where('user_id', '=', Auth::User()->id);
-        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers);
+        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
         if (count($subscribed_users)>0){
-            return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+            return back();
         }
         $course = DB::select("SELECT * from courses where id =". $request->course);
         $tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
