@@ -23,8 +23,5 @@ class Course extends Model
         'total_hours',
     ];
 
-    protected $hidden = [
-        'owner_id'
-    ];
     
 }
