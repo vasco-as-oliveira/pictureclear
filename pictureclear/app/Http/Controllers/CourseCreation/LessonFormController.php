@@ -38,13 +38,13 @@ class LessonFormController extends Controller
             $request->validate([
                 'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000',
             ]);
-            Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
+            $request->file('inputvideo')->store('public/videos');
+            //Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         }
 
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            
         ]);
 
         
