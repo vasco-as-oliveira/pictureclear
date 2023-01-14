@@ -29,7 +29,7 @@ class AboutYouController extends Controller
      */
     public function index()
     {
-        $user =  User::select('finished_setup')->where('id','=',Auth::user()->id)->get();
+        $user =  User::select('finished_setup')->where('id', '=', Auth::user()->id)->get();
         if ($user->value('finished_setup')) {
             return redirect('home');
         }

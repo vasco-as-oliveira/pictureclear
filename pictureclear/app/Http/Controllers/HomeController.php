@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\Tier;
+
 class HomeController extends Controller
 {
     /**
@@ -36,12 +37,13 @@ class HomeController extends Controller
             $order = explode('_', $request->dropdown);
             if ($order[0]=='price') {
                 $courses = Course::select('*')
-                ->whereIn('id' ,
-                            Tier::select(DB::raw('course_id as id, MIN(price) as price'))
-                            ->groupby('course_id')
-                            ->orderby('price', $order[1])
-                            ->pluck('id')
-                            ->toArray())
+                ->whereIn(
+                        'id' ,
+                        Tier::select(DB::raw('course_id as id, MIN(price) as price'))
+                        ->groupby('course_id')
+                        ->orderby('price', $order[1])
+                        ->pluck('id')
+                        ->toArray())
                 ->orderby('id', $order[1])
                 ->paginate(10);
             } else {
