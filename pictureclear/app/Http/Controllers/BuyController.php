@@ -60,8 +60,15 @@ class BuyController extends Controller
                 $balance  = Auth::user()->balance;
                 $balance = $balance - $price[0]->price;
                 DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
-                $sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
-                $aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+
+                //$sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
+                $sellerId = Course::select('owner_id')
+                ->where('id', '=', $request->course)->get()->toArray();
+                //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+                
+                $aux = User::select('balance')
+                ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
+
                 $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
                 DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
 
@@ -69,7 +76,9 @@ class BuyController extends Controller
                     ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
                 ]);
                 
-                $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+                //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+                $tierBought = Tier::select('*')
+                            ->where('id', '=', $request->tier)->get()->toArray();
                 if($tierBought[0]->hasChatPerk){
                     Chats::insert(array(
                         'student_id' => Auth::user()->id,
