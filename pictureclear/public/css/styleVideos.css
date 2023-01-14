@@ -54,7 +54,6 @@
 }
 .table thead > tr > th > a span:after {
 	content: "\f0dc";
-	font-family: FontAwesome;
 	font-style: normal;
 	font-weight: normal;
 	text-decoration: inherit;

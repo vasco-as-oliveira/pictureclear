@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Chats;
 use App\Models\Message;
 use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,9 @@ class ChatController extends Controller
     }
     
     public function showChat(Request $request, $id){
-        $chat = DB::select("SELECT * FROM chats WHERE id =".$id);
+        //$chat = DB::select("SELECT * FROM chats WHERE id =".$id);
+        $chat = Chats::select('*')
+                    ->where('id', '=', $id)->get()->toArray();
         $senderId=0;
         $allChats = null;
         if(Auth::user()->id==$chat[0]->teacher_id){

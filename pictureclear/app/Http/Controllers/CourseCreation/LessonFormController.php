@@ -31,19 +31,22 @@ class LessonFormController extends Controller
 
     public function LessonForm(Request $request, $id) {
         // Form validation
+    
+        $file = $request->file('inputvideo')->get();
+
+        if($request->file('inputvideo') != null){
+            $request->validate([
+                'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000',
+            ]);
+            $request->file('inputvideo')->store('public/videos');
+            //Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
+        }
 
         $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        if ($request->hasFile('inputvideo'))
-        {
-        ini_set('post_max_size','2024M');
-        ini_set('upload_max_filesize','2024M');
-        
-        $file = $request->file('inputvideo')->get();
-        Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
         
         Lesson::insertGetId(array(
             'course_id' => $id,
@@ -51,7 +54,7 @@ class LessonFormController extends Controller
             'description' => $request['description'],
             'url' => $request->file('inputvideo')->hashName(),
         ));
-        }
+        
 
         
         return redirect('/profile?username='.Auth::user()->username)->with('success', 'Acabaste de iniciar o teu curso!');

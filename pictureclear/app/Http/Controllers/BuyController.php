@@ -6,16 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Chats;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use App\Models\Sale;
+use App\Models\Tier;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
-
-
-
 
 class BuyController extends Controller
 {
@@ -31,28 +30,45 @@ class BuyController extends Controller
 
     public function index(Request $request)
     {   
-        $subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $request->course . ') and user_id=' . Auth::User()->id . '');
+        //$subscribed_usersTest = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $request->course . ') and user_id=' . Auth::User()->id . '');
+        $arrayOfTiers = Tier::select('id')
+                        ->where('course_id', '=', $request->course)
+                        ->where('user_id', '=', Auth::User()->id);
+        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
         if (count($subscribed_users)>0){
-            return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+            return back();
         }
-        $course = DB::select("SELECT * from courses where id =". $request->course);
-        $tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
+        //$course = DB::select("SELECT * from courses where id =". $request->course);
+        $course = Course::select('*')
+                        ->where('id', '=', $request->course)->get()->toArray();
+        //$tiers = DB::select("SELECT * from tiers where course_id =". $request->course);
+        $tiers = Tier::select('*')
+                    ->where('course_id', '=', $request->course)->get()->toArray();
         return view("buyCourse", ["course"=>$course, "tiers" => $tiers]);
     }
 
     public function buy(Request $request){
         
-        $price = DB::select("SELECT price from tiers where id =". $request->tier);
+        //$price = DB::select("SELECT price from tiers where id =". $request->tier);
+        $price = Tier::select('price')
+                        ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
             if (Auth::user()->balance<$price[0]->price){
-                return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                return back();
                 //RICK ROLL NO HACKER
             } else{
                 $balance  = Auth::user()->balance;
                 $balance = $balance - $price[0]->price;
                 DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
-                $sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
-                $aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+
+                //$sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
+                $sellerId = Course::select('owner_id')
+                ->where('id', '=', $request->course)->get()->toArray();
+                //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+                
+                $aux = User::select('balance')
+                ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
+
                 $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
                 DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
 
@@ -60,7 +76,9 @@ class BuyController extends Controller
                     ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
                 ]);
                 
-                $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+                //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+                $tierBought = Tier::select('*')
+                            ->where('id', '=', $request->tier)->get()->toArray();
                 if($tierBought[0]->hasChatPerk){
                     Chats::insert(array(
                         'student_id' => Auth::user()->id,
@@ -81,8 +99,12 @@ class BuyController extends Controller
             'quantity' => 1
         ];
 
-        $sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
-        $aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+        //$sellerId = DB::select("SELECT owner_id from courses where id =". $request->course);
+        $sellerId = Course::select('owner_id')
+                        ->where('id', '=', $request->course)->get()->toArray();
+        //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
+        $aux = User::select('balance')
+                    ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
         $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
         
 
@@ -103,7 +125,9 @@ class BuyController extends Controller
             ['user_id' => Auth::user()->id, 'tier_id' => $request->tier]
         ]);
 
-        $tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+        //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
+        $tierBought = Tier::select('*')
+                            ->where('id', '=', $request->tier)->get()->toArray();
 
         if($tierBought[0]->haschatperk){
             Chats::insert(array(
