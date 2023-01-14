@@ -48,7 +48,8 @@
                     </span>
                 @enderror
 
-                <input id="password" placeholder="Password" class="@error('password') is-invalid @enderror" type="password"
+                <input id="password" placeholder="Password"
+                class="@error('password') is-invalid @enderror" type="password"
                     name="password" required autocomplete="new-password">
 
                 @error('password')
@@ -57,7 +58,8 @@
                     </span>
                 @enderror
 
-                <input id="password-confirm" placeholder="Confirmar Password" type="password" name="password_confirmation"
+                <input id="password_confirmation" placeholder="Confirmar Password"
+                    type="password" name="password_confirmation"
                     required autocomplete="new-password">
 
                 <button type="submit" class="registerbtn">
