@@ -36,7 +36,7 @@ class LessonFormController extends Controller
 
         if($request->file('inputvideo') != null){
             $request->validate([
-                'inputvideo'  => 'mimes:mp4,mov,ogg,qt | max:20000',
+                'inputvideo'  => 'mimes:mp4,mov,ogg,qt,mkv | max:20000',
             ]);
             $request->file('inputvideo')->store('public/videos');
             //Storage::disk('local')->put('public/videos/'.$request->file('inputvideo')->hashName(), $file);
