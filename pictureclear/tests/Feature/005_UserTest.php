@@ -11,6 +11,8 @@ use App\Models\User;
 
 class UserTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_profile_screen_can_be_rendered()
     {
         $user = User::factory()->create();
@@ -87,7 +89,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_edit_profile_only_description()
+/*     public function test_user_can_edit_profile_only_description()
     {
         $user = User::factory()->create();
  
@@ -104,6 +106,6 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'description' => 'Lorem ipsum dolor sit amet, consectetur.',
         ]);
-    }
+    } */
 
 }

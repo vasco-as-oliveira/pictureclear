@@ -13,11 +13,8 @@ use App\Models\Tier;
 
 class HomeTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
+
     public function test_feed_screen_can_be_rendered()
     {
         $user = User::factory()->create();

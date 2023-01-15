@@ -27,7 +27,7 @@ class CreateCourseFormController extends Controller
     public function CreateCourseForm(Request $request) {
         
         $certificate = false;
-        if($request['has_certificate'] == 'true') $certificate = true;
+        if ($request['has_certificate'] == 'true') $certificate = true;
         // Form validation
 
         $course = array('id'=>Auth::id(), 'title' => $request['title'], 'language' => $request['language'], 'description' => $request['description'],'certificate' => $certificate);
@@ -40,13 +40,8 @@ class CreateCourseFormController extends Controller
             'language' => 'required',
          ]);
         
-
-        
-
         $request->session()->put('tier', 'true');
         
-        
-        // 
         return redirect('/course/tier')->with('success', 'Acabaste de iniciar o teu curso!');
     }
 }

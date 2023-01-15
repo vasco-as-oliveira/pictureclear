@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class SetupTest extends TestCase
 {
+    use RefreshDatabase;
 
     public function test_aboutyou_screen_can_be_rendered()
     {
