@@ -118,7 +118,7 @@
                                 @if (Auth::user()->is_admin)
                                     <h6 class="count h2">Apagar curso!</h6>
                                     <p class="m-0px font-w-600">
-                                    <form method="get" action="{{ url('/admin/apagarCurso') }}">
+                                    <form method="post" action="{{ url('/admin/apagarCurso') }}">
                                         <input type="text" name="course" value="{{ $checkCourse->id }}"
                                             style="display: none;">
                                         <input type="submit" class="label checkbox btn btn-success">

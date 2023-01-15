@@ -21,7 +21,7 @@ class AdminController extends Controller
     public function courses(Request $request)
     {
         if (!Auth::user()->is_admin) {
-            return redirect(url("/home"));
+            return redirect("/home");
         }
         $courses = Course::select('*')->paginate(10);
         $number = Course::count('*');
@@ -31,7 +31,7 @@ class AdminController extends Controller
     public function users()
     {
         if (!Auth::user()->is_admin) {
-            return redirect(url("/home"));
+            return redirect("/home");
         }
         $users = User::select('*')->where('is_admin', false)->paginate(10);
         $number = User::where('is_admin', false)->count();

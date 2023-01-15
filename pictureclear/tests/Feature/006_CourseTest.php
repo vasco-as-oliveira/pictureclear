@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Course;
@@ -53,7 +54,7 @@ class CourseTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_user_can_create_course()
+    public function test_user_can_create_course_and_tier()
     {
         $user = User::factory()->create();
 
@@ -81,8 +82,9 @@ class CourseTest extends TestCase
         ]);
  
         $response = $this->post('/course/tiers/create', [
-            'radio' =>
-        ])
+            'chooseTier1' => true,
+            'price1' => 14.50,
+        ]);
 
         $courseId = Course::where([
             'title' => 'Lorem ipsum dolor',
@@ -100,11 +102,11 @@ class CourseTest extends TestCase
 
         $this->assertDatabaseHas('tiers', [
             //'course_id' => $courseId,
-            'price'=> 15,
+            'price'=> 14.5,
             'hasscheduleperk' => false,
             'haschatperk' => false
         ]);
-    } 
+    }
 
     public function test_lesson_creation_screen_can_be_rendered()
     {
@@ -127,6 +129,73 @@ class CourseTest extends TestCase
         $response = $this->get('/addLesson/'. $course->id);
         $response->assertStatus(200);
     }
+
+    public function test_user_can_create_lessons()
+    {
+        $user = User::factory()->create();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->assertAuthenticated();
+        
+        $course = Course::factory()->create([
+            'owner_id' => $user->id,
+        ]);
+
+        $tier = tier::factory()->create([
+            'course_id' => $course->id,
+        ]);
+
+        $file = 'test-video.mp4';
+
+        $response = $this->post('/addLesson/create/'.$course->id, [
+            'title' => 'Lorem ipsum.',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur',
+            'inputvideo' => $video = UploadedFile::fake()->create($file)
+        ]);
+
+        $this->assertDatabaseHas('lessons', [
+            'title' => 'Lorem ipsum.',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur',
+            'url' => $video->hashName()
+        ]);
+    }
+
+    public function test_user_cant_create_lessons_using_invalid_format()
+    {
+        $user = User::factory()->create();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+        $this->assertAuthenticated();
+        
+        $course = Course::factory()->create([
+            'owner_id' => $user->id,
+        ]);
+
+        $tier = tier::factory()->create([
+            'course_id' => $course->id,
+        ]);
+
+        $file = 'test-video.png';
+
+        $response = $this->post('/addLesson/create/'.$course->id, [
+            'title' => 'Lorem ipsum.',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur',
+            'inputvideo' => $video = UploadedFile::fake()->image($file)
+        ]);
+
+        $this->assertDatabaseMissing('lessons', [
+            'title' => 'Lorem ipsum.',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur',
+            'url' => $video->hashName()
+        ]);
+    }
+
 
     public function test_user_can_see_others_public_course()
     {
