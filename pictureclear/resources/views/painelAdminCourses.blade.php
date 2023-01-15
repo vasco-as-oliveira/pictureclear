@@ -14,7 +14,7 @@
 
         <input type="submit" value="Cursos">
     </form>
-    {{ $number[0]->count }} Cursos <br>
+    {{ $number }} Cursos <br>
 
 
 

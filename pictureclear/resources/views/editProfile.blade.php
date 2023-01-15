@@ -31,7 +31,7 @@
                         <br>
                         <img id="profilepicture"
                             src="{{ $user['picture'] != null ?
-                                 'storage/images/' . $user[picture] :
+                                 'storage/images/' . $user['picture'] :
                                  'images/default-profilepicture.png' }}"
                             alt="{{ $user['picture'] != null ?
                                 $user['picture'] :

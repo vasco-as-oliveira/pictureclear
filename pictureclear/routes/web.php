@@ -67,8 +67,8 @@ Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController:
 Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'publishRating']);
 Route::get('/painelAdmin/courses',[App\Http\Controllers\AdminController::class, 'courses']);
 Route::get('/painelAdmin/users',[App\Http\Controllers\AdminController::class, 'users']);
-Route::get('/admin/apagarCurso',[App\Http\Controllers\AdminController::class, 'deleteCourse']);
-Route::get('/admin/deleteUser',[App\Http\Controllers\AdminController::class, 'deleteUser']);
+Route::post('/admin/apagarCurso',[App\Http\Controllers\AdminController::class, 'deleteCourse']);
+Route::post('/admin/deleteUser',[App\Http\Controllers\AdminController::class, 'deleteUser']);
 
 //Página dos chats
 Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'showChat']);

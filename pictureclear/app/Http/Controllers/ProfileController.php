@@ -81,7 +81,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user =  User::select('*')->where('id', '=', Auth::user()->id)->get();
-        return view('editProfile', ['user' => $user]);
+        return view('editProfile', ['user' => $user[0]]);
     }
 
     public function editProfileSave(Request $request)

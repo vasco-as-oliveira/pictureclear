@@ -40,7 +40,7 @@ class AdminController extends Controller
 
     public function deleteCourse(Request $request)
     {
-        if (!Auth::user()->is_admin){
+        if (!Auth::user()->is_admin) {
             return redirect(url("/home"));
         }
         Course::destroy($request->course);

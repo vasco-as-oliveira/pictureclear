@@ -20,7 +20,7 @@
     <div class="container emp-profile">
         @if (Auth::user()->is_admin && $user['username'] != Auth::user()->username)
             <p>
-            <form action='{{ url('/admin/deleteUser') }}' method="get">
+            <form action='{{ url('/admin/deleteUser') }}' method="post">
                 @csrf
                 <input type="text" value="{{ $user['id'] }}" style="display: none" name="user">
                 <input type="submit" value="Apagar utilizador">
