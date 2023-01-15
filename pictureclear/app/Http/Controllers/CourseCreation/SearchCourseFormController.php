@@ -24,13 +24,15 @@ class SearchCourseFormController extends Controller
         $find = $request['findCourse'];
         //$courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
         $courses = Course::select('*')
-                    ->where(DB::raw('UPPER(title)', 'LIKE', DB::raw("UPPER(\'%'.$find.'%\')")))->get()->toArray();
+                    ->where('title', 'ilike', '%'.$find.'%')->get()->toArray();
+        
         if($courses){
             $numOfCourses = count($courses);
             if($numOfCourses>1){
                 return view('listCourses', ['checkCourse' => $courses])->with('success', '!');
             } else if($numOfCourses == 1) {
-                return redirect('checkCourse/search?selectCourse=' . $courses[0]->id);
+
+                return redirect('checkCourse/search?selectCourse=' . $courses[0]['id']);
             }
         }
         return redirect('/home');

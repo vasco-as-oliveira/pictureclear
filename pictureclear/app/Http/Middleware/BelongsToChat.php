@@ -27,9 +27,9 @@ class BelongsToChat
         $chatId = $request->id;
         //$chat = DB::select("SELECT * FROM chats WHERE id = ".$chatId);
         $chat = Chats::select('*')
-                    ->where('id', '=', $chatId);
+                    ->where('id', '=', $chatId)->get()->toArray();
         if($chat){
-            if($chat[0]->teacher_id == Auth::user()->id || $chat[0]->student_id == Auth::user()->id) {
+            if($chat[0]['teacher_id'] == Auth::user()->id || $chat[0]['student_id'] == Auth::user()->id) {
                 return $next($request);
             }
         }

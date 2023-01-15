@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('bankcard_id');
             $table->foreign('bankcard_id')->references('id')->on('bank_cards')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

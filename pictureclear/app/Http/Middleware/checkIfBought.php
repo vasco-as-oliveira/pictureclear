@@ -28,10 +28,14 @@ class checkIfBought
     {
         $courseId = $request->id;
         //$subscribed_users = DB::select('select user_id from sales where tier_id IN(select id from tiers where course_id=' . $courseId . ') and user_id=' . Auth::User()->id . '');
-        $arrayOfTiers = Tier::select('id')
-                        ->where('course_id', '=', $request->course)
-                        ->where('user_id', '=', Auth::User()->id);
-        $subscribed_users = Sale::whereIn('tier_id', $arrayOfTiers)->get()->toArray();
+        $arrayOfTiers = 
+                        
+        $subscribed_users = Sale::select('user_id')
+                            ->whereIn('tier_id', 
+                                Tier::select('id')
+                                ->where('course_id', '=', $courseId)
+                            )
+                            ->where('user_id', '=', Auth::User()->id)->get()->toArray();
         //$courseBelongsToUser = DB::select('select owner_id from courses where id ='.$courseId);
         $courseBelongsToUser = Course::select('owner_id')
                                     ->where('id', '=', $courseId)->get()->toArray();

@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
+use App\Models\User as UserDb;
+
 
 
 class AboutYouController extends Controller
@@ -29,7 +31,7 @@ class AboutYouController extends Controller
      */
     public function index()
     {
-        $user =  User::select('finished_setup')->where('id', '=', Auth::user()->id)->get();
+        $user =  UserDb::select('finished_setup')->where('id', '=', Auth::user()->id)->get();
         if ($user->value('finished_setup')) {
             return redirect('home');
         }
@@ -42,7 +44,7 @@ class AboutYouController extends Controller
             $request->validate([
                 'description' => ['string', 'max:150'],
             ]);
-            User::find(Auth::user()->id)->update(['description'=> $request->description]);
+            UserDb::find(Auth::user()->id)->update(['description'=> $request->description]);
         }
 
         if ($request->file('inputImage') != null) {
@@ -50,10 +52,10 @@ class AboutYouController extends Controller
                 'inputImage' => ['image','mimes:png,jpg,jpeg'],
             ]);
             $request->file('inputImage')->store('public/images');
-            User::find(Auth::user()->id)->update(['picture'=>$request->file('inputImage')->hashName()]);
+            UserDb::find(Auth::user()->id)->update(['picture'=>$request->file('inputImage')->hashName()]);
         }
 
-        User::find(Auth::user()->id)->update(['finished_setup'=> true]);
+        UserDb::find(Auth::user()->id)->update(['finished_setup'=> true]);
         return redirect('home');
     }
 

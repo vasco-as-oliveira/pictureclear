@@ -20,8 +20,5 @@ class Lesson extends Model
         'url',
     ];
 
-    protected $hidden = [
-        'url'
-    ];
     
 }

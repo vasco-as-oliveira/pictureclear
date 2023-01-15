@@ -78,7 +78,7 @@ class CheckCourseFormController extends Controller
                      'chat' => $chatTeacher[0],
                      'schedule' => $schedule[0],
                     ]);
-            } else if($course[0]->public) {
+            } else if($course[0]['public']) {
                 return view('checkCourse', [
                     'checkCourse' => $course[0],
                     'checkUser' => $user[0],
@@ -120,6 +120,7 @@ class CheckCourseFormController extends Controller
                     ->update([
                         'image' => $request->file('inputImage')->hashName()
                     ]);
+            
         }
         return back();
     }
@@ -141,7 +142,7 @@ class CheckCourseFormController extends Controller
         $getCourse = Course::select('*')
                         ->where('id', '=', $id)->get()->toArray();
         //$selAvgCourseRating = DB::select('select AVG(rating) as media from course_ratings where course_id = ?', [$id]);
-        $selAvgCourseRating = CourseRating::select('AVG(rating) as media')
+        $selAvgCourseRating = CourseRating::select(DB::raw('AVG(rating) as media'))
                                 ->where('course_id', '=', $id)->get()->toArray();
         //DB::update('update courses set rating = ? where id = ?', [$selAvgCourseRating[0]['media'], $id]);
         Course::find($id)
@@ -149,7 +150,7 @@ class CheckCourseFormController extends Controller
                     'rating' => $selAvgCourseRating[0]['media']
                 ]);
         //$selAvgUserRating = DB::select('select AVG(rating) as media from course_ratings where course_id IN (select id from courses where owner_id= ? )', [$getCourse[0]->owner_id]);
-        $selAvgUserRating = CourseRating::select('AVG(rating) as media')
+        $selAvgUserRating = CourseRating::select(DB::raw('AVG(rating) as media'))
                                 ->whereIn('course_id',
                                     Course::select('id')
                                         ->where('owner_id', '=', $getCourse[0]['owner_id'])

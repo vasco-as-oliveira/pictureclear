@@ -3,17 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class ScheduleSlots extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     public $timestamps = true;
 
     protected $fillable = [
+        'student_id',
         'schedule_id',
-        'isFree',
+        'isfree',
         'begin',
         'end'
     ];

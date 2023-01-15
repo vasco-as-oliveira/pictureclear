@@ -21,6 +21,8 @@ class Course extends Model
         'rating',
         'has_certificate',
         'total_hours',
+        'image',
+        'public',
     ];
 
     

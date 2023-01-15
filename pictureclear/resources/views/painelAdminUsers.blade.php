@@ -16,8 +16,8 @@
     <ul>
 
         @foreach ($users as $user)
-            <a href={{ url('profile?username=' . $user->username) }}>
-                <li>{{ $user->username }}</li>
+            <a href={{ url('profile?username=' . $user['username']) }}>
+                <li>{{ $user['username'] }}</li>
             </a>
         @endforeach
     </ul>

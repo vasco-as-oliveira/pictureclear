@@ -35,13 +35,13 @@ class ChatController extends Controller
                     ->where('id', '=', $id)->get()->toArray();
         $senderId=0;
         $allChats = null;
-        if(Auth::user()->id==$chat[0]->teacher_id){
-            $senderId = $chat[0]->student_id;
+        if(Auth::user()->id==$chat[0]['teacher_id']){
+            $senderId = $chat[0]['student_id'];
             //$allChats = DB::select("SELECT * FROM chats WHERE teacher_id =".Auth::user()->id);
             $allChats = Chats::select('*')
                         ->where('teacher_id', '=', Auth::user()->id)->get()->toArray();
         }
-        else $senderId = $chat[0]->teacher_id;
+        else $senderId = $chat[0]['teacher_id'];
 
         //$sentMessages = DB::select("SELECT * from Messages WHERE chat_id = ?", [$id]);
         $sentMessages = Message::select('*')

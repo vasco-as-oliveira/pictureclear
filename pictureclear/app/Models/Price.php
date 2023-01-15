@@ -7,15 +7,24 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseRating extends Model
+class Price extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     public $timestamps = true;
 
     protected $fillable = [
-        'user_id',
-        'course_id',
+        'owner_id',
+        'language',
+        'title',
+        'description',
         'rating',
+        'has_certificate',
+        'total_hours',
     ];
+
+    protected $hidden = [
+        'owner_id'
+    ];
+    
 }

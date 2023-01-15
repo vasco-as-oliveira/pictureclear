@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use App\Models\Sale;
 use App\Models\Tier;
+use App\Models\User as ModelsUser;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
+
 
 class BuyController extends Controller
 {
@@ -51,14 +53,14 @@ class BuyController extends Controller
         $price = Tier::select('price')
                         ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
-            if (Auth::user()->balance<$price[0]['price']){
+            if (Auth::user()['balance']<$price[0]['price']){
                 return back();
                 //RICK ROLL NO HACKER
             } else{
                 $balance  = Auth::user()->balance;
                 $balance = $balance - $price[0]['price'];
                 //DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
-                User::find(Auth::user()->id)
+                ModelsUser::find(Auth::user()->id)
                     ->update([
                         'balance' => $balance,
                     ]);
@@ -72,7 +74,7 @@ class BuyController extends Controller
 
                 $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
                 //DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
-                User::find($sellerId[0]['owner_id'])
+                ModelsUser::find($sellerId[0]['owner_id'])
                 ->update([
                     'balance' => $sellerBalance,
                 ]);
@@ -83,7 +85,7 @@ class BuyController extends Controller
                 //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
                 $tierBought = Tier::select('*')
                             ->where('id', '=', $request->tier)->get()->toArray();
-                if($tierBought[0]->hasChatPerk){
+                if($tierBought[0]['hasChatPerk']){
                     Chats::insert(array(
                         'student_id' => Auth::user()->id,
                         'teacher_id' => $sellerId,
@@ -98,7 +100,7 @@ class BuyController extends Controller
                 'product_data' => [
                     'name' => 'Nome de curso'                    
                 ],
-                'unit_amount' => $price[0]->price *100
+                'unit_amount' => $price[0]['price'] *100
             ],
             'quantity' => 1
         ];
@@ -108,14 +110,14 @@ class BuyController extends Controller
                         ->where('id', '=', $request->course)->get()->toArray();
         //$aux = DB::select("SELECT balance from users where id =". $sellerId[0]->owner_id);
         $aux = User::select('balance')
-                    ->where('id', '=', $sellerId[0]->owner_id)->get()->toArray();
-        $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
+                    ->where('id', '=', $sellerId[0]['owner_id'])->get()->toArray();
+        $sellerBalance = $aux[0]['balance'] + ($price[0]['price'] - $price[0]['price']*0.03);
         
 
         $checkout_session = $stripe->checkout->sessions->create([
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => url("/paymentSuccess?sellerId=".$sellerId[0]->owner_id . "&sellerBalance=" . $sellerBalance . "&tier=". $request->tier),
+            'success_url' => url("/paymentSuccess?sellerId=".$sellerId[0]['owner_id'] . "&sellerBalance=" . $sellerBalance . "&tier=". $request->tier),
             'cancel_url' =>"https://www.youtube.com/watch?v=E9de-cmycx8&ab_channel=RickAstley"
         ]);
         return redirect($checkout_session->url);
@@ -125,7 +127,7 @@ class BuyController extends Controller
 
     public function success(Request $request) {
         //DB::update('update users set balance=? where id=?', [$request->sellerBalance,$request->sellerId]);
-        User::find($request->sellerId)
+        ModelsUser::find($request->sellerId)
         ->update([
             'balance' => $request->sellerBalance,
         ]);
@@ -138,7 +140,7 @@ class BuyController extends Controller
         $tierBought = Tier::select('*')
                             ->where('id', '=', $request->tier)->get()->toArray();
 
-        if($tierBought[0]->haschatperk){
+        if($tierBought[0]['haschatperk']){
             Chats::insert(array(
                 'student_id' => Auth::user()->id,
                 'teacher_id' => $request->sellerId,

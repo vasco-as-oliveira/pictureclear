@@ -19,8 +19,8 @@
 
 
     @foreach ($courses as $course)
-        <a href={{ url('checkCourse/search?selectCourse=' . $course->id) }}>
-            {{ $course->title }}<br>
+        <a href={{ url('checkCourse/search?selectCourse=' . $course['id']) }}>
+            {{ $course['title'] }}<br>
         </a>
     @endforeach
 

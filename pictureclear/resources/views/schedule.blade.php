@@ -29,20 +29,20 @@
                                     <div class="col-md-6">
                                         <div class="timetable-item">
                                             <div class="timetable-item-main">
-                                                <div class="timetable-item-time">Dia {{ explode(' ', $card->begin)[0] }}
+                                                <div class="timetable-item-time">Dia {{ explode(' ', $card['begin'])[0] }}
                                                 </div>
                                                 <div class="timetable-item-name">Começa às
-                                                    {{ explode(' ', $card->begin)[1] }} e termina às
-                                                    {{ explode(' ', $card->end)[1] }}</div>
+                                                    {{ explode(' ', $card['begin'])[1] }} e termina às
+                                                    {{ explode(' ', $card['end'])[1] }}</div>
 
 
 
                                                 <!-- Student can book if it's not booked previously -->
-                                                @if ($card->isfree)
-                                                    @if ($schedule->user_id != Auth::user()->id)
+                                                @if ($card['isfree'])
+                                                    @if ($schedule['user_id'] != Auth::user()->id)
                                                         <form method="GET" id="bookAClass"
                                                             action="{{ url('/schedule/reserve',
-                                                            ['id' => $schedule->course_id,'$slotId' => $card->id]) }}"
+                                                            ['id' => $schedule['course_id'],'$slotId' => $card['id']]) }}"
                                                             enctype="multipart/form-data">
                                                             @csrf
                                                             <button form="bookAClass" type="submit" id="viewClasses"
@@ -51,7 +51,7 @@
                                                     @else
                                                         <form method="POST" id="deleteClass"
                                                             action="{{ url('/schedule_slot_delete',
-                                                            ['id' => $schedule->course_id,'$slotId' => $card->id]) }}"
+                                                            ['id' => $schedule['course_id'],'$slotId' => $card['id']]) }}"
                                                             enctype="multipart/form-data">
                                                             @csrf
                                                             <button form="deleteClass" type="submit"
@@ -59,10 +59,10 @@
                                                         </form>
                                                     @endif
                                                 @else
-                                                    @if ($schedule->user_id == Auth::user()->id)
+                                                    @if ($schedule['user_id'] == Auth::user()->id)
                                                         <div class="timetable-item-name">Aula marcada por
                                                             {{ '@' . DB::select('select * from users where id = ?',
-                                                            [$card->student_id])[0]->username }}
+                                                            [$card['student_id']])[0]['username'] }}
                                                         </div>
                                                     @endif
                                                     <button form="bookAClass" type="button" id="viewClasses"

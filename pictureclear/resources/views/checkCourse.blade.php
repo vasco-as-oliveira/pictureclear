@@ -15,32 +15,32 @@
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-lg-6">
                     <div class="about-text go-to">
-                        <h3 class="dark-color">{{ $checkCourse->title }}</h3>
+                        <h3 class="dark-color">{{ $checkCourse['title'] }}</h3>
                         <h6 class="theme-color lead">Avaliação:
-                            @if ($checkCourse->rating == 0)
+                            @if ($checkCourse['rating'] == 0)
                                 {{ '0' }}
                             @else
-                                @for ($i = 0; $i < $checkCourse->rating; $i++)
+                                @for ($i = 0; $i < $checkCourse['rating']; $i++)
                                     <span class="fa fa-star"></span>
                                 @endfor
-                                {{ '(' . $checkRatesCount[0]->contagem . ')' }}
+                                {{ '(' . $checkRatesCount[0]['contagem'] . ')' }}
                             @endif
                         </h6>
                         <p>I <mark>Descrição: </mark>
-                            {{ $checkCourse->description }}
+                            {{ $checkCourse['description'] }}
                         </p>
                         <div class="row about-list">
                             <h6 class="theme-color lead">Informação Sobre o Professor</h6>
                             <div class="col-md-6">
                                 <div class="media">
                                     <label>Nome</label>
-                                    <a href={{ url('/profile?username=' . $checkUser->username) }}>
-                                        <p>{{ $checkUser->firstname }} {{ $checkUser->lastname }}</p>
+                                    <a href={{ url('/profile?username=' . $checkUser['username']) }}>
+                                        <p>{{ $checkUser['firstname'] }} {{ $checkUser['lastname'] }}</p>
                                     </a>
                                 </div>
                                 <div class="media">
                                     <label>Biografia</label>
-                                    <p>{{ $checkUser->description }}</p>
+                                    <p>{{ $checkUser['description'] }}</p>
                                 </div>
                                 <div>
                                 </div>
@@ -54,8 +54,8 @@
                         <div class="overlay-container">
                             <div class="overlay">
                                 <div class="profilepicture">
-                                    <img src="{{ $checkCourse->image != null ?
-                                     URL::asset('storage/images/' . $checkCourse->image) :
+                                    <img src="{{ $checkCourse['image'] != null ?
+                                     URL::asset('storage/images/' . $checkCourse['image']) :
                                       URL::asset('images/default-profilepicture.png') }}"
                                         alt="default-profilepicture" id="profilepicture">
                                 </div>
@@ -76,7 +76,7 @@
                         <div class="count-data text-center">
                             <h6 class="count h2">Visualizar Aulas!</h6>
                             <p class="m-0px font-w-600">
-                            <form method="GET" id="viewVideos" action="{{ url('/videos', ['id' => $checkCourse->id]) }}"
+                            <form method="GET" id="viewVideos" action="{{ url('/videos', ['id' => $checkCourse['id']]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <button form="viewVideos" type="submit" id="viewClasses"
@@ -90,7 +90,7 @@
                             <div class="count-data text-center">
                                 <div class="rate">
                                     <form name="publish" method="POST"
-                                        action="{{ url('/publishrating', ['id' => $checkCourse->id]) }}">
+                                        action="{{ url('/publishrating', ['id' => $checkCourse['id']]) }}">
                                         @csrf
                                         <input type="radio" id="star5" name="rating" value="5"
                                             onchange="this.form.submit();" />
@@ -119,7 +119,7 @@
                                     <h6 class="count h2">Apagar curso!</h6>
                                     <p class="m-0px font-w-600">
                                     <form method="get" action="{{ url('/admin/apagarCurso') }}">
-                                        <input type="text" name="course" value="{{ $checkCourse->id }}"
+                                        <input type="text" name="course" value="{{ $checkCourse['id'] }}"
                                             style="display: none;">
                                         <input type="submit" class="label checkbox btn btn-success">
                                     </form>
@@ -128,7 +128,7 @@
                                     <h6 class="count h2">Comprar curso!</h6>
                                     <p class="m-0px font-w-600">
                                     <form method="get" action="{{ url('/comprarCurso') }}">
-                                        <input type="text" name="course" value="{{ $checkCourse->id }}"
+                                        <input type="text" name="course" value="{{ $checkCourse['id'] }}"
                                             style="display: none;">
                                         <input type="submit" class="label checkbox btn btn-success">
                                     </form>
@@ -143,7 +143,7 @@
                                 <h6 class="count h2">Ver Chat!</h6>
                                 <p class="m-0px font-w-600">
                                     <!-- Redirects to page for schedule -->
-                                <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat->id]) }}"
+                                <form method="GET" id="chat" action="{{ url('/chat', ['id' => $chat['id']]) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button form="chat" type="submit" id="viewClasses"
@@ -161,7 +161,7 @@
                                 <p class="m-0px font-w-600">
                                     <!-- Redirects to page for schedule -->
                                 <form method="GET" id="sched"
-                                    action="{{ url('/schedule', ['id' => $checkCourse->id]) }}"
+                                    action="{{ url('/schedule', ['id' => $checkCourse['id']]) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <button form="sched" type="submit" id="viewClasses"

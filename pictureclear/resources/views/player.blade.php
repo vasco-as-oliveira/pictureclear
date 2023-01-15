@@ -7,13 +7,13 @@
         <div class="firstinfo">
             <video controls id="videoLesson" class="video_div">
                 <track/>
-                <source src="{{ URL::asset('storage/videos/' . $lesson->url . '') }}" type="video/mp4">
+                <source src="{{ URL::asset('storage/videos/' . $lesson['url'] . '') }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="profileinfo">
-                <h1>{{ $lesson->title }}</h1>
-                <h3>{{ $lesson->created_at }}</h3>
-                <p class="bio">{{ $lesson->description }}</p>
+                <h1>{{ $lesson['title'] }}</h1>
+                <h3>{{ $lesson['created_at'] }}</h3>
+                <p class="bio">{{ $lesson['description'] }}</p>
             </div>
         </div>
     </div>

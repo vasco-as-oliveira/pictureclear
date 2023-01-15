@@ -14,12 +14,12 @@
                 <h1>Continuas a mesma pessoa {{ Auth::user()->firstname }}!</h1>
                 <div class="submit">
                     <input placeholder="Primeiro Nome" type="text" name="firstname"
-                        value="{{ $user->value('firstname') }}">
-                    <input placeholder="Último nome" type="text" name="lastname" value="{{ $user->value('lastname') }}">
+                        value="{{ $user['firstname'] }}">
+                    <input placeholder="Último nome" type="text" name="lastname" value="{{ $user['lastname'] }}">
                     <input placeholder="E-mail" disabled type="text"
-                        name="lastname" value="{{ $user->value('email') }}">
+                        name="lastname" value="{{ $user['email'] }}">
                     <textarea maxlength="150" name="about" class="text" placeholder="Descrição"
-                        value="{{ $user->value('description') }}">{{ $user->value('description') }}</textarea>
+                        value="{{ $user['description'] }}">{{ $user['description'] }}</textarea>
                     <button type="submit">Concluir alterações</button>
                 </div>
         </div>
@@ -30,14 +30,14 @@
                         <h1 id="photo">Wow, ainda melhor!</h1>
                         <br>
                         <img id="profilepicture"
-                            src="{{ $user->value('picture') != null ?
-                                 'storage/images/' . $user->value('picture') :
+                            src="{{ $user['picture'] != null ?
+                                 'storage/images/' . $user[picture] :
                                  'images/default-profilepicture.png' }}"
-                            alt="{{ $user->value('picture') != null ?
-                                 $user->value('picture') :
+                            alt="{{ $user['picture'] != null ?
+                                $user['picture'] :
                                 'default-profilepicture.png' }}">
                         <input type="file" id="profilepictureInput" name='image' style="display: none"
-                            value="{{ $user->value('picture') }}">
+                            value="{{ $user['picture'] }}">
                         <label for="profilepictureInput" class="upload">
                             <button class="ghost" id="upload">
                                 Escolhe uma foto!

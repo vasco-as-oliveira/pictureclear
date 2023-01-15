@@ -2,7 +2,7 @@
 
 
 @section('title')
-    {{ $user->value('firstname') . ' ' . $user->value('lastname') }}
+    {{ $user['firstname'] . ' ' . $user['lastname'] }}
 @endsection
 
 @section('content')
@@ -18,11 +18,11 @@
     <!------ Include the above in your HEAD tag ---------->
 
     <div class="container emp-profile">
-        @if (Auth::user()->is_admin && $user->value('username') != Auth::user()->username)
+        @if (Auth::user()->is_admin && $user['username'] != Auth::user()->username)
             <p>
             <form action='{{ url('/admin/deleteUser') }}' method="get">
                 @csrf
-                <input type="text" value="{{ $user->value('id') }}" style="display: none" name="user">
+                <input type="text" value="{{ $user['id'] }}" style="display: none" name="user">
                 <input type="submit" value="Apagar utilizador">
             </form>
             </p>
@@ -31,8 +31,8 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="{{ $user->value('picture') != null ? 'storage/images/' .
-                         $user->value('picture') : 'images/default-profilepicture.png' }}"
+                    <img src="{{ $user['picture'] != null ? 'storage/images/' .
+                         $user['picture'] : 'images/default-profilepicture.png' }}"
                         alt="profile_picture" />
                 </div>
             </div>
@@ -40,25 +40,25 @@
                 <div class="profile-head">
                     @php
                         $costumerCount = DB::select('select count(*) as contagem from course_ratings where user_id=' .
-                             $user->value('id'));
+                             $user['id']);
                         $courseCount = DB::select('select count(*) as ccontagem from courses where owner_id = ?',
-                             [$user->value('id')]);
+                             [$user['id']]);
                     @endphp
                     <h4>
-                        {{ $user->value('firstname') . ' ' . $user->value('lastname') }}
+                        {{ $user['firstname'] . ' ' . $user['lastname'] }}
                     </h4>
                     <h6>
-                        {{ '@' . $user->value('username') }}
+                        {{ '@' . $user['username'] }}
                     </h6>
                     <h5>
-                        {{ $user->value('description') }}
+                        {{ $user['description'] }}
                     </h5>
                     <p class="proile-rating">
                         AVALIAÇÕES:
-                        @if ($user->value('rating') == 0)
+                        @if ($user['rating'] == 0)
                             {{ '0' }}
                         @else
-                            @for ($i = 0; $i < $user->value('rating'); $i++)
+                            @for ($i = 0; $i < $user['rating']; $i++)
                                 <span class="fa fa-star"></span>
                             @endfor
                             {{ '(' . $costumerCount[0]->contagem . ')' }}
@@ -76,7 +76,7 @@
                 <form method="GET" name="courses" id="courses" action="{{ url('/profile') }}"
                     enctype="multipart/form-data">
                     @csrf
-                    <input name="username" value="{{ $user->value('username') }}" style="display: none;">
+                    <input name="username" value="{{ $user['username'] }}" style="display: none;">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item ">
                             <label for="coursesSelected1" title="text">
@@ -109,12 +109,12 @@
                             @foreach ($courses as $course)
                                 <div class="container-course">
                                     <a style="text-decoration: none;color: inherit;"
-                                        href={{ 'checkCourse/search?selectCourse=' . $course->id }}>
-                                        <h4>{{ $course->title }}</h4>
-                                        <h6>{{ $user->value('username') }}</h6>
-                                        <h5>Linguagem: {{ $course->language }}</h5>
+                                        href={{ 'checkCourse/search?selectCourse=' . $course['id'] }}>
+                                        <h4>{{ $course['title'] }}</h4>
+                                        <h6>{{ $user['username'] }}</h6>
+                                        <h5>Linguagem: {{ $course['language'] }}</h5>
                                         <h5>Desde:
-                                            {{$price =DB::table('tiers')->where('id', $course->id)->min('price').'€'}}
+                                            {{$price =DB::table('tiers')->where('id', $course['id'])->min('price').'€'}}
                                         <h5>
                                     </a>
                                 </div>

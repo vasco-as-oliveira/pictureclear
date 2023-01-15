@@ -17,10 +17,10 @@
             <div class="col-4">
                 <!-- Cada Container -->
                 <div class="container-register">
-                    <h1>{{ $course->title }}</h1>
-                    <h5>Rating: {{ $course->rating }}</h5>
-                    <h5>Linguagem: {{ $course->language }}</h5>
-                    <h5>Recebe certificado?: @if ($course->has_certificate)
+                    <h1>{{ $course['title'] }}</h1>
+                    <h5>Rating: {{ $course['rating'] }}</h5>
+                    <h5>Linguagem: {{ $course['language'] }}</h5>
+                    <h5>Recebe certificado?: @if ($course['has_certificate'])
                             &#10003;
                         @else
                             &#x2717;
@@ -29,7 +29,7 @@
 
                     <form method="GET" action="{{ url('/checkCourse/search') }}">
                         @csrf
-                        <input type="text" name="selectCourse" value="{{ $course->id }}" hidden>
+                        <input type="text" name="selectCourse" value="{{ $course['id'] }}" hidden>
                         <button type="submit" id="selectCourse" class="btn btn-success">Ver Mais</button>
                     </form>
                 </div>

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('tier_id');
             $table->foreign('tier_id')->references('id')->on('tiers')->onDelete('cascade');
             $table->timestamp('bought')->nullable();
+            $table->timestamps();
+
         });
     }
 

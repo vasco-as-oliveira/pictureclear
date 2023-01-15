@@ -22,18 +22,18 @@
                         <!-- LISTA DE TODOS OS CHATS -->
                         @if ($all_chats_teacher)
                             @foreach ($all_chats_teacher as $chat)
-                                <a href="{{ url('/chat', ['id' => $chat->id]) }}"
+                                <a href="{{ url('/chat', ['id' => $chat['id']]) }}"
                                     class="list-group-item list-group-item-action border-0">
                                     <div class="d-flex align-items-start">
                                         <img
-										src="{{DB::select('select * from users where id =' . $chat->student_id)[0]->picture != null ?
-											 URL::asset('storage/images/'.DB::select('select * from users where id ='.$chat->student_id)[0]->picture) :
+										src="{{DB::select('select * from users where id =' . $chat['student_id'])[0]->picture != null ?
+											 URL::asset('storage/images/'.DB::select('select * from users where id ='.$chat['student_id'])[0]->picture) :
 											URL::asset('images/default-profilepicture.png')}}"
                                             class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                             style="object-fit: cover;">
                                         <div class="flex-grow-1 ml-3">
                                             {{DB::select('select * from users where id ='
-											.$chat->student_id)[0]->username}}
+											.$chat['student_id'])[0]->username}}
                                             <div class="small">
 												<span class="fas fa-circle chat-online">
 													</span>Online</div>
@@ -67,35 +67,35 @@
 
                                 <!-- MENSAGENS DO USER -->
                                 @foreach ($sentMessages as $message)
-                                    @if ($message->user_id == Auth::user()->id)
+                                    @if ($message['user_id'] == Auth::user()->id)
                                         <div class="chat-message-right pb-4">
                                         @else
                                             <div class="chat-message-left pb-4">
                                     @endif
                                     <div>
-                                        @if ($message->user_id == Auth::user()->id)
+                                        @if ($message['user_id'] == Auth::user()->id)
                                             <img src="{{ Auth::user()->picture != null ?
 											 URL::asset('storage/images/' . Auth::user()->picture) :
 											  URL::asset('images/default-profilepicture.png') }}"
                                                 class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                                 style="object-fit: cover;">
                                         @else
-                                            <img src="{{ $sender->picture != null ?
-											 URL::asset('storage/images/' . $sender->picture) :
+                                            <img src="{{ $sender['picture'] != null ?
+											 URL::asset('storage/images/' . $sender['picture']) :
 											  URL::asset('images/default-profilepicture.png') }}"
                                                 class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"
                                                 style="object-fit: cover;">
                                         @endif
-                                        <div class="text-muted small text-nowrap mt-2 info">{{ $message->sentOn }}</div>
+                                        <div class="text-muted small text-nowrap mt-2 info">{{ $message['sentOn'] }}</div>
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                        @if ($message->user_id == Auth::user()->id)
+                                        @if ($message['user_id'] == Auth::user()->id)
                                             <div class="font-weight-bold mb-1">You</div>
                                         @else
                                             <div class="font-weight-bold mb-1">
-                                                {{ $sender->firstname . ' ' . $sender->lastname }}</div>
+                                                {{ $sender['firstname'] . ' ' . $sender['lastname'] }}</div>
                                         @endif
-                                        {{ $message->message }}
+                                        {{ $message['message'] }}
                                     </div>
                             </div>
                             @endforeach

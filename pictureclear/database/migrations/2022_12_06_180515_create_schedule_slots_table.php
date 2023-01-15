@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamp('end');
             $table->integer('student_id')->nullable();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+
         });
     }
 

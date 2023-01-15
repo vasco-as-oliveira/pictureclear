@@ -29,16 +29,16 @@ integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZA
                     @foreach ($result as $lesson)
 						<tr>
 							<td class="text-center" style="width: 20%;">
-							<span class="label label-default">{{ $lesson->title }}</span>
+							<span class="label label-default">{{ $lesson['title'] }}</span>
 							</td>
 							<td>
-                                {{ $lesson->created_at }}
+                                {{ $lesson['created_at'] }}
 							</td>
 							<td class="text-center">
-								<span class="label label-default">{{ $lesson->description }}</span>
+								<span class="label label-default">{{ $lesson['description'] }}</span>
 							</td>
 							<td class="text-center" style="width: 10%;">
-							<form method="POST" action="{{ url('/player', ['courseId' => $lesson->course_id, 'videoid' => $lesson->id]) }}"
+							<form method="POST" action="{{ url('/player', ['courseId' => $lesson['course_id'], 'videoid' => $lesson['id']]) }}"
 								enctype="multipart/form-data">
 								@csrf
 								<button type="submit" class="label checkbox btn btn-success">Assistir Aula</button>
