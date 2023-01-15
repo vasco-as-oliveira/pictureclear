@@ -58,13 +58,23 @@ class ScheduleController extends Controller
                     ->where('course_id', '=', $id)->get()->toArray();
         $firstHour = date("d/m/Y H:i:s", strToTime($request['schedDia'].' '.$request['schedHoraInicial']));
         $lastHour = date("d/m/Y H:i:s", strToTime($request['schedDia'].' '.$request['schedHoraFinal']));
+        
+        $date1 = Carbon::createFromFormat('d/m/Y H:i:s', $firstHour);
+        $date2 = Carbon::createFromFormat('d/m/Y H:i:s', $lastHour);
 
-        ScheduleSlots::insert(array(
-            'schedule_id' => $schedule[0]['id'],
-            'isfree' => true,
-            'begin' => $firstHour,
-            'end' => $lastHour,
-        ));
+        if($date2->gt($date1)){
+            ScheduleSlots::insert(array(
+                'schedule_id' => $schedule[0]['id'],
+                'isfree' => true,
+                'begin' => $firstHour,
+                'end' => $lastHour,
+            ));
+        } else {
+            return back();
+        }
+
+
+        
         
         
         return back();

@@ -12,6 +12,8 @@ use App\Models\Course;
 class AdminTest extends TestCase
 {
 
+    use RefreshDatabase;
+
     public function test_admin_courses_screen_can_be_rendered()
     {
         $user = User::factory()->create([

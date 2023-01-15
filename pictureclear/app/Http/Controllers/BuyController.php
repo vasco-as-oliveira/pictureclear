@@ -56,9 +56,8 @@ class BuyController extends Controller
         if ($request->saldo) {
             if (Auth::user()['balance'] < $price[0]['price']) {
                 return back();
-                //RICK ROLL NO HACKER
-            } else {
-                $balance = Auth::user()->balance;
+            } else{
+                $balance  = Auth::user()->balance;
                 $balance = $balance - $price[0]['price'];
                 //DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
                 ModelsUser::find(Auth::user()->id)
