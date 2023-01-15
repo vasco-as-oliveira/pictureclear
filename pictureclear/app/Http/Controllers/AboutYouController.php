@@ -44,7 +44,7 @@ class AboutYouController extends Controller
             ]);
             User::find(Auth::user()->id)->update(['description'=> $request->description]);
         }
-
+       
         if ($request->file('inputImage') != null) {
             $request->validate([
                 'inputImage' => ['image','mimes:png,jpg,jpeg'],

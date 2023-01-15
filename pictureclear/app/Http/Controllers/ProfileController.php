@@ -70,20 +70,24 @@ class ProfileController extends Controller
 
     public function editProfileSave(Request $request)
     {
-        if (!$request->file('image')) {
-            DB::update('update users set firstname=?, lastname=?, description=? where id=?', [$request->firstname, $request->lastname, $request->about, Auth::user()->id]);
-            return redirect(url("/profile/?username=" . Auth::user()->username));
-        }
-        $request->validate([
-            'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
-        ]);
+       
+        DB::update('update users set firstname=?, lastname=?, description=? where id=?',
+            [$request->firstname, $request->lastname, $request->about, Auth::user()->id]);
+            
+        if ($request->file('image')) {
+            $request->validate([
+                'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
+            ]);
 
-        if (Storage::exists('public/images/' . Auth::user()->picture)) {
-            Storage::delete('public/images/' . Auth::user()->picture);
-        }
+            if (Storage::exists('public/images/' . Auth::user()->picture)) {
+                Storage::delete('public/images/' . Auth::user()->picture);
+            }
 
-        $request->file('image')->store('public/images');
-        DB::update('update users set firstname=?, lastname=?, description=?, picture=? where id=?', [$request->firstname, $request->lastname, $request->about, $request->file('image')->hashName(), Auth::user()->id]);
-        return redirect(url("/profile/?username=" . Auth::user()->username));
+            $request->file('image')->store('public/images');
+            DB::update('update users set picture=? where id=?',
+                    [ $request->file('image')->hashName(), Auth::user()->id]);
+        
+        }
+    return redirect(url("/profile/?username=" . Auth::user()->username));
     }
 }
