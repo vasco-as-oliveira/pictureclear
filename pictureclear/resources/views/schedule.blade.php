@@ -62,7 +62,7 @@
                                                     @if ($schedule['user_id'] == Auth::user()->id)
                                                         <div class="timetable-item-name">Aula marcada por
                                                             {{ '@' . DB::select('select * from users where id = ?',
-                                                            [$card['student_id']])[0]['username'] }}
+                                                            [$card['student_id']])[0]->username}}
                                                         </div>
                                                     @endif
                                                     <button form="bookAClass" type="button" id="viewClasses"

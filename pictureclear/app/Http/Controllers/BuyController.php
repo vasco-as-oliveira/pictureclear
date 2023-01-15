@@ -53,7 +53,7 @@ class BuyController extends Controller
         $price = Tier::select('price')
                         ->where('id', '=', $request->tier)->get()->toArray();
         if ($request->saldo){
-            if (Auth::user()['balance']<$price[0]['price']){
+            if ( Auth::user()['balance'] < $price[0]['price']){
                 return back();
                 //RICK ROLL NO HACKER
             } else{
@@ -98,7 +98,7 @@ class BuyController extends Controller
             'price_data' => [
                 'currency' => 'eur',
                 'product_data' => [
-                    'name' => 'Nome de curso'                    
+                    'name' => 'Nome de curso' ,
                 ],
                 'unit_amount' => $price[0]['price'] *100
             ],
