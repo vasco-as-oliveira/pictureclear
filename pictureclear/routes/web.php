@@ -59,7 +59,9 @@ Route::get('/comprarCurso', [App\Http\Controllers\BuyController::class, 'index']
 Route::post('/comprarCurso/tier',[App\Http\Controllers\BuyController::class, 'buy']);
 Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'success']);
 
+//Página dos videos
 Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index'])->name('{id}');
+//Controller que vai reencaminha para uma página com o player
 Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
 
 Route::post('/publishrating/{id}',[App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'publishRating']);
@@ -68,11 +70,16 @@ Route::get('/painelAdmin/users',[App\Http\Controllers\AdminController::class, 'u
 Route::get('/admin/apagarCurso',[App\Http\Controllers\AdminController::class, 'deleteCourse']);
 Route::get('/admin/deleteUser',[App\Http\Controllers\AdminController::class, 'deleteUser']);
 
-
+//Página dos chats
 Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'showChat']);
+//Controller que envia a mensagem
 Route::post('/messageSent/{id}', [App\Http\Controllers\ChatController::class, 'messageSent']);
 
+//Adição de uma hora
 Route::post('/addHour/{id}', [App\Http\Controllers\ScheduleController::class, 'addHour']);
+//Página do calendário
 Route::get('/schedule/{id}', [App\Http\Controllers\ScheduleController::class, 'checkSchedule']);
+//Página da reserva do calendário
 Route::get('/schedule/reserve/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'makeAnAppointment']);
+//Página para apagar o calendário
 Route::post('/schedule_slot_delete/{id}/{slotId}', [App\Http\Controllers\ScheduleController::class, 'deleteSlot']);
