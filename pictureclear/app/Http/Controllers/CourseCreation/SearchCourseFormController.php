@@ -22,7 +22,6 @@ class SearchCourseFormController extends Controller
     public function checkCourse(Request $request) {
         $user = null;
         $find = $request['findCourse'];
-        //$courses = DB::select('select * from courses where UPPER(title) LIKE UPPER(\'%'.$find.'%\')');
         $courses = Course::select('*')
                     ->where('title', 'ilike', '%'.$find.'%')->get()->toArray();
         
