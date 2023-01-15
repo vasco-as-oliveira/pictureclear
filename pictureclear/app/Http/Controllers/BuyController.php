@@ -51,13 +51,14 @@ class BuyController extends Controller
     public function buy(Request $request)
     {
         $price = Tier::select('price')
-                        ->where('id', '=', $request->tier)->get()->toArray();
-        if ($request->saldo){
-            if ( Auth::user()['balance'] < $price[0]['price']){
+                        ->where('id', '=', $request->tier)->get();
+           
+        if ($request->saldo) {
+            if (Auth::user()['balance'] < $price[0]['price']) {
                 return back();
                 //RICK ROLL NO HACKER
-            } else{
-                $balance  = Auth::user()->balance;
+            } else {
+                $balance = Auth::user()->balance;
                 $balance = $balance - $price[0]['price'];
                 //DB::update('update users set balance=? where id=?', [$balance,Auth::user()->id]);
                 ModelsUser::find(Auth::user()->id)
@@ -72,7 +73,7 @@ class BuyController extends Controller
                 $aux = User::select('balance')
                 ->where('id', '=', $sellerId[0]['owner_id'])->get()->toArray();
 
-                $sellerBalance = $aux[0]->balance + ($price[0]->price - $price[0]->price*0.03);
+                $sellerBalance = $aux[0]['balance'] + ($price[0]['price'] - $price[0]['price']*0.03);
                 //DB::update('update users set balance=? where id=?', [$sellerBalance,$sellerId[0]->owner_id]);
                 ModelsUser::find($sellerId[0]['owner_id'])
                 ->update([
@@ -85,10 +86,11 @@ class BuyController extends Controller
                 //$tierBought = DB::select('SELECT * FROM tiers WHERE id ='.$request->tier);
                 $tierBought = Tier::select('*')
                             ->where('id', '=', $request->tier)->get()->toArray();
-                if($tierBought[0]['hasChatPerk']){
+                        
+                if ($tierBought[0]['haschatperk']) {
                     Chats::insert(array(
                         'student_id' => Auth::user()->id,
-                        'teacher_id' => $sellerId,
+                        'teacher_id' => $sellerId[0]['owner_id'],
                     ));
                 }
             }//
@@ -122,7 +124,7 @@ class BuyController extends Controller
         ]);
         return redirect($checkout_session->url);
         }
-       
+       return redirect('/home');
     }
 
     public function success(Request $request) {
@@ -140,7 +142,7 @@ class BuyController extends Controller
         $tierBought = Tier::select('*')
                             ->where('id', '=', $request->tier)->get()->toArray();
 
-        if($tierBought[0]['haschatperk']){
+        if ($tierBought[0]['haschatperk']) {
             Chats::insert(array(
                 'student_id' => Auth::user()->id,
                 'teacher_id' => $request->sellerId,
