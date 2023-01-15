@@ -28,16 +28,25 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Route::post('/home/dropdown', [App\Http\Controllers\HomeController::class, 'changeOrder']);
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile']);
 
+//Página da criação do curso
 Route::get('/course', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'createForm'])->name('course');
+//Página da criação do tier
 Route::get('/course/tier', [App\Http\Controllers\CourseCreation\TierFormController::class, 'createForm'])->name('tier');
+//Envia para o controller que irá guardar as informações do curso em session
 Route::post('/course/create', [App\Http\Controllers\CourseCreation\CreateCourseFormController::class, 'CreateCourseForm'])->name('course.store');
+//Envia para o controller que irá criar o curso e os seus tiers correspondentes
 Route::post('/course/tiers/create', [App\Http\Controllers\CourseCreation\TierFormController::class, 'CreateCourseForm'])->name('tier.store');
+//Vai buscar a página do curso
 Route::get('/checkCourse', [App\Http\Controllers\CourseCreation\SearchCourseFormController::class, 'checkCourse'])->name('getCourse');
+//Procura as páginas de curso
 Route::get('/checkCourse/search', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'viewCourse'])->name('getCourse');
+//Dá update das informações do curso
 Route::post('/checkCourse/update/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'finishSetup'])->name('finishSetup');
+//Torna o curso público
 Route::post('/checkCourse/launchcourse/{id}', [App\Http\Controllers\CourseCreation\CheckCourseFormController::class, 'launchCourse']);
-
+//Página de adição de licões
 Route::get('/addLesson/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'createForm']);
+//Controller que cria as lições
 Route::post('/addLesson/create/{id}', [App\Http\Controllers\CourseCreation\LessonFormController::class, 'LessonForm']);
 
 Route::get('/aboutyou', [App\Http\Controllers\AboutYouController::class, 'index'])->name('about you');
