@@ -59,7 +59,6 @@ Route::get('/comprarCurso', [App\Http\Controllers\BuyController::class, 'index']
 Route::post('/comprarCurso/tier',[App\Http\Controllers\BuyController::class, 'buy']);
 Route::get('/paymentSuccess', [App\Http\Controllers\BuyController::class, 'success']);
 
-//Página dos videos
 Route::get('/videos/{id}', [App\Http\Controllers\VideoListController::class, 'index'])->name('{id}');
 //Controller que vai reencaminha para uma página com o player
 Route::post('/player/{id}/{videoId}', [App\Http\Controllers\VideoListController::class, 'watchvideo']);
